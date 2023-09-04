@@ -1,0 +1,50 @@
+<?php
+/* @var $block \Aheadworks\Blog\Block\Widget\RecentPost */
+/* @var $viewModel \Aheadworks\Blog\ViewModel\PostImage */
+
+// @codingStandardsIgnoreFile
+$canShow = true;
+$viewModel = $block->getViewModel();
+if (!$block->isAjax()): ?>
+    <?php $canShow = false; ?>
+    <div data-aw-blog-block-name="<?php /* @noEscape */ echo $block->getWidgetEncodeData() ?>"></div>
+<?php endif; ?>
+
+<?php if ($canShow && $block->isEnabled()): ?>
+    <?php
+        $recentPosts = $block->getPosts();
+        $title = $block->getTitle() ? : 'Recent Posts';
+    ?>
+    <?php if (count($recentPosts)): ?>
+        <div class="block widget block-blog-recent-post">
+            <div class="block-title">
+                <strong><?php echo __($block->escapeHtml($title)) ?></strong>
+            </div>
+            <div class="block-content">
+                <ul class="block-recent-posts">
+                    <?php foreach ($recentPosts as $post): ?>
+                        <li class="block-recent-posts-item">
+                            <?php if (($viewModel->isFeaturedImageLoaded($post) && $block->isNeedToShowImages())
+                                || $viewModel->isPlaceholderImageLoaded()): ?>
+                                <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>" class="recent-post-featured-image-link">
+                                    <picture>
+                                        <source srcset="<?= $block->escapeUrl($viewModel->getFeaturedImageMobileUrl($post)) ?>" media="(max-width: 768px)">
+                                        <img class="recent-post-featured-image"
+                                             src = "<?= $block->escapeUrl($viewModel->getFeaturedImageUrl($post)) ?>"
+                                             title = "<?= $block->escapeHtml($post->getFeaturedImageTitle()) ?>"
+                                             alt = "<?= $block->escapeHtml($viewModel->getFeaturedImageAlt($post)) ?>"
+                                        >
+                                    </picture>
+                                </a>
+                            <?php endif; ?>
+                            <a href="<?php /* @noEscape */ echo $block->getPostUrl($post) ?>"
+                               class="block-recent-posts-link">
+                                <?php echo $block->escapeHtml($post->getTitle()) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

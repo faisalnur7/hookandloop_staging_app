@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="Aheadworks\Blog\Block\Product\PostList" name="aw_blog_product_post_list" group="detailed_info">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                </arguments>
+                <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_product_post_list.post_image">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                        <argument name="img_class" xsi:type="string">product-post-featured-image</argument>
+                    </arguments>
+                </block>
+                <arguments>
+                    <argument name="sort_order" xsi:type="string">9</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

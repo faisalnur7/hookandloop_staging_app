@@ -1,0 +1,98 @@
+.aw_blog_search-container {
+    width: 100% !important;
+    margin-bottom: 20px;
+    position: relative;
+
+    &.aw_blog_search-container-mobile {
+        display: none;
+    }
+}
+
+.aw_blog_search-bottom-toolbar-container {
+    .pager {
+        display: flex;
+        justify-content: space-between;
+        align-items: first baseline;
+
+        .pages {
+            order: 1;
+        }
+
+        .toolbar-amount {
+            order: 2;
+        }
+
+        .limiter {
+            order: 3;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .aw_blog_search-container {
+
+        &.aw_blog_search-container-desktop {
+            display: none;
+        }
+
+        &.aw_blog_search-container-mobile {
+            display: block;
+
+            .aw_blog_search-input {
+                left: 0;
+                position: relative;
+                height: 42px;
+                margin-top: 10px;
+            }
+
+            .aw_blog_search-button {
+                display: block;
+                background: none;
+                -moz-box-sizing: content-box;
+                border: 0;
+                box-shadow: none;
+                line-height: inherit;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
+                text-shadow: none;
+                font-weight: 400;
+                position: absolute;
+                right: 15px;
+                top: 16px;
+                z-index: 1;
+            }
+
+            .aw_blog_search-button:before {
+                font-size: 22px;
+                line-height: 30px;
+                color: #757575;
+                content: '\e615';
+                font-family: 'luma-icons';
+                margin: 0;
+                vertical-align: top;
+                display: inline-block;
+                font-weight: normal;
+                overflow: hidden;
+                text-align: center;
+            }
+        }
+    }
+
+    .aw_blog_search-bottom-toolbar-container {
+        .pager {
+            justify-content: center;
+
+            .pages {
+            }
+
+            .toolbar-amount {
+                display: none;
+            }
+
+            .limiter {
+                display: none;
+            }
+        }
+    }
+}

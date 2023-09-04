@@ -1,0 +1,28 @@
+<?php
+// @codingStandardsIgnoreFile
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Aheadworks\Blog\ViewModel\PostViewMode $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+$currentViewMode = $viewModel->getCurrentViewMode();
+?>
+
+<style>
+    :root {
+        --aw-blog-grid-view-column-count: <?= /* @noEscape */ $viewModel->getGridViewColumnCount() ?>
+    }
+</style>
+<div class="blog-view-toggle-buttons-container" data-mage-init='{"awBlogPostViewToggle":{}}'>
+    <div class="buttons">
+        <button data-view-mode="grid" <?= $currentViewMode == 'grid' ? 'class="active"' : '' ?>>
+            <span class="icon"></span>
+            <span class="label"><?= __('Grid') ?></span>
+        </button>
+        <button data-view-mode="list" <?= $currentViewMode == 'list' ? 'class="active"' : '' ?>>
+            <span class="icon"></span>
+            <span class="label"><?= __('List') ?></span>
+        </button>
+    </div>
+</div>

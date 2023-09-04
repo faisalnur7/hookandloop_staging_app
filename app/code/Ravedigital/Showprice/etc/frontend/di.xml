@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Ravedigital_Showprice:price_range" type="Ravedigital\Showprice\Plugin\Block\Product\ListProduct" sortOrder="1"/>
+    </type>
+</config>

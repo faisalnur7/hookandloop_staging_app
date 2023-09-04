@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:framework:Search/etc/search_request.xsd">
+    <request query="aheadworks_blogsearch_post_fulltext" index="aheadworks_blogsearch_post_fulltext">
+        <dimensions>
+            <dimension name="scope" value="default"/>
+        </dimensions>
+        <queries>
+            <!-- boost from config for queries is adding in plugins by field names-->
+            <query xsi:type="boolQuery" name="aheadworks_blogsearch_post_fulltext">
+                <queryReference clause="should" ref="aw_blog_search_post_title_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_content_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_author_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_tag_names_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_title_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_keywords_search_filtered_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_description_search_filtered_query"/>
+
+                <queryReference clause="should" ref="aw_blog_search_post_title_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_content_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_author_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_tag_names_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_title_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_keywords_search_match_query"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_description_search_match_query"/>
+
+                <queryReference clause="should" ref="aw_blog_search_post_title_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_content_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_author_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_tag_names_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_title_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_keywords_search_match_query_partial"/>
+                <queryReference clause="should" ref="aw_blog_search_post_meta_description_search_match_query_partial"/>
+            </query>
+
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_title_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_title_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_content_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_content_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_author_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_author_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_tag_names_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_tags_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_meta_title_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_meta_title_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_meta_keywords_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_meta_keywords_filter"/>
+            </query>
+            <query xsi:type="filteredQuery" name="aw_blog_search_post_meta_description_search_filtered_query">
+                <filterReference clause="must" ref="aw_blog_search_post_meta_description_filter"/>
+            </query>
+
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_title_search_match_query">
+                <match field="title"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_content_search_match_query">
+                <match field="content"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_author_search_match_query">
+                <match field="author"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_tag_names_search_match_query">
+                <match field="tag_names"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_title_search_match_query">
+                <match field="meta_title"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_keywords_search_match_query">
+                <match field="meta_keywords"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_description_search_match_query">
+                <match field="meta_description"/>
+            </query>
+
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_title_search_match_query_partial">
+                <match field="title" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_content_search_match_query_partial">
+                <match field="content" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_author_search_match_query_partial">
+                <match field="author" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_tag_names_search_match_query_partial">
+                <match field="tag_names" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_title_search_match_query_partial">
+                <match field="meta_title" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_keywords_search_match_query_partial">
+                <match field="meta_keywords" matchCondition="match_phrase_prefix"/>
+            </query>
+            <query xsi:type="matchQuery" value="$search_term$" name="aw_blog_search_post_meta_description_search_match_query_partial">
+                <match field="meta_description" matchCondition="match_phrase_prefix"/>
+            </query>
+
+        </queries>
+        <filters>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_title_filter" field="title" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_content_filter" field="content" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_author_filter" field="author" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_tags_filter" field="tag_names" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_meta_title_filter" field="meta_title" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_meta_keywords_filter" field="meta_keywords" value="$search_term$"/>
+            <filter xsi:type="wildcardFilter" name="aw_blog_search_post_meta_description_filter" field="meta_description" value="$search_term$"/>
+        </filters>
+        <from>0</from>
+        <size>10000</size>
+    </request>
+</requests>

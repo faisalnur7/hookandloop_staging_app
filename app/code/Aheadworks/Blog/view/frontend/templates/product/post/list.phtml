@@ -1,0 +1,25 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var \Aheadworks\Blog\Block\Product\PostList $block */
+/** @var \Aheadworks\Blog\ViewModel\Post $viewModel */
+?>
+<?php
+    $viewModel = $block->getViewModel();
+?>
+<?php if ($posts = $block->getPosts()): ?>
+    <ul class="block-product-posts-items">
+        <?php foreach ($posts as $post): ?>
+            <li class="block-product-posts-item">
+                <?php if ($viewModel->isFeaturedImageLoaded($post) || $viewModel->isPlaceholderImageLoaded()): ?>
+                    <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>" class="product-post-featured-image-link">
+                        <?= /* @noEscape */ $viewModel->getFeaturedImageHtml($block, 'aw_blog_product_post_list.post_image', $post) ?>
+                    </a>
+                <?php endif; ?>
+                <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>" target="_blank">
+                    <?php echo $block->escapeHtml($post->getTitle()) ?>
+                </a>
+            </li>
+        <?php endforeach ?>
+    </ul>
+<?php endif; ?>

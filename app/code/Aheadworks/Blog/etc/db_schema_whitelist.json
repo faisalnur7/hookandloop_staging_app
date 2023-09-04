@@ -1,0 +1,208 @@
+{
+    "aw_blog_post": {
+        "column": {
+            "id": true,
+            "title": true,
+            "url_key": true,
+            "featured_image_file": true,
+            "featured_image_title": true,
+            "featured_image_alt": true,
+            "short_content": true,
+            "content": true,
+            "author_name": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true,
+            "publish_date": true,
+            "canonical_category_id": true,
+            "is_allow_comments": true,
+            "meta_title": true,
+            "meta_description": true,
+            "product_condition": true,
+            "meta_twitter_site": true,
+            "meta_twitter_creator": true,
+            "customer_groups": true,
+            "author_id": true,
+            "meta_keywords": true,
+            "meta_prefix": true,
+            "meta_suffix": true,
+            "featured_image_mobile_file": true,
+            "is_featured": true,
+            "author_display_mode": true,
+            "are_related_products_enabled": true,
+            "is_author_badge_enabled": true,
+            "featured_image_link": true,
+            "end_date": true
+        },
+        "index": {
+            "AW_BLOG_POST_STATUS_PUBLISH_DATE": true,
+            "AW_BLOG_POST_URL_KEY": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_POST_AUTHOR_ID_AW_BLOG_AUTHOR_ID": true
+        }
+    },
+    "aw_blog_category": {
+        "column": {
+            "id": true,
+            "name": true,
+            "url_key": true,
+            "status": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true,
+            "meta_title": true,
+            "meta_description": true,
+            "parent_id": true,
+            "path": true,
+            "meta_keywords": true,
+            "meta_prefix": true,
+            "meta_suffix": true,
+            "image_file_name": true,
+            "image_title": true,
+            "image_alt": true,
+            "is_description_enabled": true,
+            "description": true,
+            "display_mode": true,
+            "cms_block_id": true
+        },
+        "index": {
+            "AW_BLOG_CATEGORY_STATUS": true,
+            "AW_BLOG_CATEGORY_URL_KEY": true,
+            "AW_BLOG_CATEGORY_PATH": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_CATEGORY_CMS_BLOCK_ID_CMS_BLOCK_BLOCK_ID": true
+        }
+    },
+    "aw_blog_tag": {
+        "column": {
+            "id": true,
+            "name": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "AW_BLOG_TAG_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_blog_category_store": {
+        "column": {
+            "category_id": true,
+            "store_id": true
+        },
+        "index": {
+            "AW_BLOG_CATEGORY_STORE_CATEGORY_ID": true,
+            "AW_BLOG_CATEGORY_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_CATEGORY_STORE_CATEGORY_ID_AW_BLOG_CATEGORY_ID": true,
+            "AW_BLOG_CATEGORY_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "aw_blog_post_store": {
+        "column": {
+            "post_id": true,
+            "store_id": true
+        },
+        "index": {
+            "AW_BLOG_POST_STORE_POST_ID": true,
+            "AW_BLOG_POST_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_POST_STORE_POST_ID_AW_BLOG_POST_ID": true,
+            "AW_BLOG_POST_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "aw_blog_post_category": {
+        "column": {
+            "category_id": true,
+            "post_id": true
+        },
+        "index": {
+            "AW_BLOG_POST_CATEGORY_CATEGORY_ID": true,
+            "AW_BLOG_POST_CATEGORY_POST_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_POST_CATEGORY_CATEGORY_ID_AW_BLOG_CATEGORY_ID": true,
+            "AW_BLOG_POST_CATEGORY_POST_ID_AW_BLOG_POST_ID": true
+        }
+    },
+    "aw_blog_post_tag": {
+        "column": {
+            "tag_id": true,
+            "post_id": true
+        },
+        "index": {
+            "AW_BLOG_POST_TAG_TAG_ID": true,
+            "AW_BLOG_POST_TAG_POST_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_POST_TAG_TAG_ID_AW_BLOG_TAG_ID": true,
+            "AW_BLOG_POST_TAG_POST_ID_AW_BLOG_POST_ID": true
+        }
+    },
+    "aw_blog_product_post": {
+        "column": {
+            "product_id": true,
+            "post_id": true,
+            "store_id": true
+        },
+        "index": {
+            "AW_BLOG_PRODUCT_POST_PRODUCT_ID": true,
+            "AW_BLOG_PRODUCT_POST_POST_ID": true,
+            "AW_BLOG_PRODUCT_POST_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BLOG_PRODUCT_POST_POST_ID_AW_BLOG_POST_ID": true,
+            "AW_BLOG_PRODUCT_POST_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "aw_blog_author": {
+        "column": {
+            "id": true,
+            "firstname": true,
+            "lastname": true,
+            "url_key": true,
+            "job_position": true,
+            "image_file": true,
+            "short_bio": true,
+            "twitter_id": true,
+            "facebook_id": true,
+            "linkedin_id": true,
+            "meta_title": true,
+            "meta_keywords": true,
+            "meta_description": true,
+            "meta_prefix": true,
+            "meta_suffix": true
+        },
+        "index": {
+            "AW_BLOG_AUTHOR_TWITTER_ID": true,
+            "AW_BLOG_AUTHOR_FACEBOOK_ID": true,
+            "AW_BLOG_AUTHOR_LINKEDIN_ID": true,
+            "AW_BLOG_AUTHOR_URL_KEY": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_blog_post_preview": {
+        "column": {
+            "id": true,
+            "post_preview_data": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

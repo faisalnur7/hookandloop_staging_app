@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Widget\Block\Adminhtml\Widget\Instance\Edit\Tab\Main\Layout" type="Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Edit\Tab\Main\Layout" />
+    <preference for="Magento\Widget\Model\Widget\Instance" type="Aheadworks\Blog\Model\Widget\Instance" />
+    <virtualType name="Aheadworks\Blog\Controller\Adminhtml\Category\PostDataProcessor"
+                 type="Aheadworks\Blog\Model\Data\Processor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="store_ids" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Category\StoreIds</item>
+                <item name="image_file_name" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Category\ImageFileName</item>
+                <item name="cms_block_id" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Category\CmsBlockId</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Blog\Controller\Adminhtml\Category\Save">
+        <arguments>
+            <argument name="postDataProcessor" xsi:type="object">Aheadworks\Blog\Controller\Adminhtml\Category\PostDataProcessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\Blog\Controller\Adminhtml\Post\PostDataProcessor"
+                 type="Aheadworks\Blog\Model\Data\Processor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="postId" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\PostId</item>
+                <item name="shortContent" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\ShortContent</item>
+                <item name="storeIds" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\StoreIds</item>
+                <item name="categoryIds" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\CategoryIds</item>
+                <item name="tags" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\Tags</item>
+                <item name="productConditions" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\ProductConditions</item>
+                <item name="featuredImageFile" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\FeaturedImageFile</item>
+                <item name="featuredImageMobileFile" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\FeaturedImageMobileFile</item>
+                <item name="metaTwiterSite" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\MetaTwitterSite</item>
+                <item name="authorDisplayMode" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\AuthorDisplayMode</item>
+                <item name="status" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\Status</item>
+                <item name="publishDate" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\PublishDate</item>
+                <item name="title" xsi:type="object">Aheadworks\Blog\Model\Data\Processor\Post\FieldSuffixForDuplicatedPost</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Blog\Model\Data\Processor\Post\FieldSuffixForDuplicatedPost">
+        <arguments>
+            <argument name="fields" xsi:type="array">
+                <item name="urlKey" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::URL_KEY</item>
+                <item name="title" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::TITLE</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Blog\Model\Import\Processor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="blog_posts" xsi:type="object">Aheadworks\Blog\Model\Import\Processor\Posts</item>
+                <item name="blog_categories" xsi:type="object">Aheadworks\Blog\Model\Import\Processor\Categories</item>
+                <item name="blog_authors" xsi:type="object">Aheadworks\Blog\Model\Import\Processor\Authors</item>
+            </argument>
+            <argument name="defaultImportConfig" xsi:type="array">
+                <item name="validation_strategy" xsi:type="string">validation-stop-on-errors</item>
+                <item name="allowed_error_count" xsi:type="string">0</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Blog\Model\Import\Processor\Posts">
+        <arguments>
+            <argument name="configEntity" xsi:type="array">
+                <item name="entities" xsi:type="array">
+                    <item name="blog_posts" xsi:type="array">
+                        <item name="name" xsi:type="string">blog_posts</item>
+                        <item name="label" xsi:type="string">Blog Posts</item>
+                        <item name="behaviorModel" xsi:type="string">Magento\ImportExport\Model\Source\Import\Behavior\Basic</item>
+                        <item name="model" xsi:type="string">Aheadworks\Blog\Model\Import\Source\Posts</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Blog\Model\Import\Processor\Authors">
+        <arguments>
+            <argument name="configEntity" xsi:type="array">
+                <item name="entities" xsi:type="array">
+                    <item name="blog_authors" xsi:type="array">
+                        <item name="name" xsi:type="string">blog_authors</item>
+                        <item name="label" xsi:type="string">Blog Authors</item>
+                        <item name="behaviorModel" xsi:type="string">Magento\ImportExport\Model\Source\Import\Behavior\Basic</item>
+                        <item name="model" xsi:type="string">Aheadworks\Blog\Model\Import\Source\Authors</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Blog\Model\Import\Processor\Categories">
+        <arguments>
+            <argument name="configEntity" xsi:type="array">
+                <item name="entities" xsi:type="array">
+                    <item name="blog_categories" xsi:type="array">
+                        <item name="name" xsi:type="string">blog_categories</item>
+                        <item name="label" xsi:type="string">Blog Categories</item>
+                        <item name="behaviorModel" xsi:type="string">Magento\ImportExport\Model\Source\Import\Behavior\Basic</item>
+                        <item name="model" xsi:type="string">Aheadworks\Blog\Model\Import\Source\Categories</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\Blog\Import\PostDataProcessor"
+                 type="Aheadworks\Blog\Controller\Adminhtml\Post\PostDataProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="featuredImageFile" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\FeaturedImageFile</item>
+                <item name="featuredImageMobileFile" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\FeaturedImageMobileFile</item>
+                <item name="author" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\Author</item>
+                <item name="categoryIds" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\CategoryIds</item>
+                <item name="tagNames" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\TagNames</item>
+                <item name="storeIds" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\StoreIds</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Blog\Import\AuthorDataProcessor" type="Aheadworks\Blog\Model\Data\Processor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="authorId" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Author\AuthorId</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Blog\Import\CategoryDataProcessor" type="Aheadworks\Blog\Model\Data\Processor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="storeIds" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Post\StoreIds</item>
+                <item name="status" xsi:type="object">Aheadworks\Blog\Model\Import\Data\Processor\Category\Status</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Blog\Model\Import\Source\Authors" type="Aheadworks\Blog\Model\Import\Source\AbstractSourceEntity">
+        <arguments>
+            <argument name="dataProcessor" xsi:type="object">Aheadworks\Blog\Import\AuthorDataProcessor</argument>
+            <argument name="entityCode" xsi:type="string">blog_authors</argument>
+            <argument name="masterAttributeCode" xsi:type="string">url_key</argument>
+            <argument name="requiredColumnNames" xsi:type="array">
+                <item name="1" xsi:type="string">firstname</item>
+                <item name="2" xsi:type="string">lastname</item>
+                <item name="3" xsi:type="string">url_key</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Blog\Model\Import\Source\Categories" type="Aheadworks\Blog\Model\Import\Source\AbstractSourceEntity">
+        <arguments>
+            <argument name="dataProcessor" xsi:type="object">Aheadworks\Blog\Import\CategoryDataProcessor</argument>
+            <argument name="entityCode" xsi:type="string">blog_categories</argument>
+            <argument name="masterAttributeCode" xsi:type="string">url_key</argument>
+            <argument name="requiredColumnNames" xsi:type="array">
+                <item name="1" xsi:type="string">name</item>
+                <item name="2" xsi:type="string">url_key</item>
+                <item name="3" xsi:type="string">store_view</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Blog\Model\Import\Source\Posts" type="Aheadworks\Blog\Model\Import\Source\AbstractSourceEntity">
+        <arguments>
+            <argument name="dataProcessor" xsi:type="object">Aheadworks\Blog\Import\PostDataProcessor</argument>
+            <argument name="entityCode" xsi:type="string">blog_posts</argument>
+            <argument name="masterAttributeCode" xsi:type="string">title</argument>
+            <argument name="requiredColumnNames" xsi:type="array">
+                <item name="1" xsi:type="string">title</item>
+                <item name="2" xsi:type="string">url_key</item>
+                <item name="3" xsi:type="string">store_view</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Blog\Controller\Adminhtml\Post\Preview">
+        <arguments>
+            <argument name="postDataProcessor" xsi:type="object">Aheadworks\Blog\Controller\Adminhtml\Post\PostDataProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Controller\Adminhtml\Post\Save">
+        <arguments>
+            <argument name="postDataProcessor" xsi:type="object">Aheadworks\Blog\Controller\Adminhtml\Post\PostDataProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Controller\Adminhtml\Post\Validate">
+        <arguments>
+            <argument name="postDataProcessor" xsi:type="object">Aheadworks\Blog\Controller\Adminhtml\Post\PostDataProcessor</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\Blog\Ui\DataProvider\CategoryDataProvider\ModifierPool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="image_data" xsi:type="array">
+                    <item name="class" xsi:type="string">Aheadworks\Blog\Ui\DataProvider\Modifier\Category\ImageData</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Blog\Ui\DataProvider\CategoryDataProvider">
+        <arguments>
+            <argument name="modifierPool" xsi:type="object">Aheadworks\Blog\Ui\DataProvider\CategoryDataProvider\ModifierPool</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Config\Model\Config">
+        <plugin name="admin_system_blog_config_save_plugin" type="Aheadworks\Blog\Plugin\Config\Model\ConfigPlugin"/>
+    </type>
+
+    <type name="Aheadworks\Blog\Model\Config\Backend\Suffix\Author">
+        <arguments>
+            <argument name="validator" xsi:type="object">Aheadworks\Blog\Model\Validator\UrlSuffix</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Model\Config\Backend\Suffix\OtherPages">
+        <arguments>
+            <argument name="validator" xsi:type="object">Aheadworks\Blog\Model\Validator\UrlSuffix</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Model\Config\Backend\Suffix\Post">
+        <arguments>
+            <argument name="validator" xsi:type="object">Aheadworks\Blog\Model\Validator\UrlSuffix</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Model\Widget\Instance">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="layout_handles" xsi:type="array">
+                    <item name="blog_categories" xsi:type="string">aw_blog_category_view</item>
+                    <item name="blog_authors" xsi:type="string">aw_blog_author_view</item>
+                    <item name="blog_posts" xsi:type="string">aw_blog_post_view</item>
+                </item>
+                <item name="specific_entities_layout_handles" xsi:type="array">
+                    <item name="blog_categories" xsi:type="string">aw_blog_category_view_id_{{ID}}</item>
+                    <item name="blog_authors" xsi:type="string">aw_blog_author_view_id_{{ID}}</item>
+                    <item name="blog_posts" xsi:type="string">aw_blog_post_view_id_{{ID}}</item>
+                </item>
+                <item name="display_on_containers" xsi:type="array">
+                    <item name="blog_categories" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Categories</item>
+                        <item name="code" xsi:type="string">blog_categories</item>
+                        <item name="name" xsi:type="string">blog_categories</item>
+                        <item name="layout_handle" xsi:type="string">aw_blog_category_view</item>
+                        <item name="display_type" xsi:type="string">custom</item>
+                        <item name="is_anchor_only" xsi:type="string"></item>
+                        <item name="product_type_id" xsi:type="string"></item>
+                    </item>
+                    <item name="blog_authors" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Authors</item>
+                        <item name="code" xsi:type="string">blog_authors</item>
+                        <item name="name" xsi:type="string">blog_authors</item>
+                        <item name="layout_handle" xsi:type="string">aw_blog_author_view</item>
+                        <item name="display_type" xsi:type="string">grid</item>
+                        <item name="is_anchor_only" xsi:type="string"></item>
+                        <item name="product_type_id" xsi:type="string"></item>
+                    </item>
+                    <item name="blog_posts" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Posts</item>
+                        <item name="code" xsi:type="string">blog_posts</item>
+                        <item name="name" xsi:type="string">blog_posts</item>
+                        <item name="layout_handle" xsi:type="string">aw_blog_post_view</item>
+                        <item name="display_type" xsi:type="string">grid</item>
+                        <item name="is_anchor_only" xsi:type="string"></item>
+                        <item name="product_type_id" xsi:type="string"></item>
+                    </item>
+                </item>
+                <item name="chooser_blocks" xsi:type="array">
+                    <item name="grid" xsi:type="array">
+                        <item name="blog_posts" xsi:type="object">Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Grid\Posts</item>
+                        <item name="blog_authors" xsi:type="object">Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Grid\Authors</item>
+                    </item>
+                    <item name="custom" xsi:type="array">
+                        <item name="blog_categories" xsi:type="object">Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Custom\Categories</item>
+                    </item>
+                </item>
+                <item name="display_on_options" xsi:type="array">
+                    <item name="blog" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Blog</item>
+                        <item name="value" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">blog_authors</item>
+                                <item name="label" xsi:type="string" translate="true">Authors</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">blog_categories</item>
+                                <item name="label" xsi:type="string" translate="true">Categories</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">blog_posts</item>
+                                <item name="label" xsi:type="string" translate="true">Posts</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Grid\Posts">
+        <arguments>
+            <argument name="collection" xsi:type="object">Aheadworks\Blog\Model\ResourceModel\Post\Grid\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Grid\Authors">
+        <arguments>
+            <argument name="collection" xsi:type="object">Aheadworks\Blog\Model\ResourceModel\Author\Grid\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="widgetInstanceErrorMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Aheadworks_Blog::messages/widgetInstanceErrorMessage.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Blog\Controller\Adminhtml\Export\Export">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Blog\Model\Export\Data\Operation\CreateExportInfo</argument>
+        </arguments>
+    </type>
+</config>

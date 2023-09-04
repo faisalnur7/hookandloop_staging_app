@@ -1,0 +1,7 @@
+<?php
+$_order = $block->getOrder();
+$payment = $_order->getPayment();
+if ($payment->getTaxReliefCode()) : ?>
+    <div><span><strong>Tax Relief Code: </strong><?php echo $payment->getTaxReliefCode(); ?></span>
+        <span><strong>Tax Relief State: </strong><?php echo $payment->getTaxReliefState(); ?></span></div>
+<?php endif; ?>

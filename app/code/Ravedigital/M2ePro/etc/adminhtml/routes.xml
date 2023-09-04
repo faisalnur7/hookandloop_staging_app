@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="ravedigital_m2epro" frontName="ravedigital_m2epro">
+            <module name="Ravedigital_M2ePro" before="Magento_Backend"/>
+        </route>
+    </router>
+</config>

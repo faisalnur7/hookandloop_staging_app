@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author DCKAP Team
+* @copyright Copyright (c) 2018 DCKAP (https://www.dckap.com)
+* @package Dckap_CustomFields
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+ <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+       <plugin name="checkout_custom_shipping_fields" type="Dckap\CustomFields\Plugin\Checkout\LayoutProcessorPlugin" sortOrder="10"/>
+   </type>
+   <type name="Magento\Checkout\Model\ShippingInformationManagement">
+      <plugin name="save_to_quote_table" type="Dckap\CustomFields\Plugin\Quote\SaveToQuote" sortOrder="10"/>
+   </type>
+
+    <preference for="Magento\Paypal\Controller\Express\SaveShippingMethod" type="Dckap\CustomFields\Controller\Express\SaveShippingMethod" />
+
+    <preference for="Magento\Paypal\Controller\Express\AbstractExpress\SaveShippingMethod" type="Dckap\CustomFields\Controller\Express\AbstractExpress\SaveShippingMethod" />
+
+    <preference for="Magento\Paypal\Block\Express\Review" type="Dckap\CustomFields\Block\Review" />
+</config>

@@ -1,0 +1,89 @@
+<?php
+/**
+ * @category FishPig
+ * @package FishPig_WordPress
+ * @notes This template is used when there post/list.phtml doesn't have a child block called 'renderer'
+ * @notes This happens when post/list.phtml is called in via PHP rather than via the default layout handles
+ */
+?>
+<?php //if ($post = $this->getPost()): ?>
+<?php if ($post = $this->getData('post')) : ?>
+    <div class="post-list-item">
+        
+        <div class="post-entry">
+             <?php
+                if ($post->getFeaturedImageFile()) : ?>
+                    <div class="post-image">
+                                    <?php if ($post->getFeaturedImageFile()) : ?>
+                            <a href="<?php /* @noEscape */ $block->escapeXssInUrl($block->getPostUrl($post)) ?>">
+                                <img  src = "<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getFeaturedImageUrl($post)) ?>" 
+                                     title = "<?php echo $block->escapeHtml($post->getFeaturedImageTitle()) ?>"
+                                     alt = "<?php echo $block->escapeHtml($post->getFeaturedImageAlt()) ?>"
+                                />
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                            <?php endif; ?>
+            <div class="post-item-content">
+                <h2>
+                    <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>" title="<?php echo $this->escapeHtml($post->getTitle()) ?>">
+                        <?php echo $this->escapeHtml($post->getTitle()) ?>
+                    </a>
+                </h2>
+                <div class="post-meta">
+                    <div class="post-date post-meta-item">
+                        <strong><?php echo __('Updated On') ?>:</strong> <?php echo $block->formatDate($post->getUpdatedAt(), \IntlDateFormatter::MEDIUM) ?>
+                    </div>
+                   <div class="post-user post-meta-item">
+                        <strong><?php echo __('Posted By') ?>:</strong> <a class="author-link" href="<?= /* @noEscape */ $block->getAuthorUrl() ?>">
+                            <?php /* @noEscape */ echo $block->getAuthorFullname() ?>
+                        </a>
+                    </div> 
+                </div>
+                <div class="post-excerpt"><?php echo $post->getShortContent() ?></div>
+                <?php //if ($block->showReadMoreButton($post)): ?>
+                    <p class="blog-post-read-more-wrapper">
+                        <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>"
+                           class="blog-post-read-more action read-more">
+                            <?php echo $block->escapeHtml(__('Continue reading →')) ?>
+                        </a>
+                    </p>
+                <?php //endif; ?>
+                <div class="post-meta">
+                    <?php $categoryLinks = $block->getCategoryLinks();  ?>
+                    <?php if ($linksCount = count($categoryLinks)) : ?>
+                        <div class="post-categories post-meta-item">
+                            <strong><?php echo __('Categories') ?>:</strong>
+                            <?php if ($linksCount == 1) : ?>
+                                <?php /* @noEscape */ echo $categoryLinks[0] ?>
+                            <?php elseif ($linksCount == 2) : ?>
+                                <?php /* @noEscape */ echo __('%1 and %2', $categoryLinks[0], $categoryLinks[1]) ?>
+                            <?php elseif ($linksCount > 2) : ?>
+                                <?php /* @noEscape */ echo __(
+                                    '%1, %2 and %3',
+                                    implode(', ', array_slice($categoryLinks, 0, $linksCount - 2)),
+                                    $categoryLinks[$linksCount - 2],
+                                    $categoryLinks[$linksCount - 1]
+                                ) ?>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                   
+                    <?php if ($post->getTagNames()) : ?>
+                        <div class="post-tags post-meta-item">
+                            <strong><?php echo __('Tags') ?>:</strong>
+                             <?php foreach ($post->getTagNames() as $tagName) : ?>
+                                <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getSearchByTagUrl($tagName)) ?>"
+                                   class="blog-tags-tag">
+                                    <?php echo $block->escapeHtml($tagName) ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+<?php endif; ?>

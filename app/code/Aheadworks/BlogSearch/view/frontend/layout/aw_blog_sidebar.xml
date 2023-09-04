@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="aw_blog_sidebar.search">
+            <container name="aw_blog_search.container" htmlTag="div" htmlClass="aw_blog_search-container aw_blog_search-container-desktop">
+                <block class="Aheadworks\BlogSearch\Block\SearchField"
+                       name="aw_blog_search.search_field"
+                       template="Aheadworks_BlogSearch::search_field.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\BlogSearch\ViewModel\SearchField</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,33 @@
+<?php /** @var \Magento\Framework\Pricing\Render\Amount $block */ ?>
+<div class="price-box range second price-final_price" data-role="priceBox" data-product-id="<?= /* @escapeNotVerified */ $block->getProductId() ?>">
+    <span class="special-price">
+        <span class="price-container price-final_price">
+            <?php if ($block->getDisplayLabel()): ?>
+                <span class="price-label"><?= /* @escapeNotVerified */ $block->getDisplayLabel(); ?></span>
+            <?php endif; ?>
+            <?php if($block->getSpecialPrice()): ?>
+                <span class="special-price"
+                data-price-amount=""
+                    data-price-type="finalPrice1"
+                    class="price-wrapper">
+                    <span class="price"><?= /* @escapeNotVerified */ $block->getSpecialPrice();?>
+                    </span>
+                </span>    
+                <span class="old-price"
+                    ata-price-amount=""
+                    data-price-type="oldPrice"
+                    class="price-wrapper">
+                    <span class="price"><?= /* @escapeNotVerified */ $block->getDisplayValue();?>
+                    </span>
+                </span> 
+            <?php else:?>
+                <span <?php if ($block->getPriceId()): ?> id="<?= $block->getPriceId() ?>"<?php endif;?>
+                    data-price-amount=""
+                    data-price-type="finalPrice1"
+                    class="price-wrapper">
+                    <span class="price"><?= /* @escapeNotVerified */ $block->getDisplayValue();?></span>
+                </span> 
+             <?php endif;?>   
+        </span>
+    </span>
+</div>

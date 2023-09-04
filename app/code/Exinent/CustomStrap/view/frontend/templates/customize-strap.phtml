@@ -1,0 +1,440 @@
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('customize-strap')->toHtml(); 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$img_path = $objectManager->get('Magento\Store\Model\StoreManagerInterface')
+->getStore()
+->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+?>
+<div class="customize-product-selection">
+    <h2 class="legend"><?= __('Select Strap Style')?></h2>
+    <div class="custom-strap-list-panel clearfix">
+        <label class="required"><em>*</em><?= __('Select Strap Style')?></label>
+        <ul class="list-select" id="strap-type-select">
+            <li class="control">
+                <input type="radio" name="strap-type" value="Cinch Strap" checked>
+                <img src="<?php echo $img_path?>form-images/design-your-own/cinch.jpg" alt="Cinch Strap">
+                <img style="display:none" id="img_test" src='<?= $img_path ."/dcs_249.jpg" ?>' alt="dcs_249.jpg">
+                <label><?= __('Cinch Strap With Ring')?></label>
+            </li>
+            <li class="control">
+                <input type="radio" name="strap-type" value="Back Strap" checked>
+                <img src="<?php echo $img_path?>/form-images/design-your-own/back.jpg" alt="Back Strap">
+                <img style="display:none" id="img_test" src='<?= $img_path ."/dbs_280.jpg " ?>' alt="dbs_280.jpg">
+                <label><?= __('Back strap')?></label>
+            </li>
+            <li class="control">
+                <input type="radio" name="strap-type" value="Face Strap" checked>
+                <img src="<?php echo $img_path?>/form-images/design-your-own/face.jpg" alt="Face Strap">
+                <img style="display:none" id="img_test" src='<?= $img_path ."/dcs_250.jpg" ?>' alt="dcs_250.jpg">
+                <label><?= __('Face Strap')?></label>
+            </li>
+            <li class="control">
+                <input type="radio" name="strap-type" value="Two Way Face Strap" checked>
+                <img src="<?php echo $img_path?>/form-images/design-your-own/two_way.jpg" alt="Two Way Face Strap">
+                <img style="display:none" id="img_test" src='<?= $img_path ."/dcs_251.jpg" ?>' alt="dcs_251.jpg">
+                <label><?= __('Two way Face Strap')?></label>
+            </li>
+
+        </ul>
+        <input type="hidden" name="strap-type-hidden"  id="strap-type-hidden" value="Cinch Strap" />
+    </div>
+</div>
+
+<div class="customize-product-detail">
+    <h2><?= __('Select Product Details')?></h2>
+    <ul class="form-list clearfix">
+        <li class="webforms-fields-101 fields">
+            <label class="required"><?= __('Select Material')?> <em>*</em></label>
+            <div class="input-box custom-strap-list-panel clearfix">
+                <select  id="brand" class=" required-entry" >
+                    <option value="DuraGrip"><?= __('Duragrip Brand')?></option>
+                    <option value="VELCRO"><?= __('Velcro Brand')?></option>
+                </select>
+                <input type="hidden" name="strap-brand-hidden"  id="strap-brand-hidden" value="DuraGrip" />
+            </div>
+        </li>
+        <li class="webforms-fields-101 fields">
+            <label class="required"><?= __('Select Width')?> <em>*</em></label>
+            <div class="input-box custom-strap-list-panel clearfix">
+                <select id="strap-width" class=" required-entry">
+                    <option value="5/8"><?= __('5/8"')?></option>
+                    <option value="3/4"><?= __('3/4"')?></option>
+                    <option value="1"><?= __('1"')?></option>
+                    <option value="1.5"><?= __('1.5"')?></option>
+                    <option value="2"><?= __('2"')?></option>
+                    <option value="3"><?= __('3"')?></option>
+                    <option value="4"><?= __('4"')?></option>
+                </select>
+                <input type="hidden" name="strap-width-hidden"  id="strap-width-hidden" value="5/8" />
+                <label id="custom-strap-msg" style="display:none;" class="webforms-fields-comment" id="length-require"><?= __('3" and 4" wide straps will have a straight tip.');?></label>
+            </div>
+        </li>
+        <li class="webforms-fields-101 fields">
+            <label class="required"><?= __('Enter Strap Length')?> <em>*</em></label>
+            <div class="input-box custom-strap-list-panel clearfix">
+                <input id="strap-length" type="number" class=" required-entry input-text" style="" placeholder="Strap Length" value="">
+                <input type="hidden" name="strap-length-hidden"  id="strap-length-hidden" value="" />
+                <label class="webforms-fields-comment required" id="length-require"><em>*</em><?= __('Enter strap length in inches (between 6" and 120")')?></label>
+            </div>
+        </li>
+        <li class="fields webforms-fields-101">
+            <label class="required"><?= __('Quantity')?> <em>*</em></label>
+            <div class="input-box custom-strap-list-panel clearfix">
+                <input id="qunatity" type="text" class=" required-entry input-text" style="" placeholder="Quantity" value="">
+                <label class="webforms-fields-comment required" id="quantity-require"><em>*</em><?= __('Minimum purchase quantity is 25')?></label>
+            </div>
+        </li>
+        <li class="webforms-fields-101 fields actions">
+         <button class="btn_thme_primary action primary" id="custom_strap_apply" title="Apply">
+            <span><span><?= __('Apply')?></span></span></button>
+        </li>
+    </ul>
+    
+    <div class="cstm-form-bottom-section">
+        <span class="straps-logo-text"><?= __('All straps come with our HookandLoop.com logo on a 4. <strong>Straps are available without logo imprinting, just enter it in the order comments at checkout.<strong>')?> <a href="/custom-strap-form" class="customStrapFormPage" target="_blank"><?= __('Custom logos also available.')?></a></span>
+        <div class="cstm-price-lft">
+            <label id="price-label" class="required"><?= __('Price:')?> </label>
+            <div class="input-box custom-strap-list-panel clearfix">
+                <div class="price_cont clearfix">$ <label id="price">0.0</label></div>
+                <label id="sku" style="display: none;"></label>
+                <label id="unit-price" style="display: none;" ></label>
+            </div>
+            <div class="buttons-set">
+                <button type="submit" class="btn_thme_secondary action primary" id="custom_strap_atc" disabled title="Add to cart" >
+                    <span><?= __('Add to cart')?></span></button>
+                </div>
+                <span class="please-wait" id="loader-add-to-cart" style="display: none;">
+                    <div style="display: table;width: 100%;height: 100%;">
+                        <div style="display:table-cell;height: 100%;vertical-align: middle;">
+                            <img src="<?php echo $img_path?>customize-strap/spinner.gif" alt="Adding..." title="Adding..." class="v-middle">
+                            <span id="webform_ouzrdn_progress_text"><?= __('Adding...')?></span>
+                        </div>
+                    </div>
+                </span>
+            </div>
+            <a href="/custom-strap-form" class="customStrapFormLink" target="_blank">Custom orders also available</a>
+        </div>
+
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="mb-login-popup-title"> <?= __('Add to Cart')?><span class="close">&times;</span></div>
+            <div class="title_appended"><?= __('Something went worng, Product Not Added To Cart')?></div>
+            <div class="title_appended_success">
+                <img src="<?php echo $img_path.'images/top-menu-icon.png' ?>" />
+                <span><?= __('Product Added to Cart!')?><span>
+                </div>
+                <div class="product-name"></div>
+                <div style="margin:0px auto;" class="product-sku"><label><?= __('Part #:')?></label><span></span></div>
+                <div class="test_b" style="width:30%;">
+                    <label id="test_img"></label>
+                    <img src="" style="width:75% ;    height:auto;">
+                </div>
+                <div class="test_a" style="width:50%;">
+
+                    <!-- <div class="part" sty;e="    height: 35px;"><p>part#:</p><p id="product-sku"></p></div> -->
+                    <div ><p><?= __('Strap Style:')?></p><p id="strap_style"></p></div>
+                    <div ><p><?= __('Select Material:')?></p><p id="strap_material"></p></div>
+                    <div ><p><?= __('Select Width:')?></p><p id="strap_width"></p></div>
+                    <div style="float: left;    width: 100%;"><p><?= __('Enter Strap Length:')?></p><p id="strap_length"></p></div >
+                    <div ><p><?= __('Quantity:')?></p><p id="strap_qty"></p></div >
+                </div>
+
+                <div class="ajaxcart-buttons ajaxsuite-buttons">
+                    <button type="button" id="ajaxcart_cancel" class="action primary mb-ajaxsuite-close" title="Continue Shopping">
+                        <span><?= __('Continue Shopping')?> </span>
+                    </button>
+                    <a href="<?php echo $block->getUrl('checkout/cart', ['_secure' => true]);?>"> <button type="button" id="ajaxcart_checkout" class="action focus primary" title="Go to Shopping Cart">
+                        <span><?= __('Go to Shopping Cart')?></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="overlay strap-not-found mb-ajaxsuite-popup-wrapper strap-not-found" id="mb-ajaxsuite-popup-wrapper">
+        <div class="pop_bl">
+            <div id="mb-ajaxcart-wrapper" style="display: block;" class="popup-content-box pop_content">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        requirejs(['jquery','Magento_Customer/js/customer-data'], function (jQuery, customerData) {
+            jQuery(function ($) {
+                $(document).ready(function () {
+                    var strapType;
+                    var width;
+                    var brand;
+                    var strapLength;
+                var lab;// selected label text
+                var imgName;//selected img url
+                var img_name;
+                $('input:radio[name="strap-type"][value="Cinch Strap"]').prop('checked', true);
+                hideWidthOnStrapType("Cinch Strap");
+                $('.test_b img').attr('src',"<?= $img_path?>customize-strap/dcs_249.jpg");
+                $('.control ').click(function() {
+                 lab=$(this).find('input:radio[name="strap-type"]').siblings('label').text();
+                 imgName=$(this).find('input:radio[name="strap-type"]').siblings('#img_test').attr('src');
+                 $('.test_b img').attr('src',imgName);
+             });
+                $('#strap-type-select li').click(function () {
+                    $(this).children("input[type=radio]").prop("checked", true);
+                    hideWidthOnStrapType($(this).children("input[type=radio]").val());
+                    $('#strap-type-hidden').val($(this).children("input[type=radio]").val());
+                    //getPrice();
+                });
+
+                $('#strap-width').on('change', function () {
+                    $('#custom-strap-msg').hide();
+                    var strap_width = $(this).val();
+                    if(strap_width >= 3){
+                        $('#custom-strap-msg').show();
+                    }
+                    $('#strap-width-hidden').val($(this).find(":selected").val());
+                    //getPrice();
+                });
+
+                $('#brand').on('change', function () {
+                    $('#strap-brand-hidden').val($(this).find(":selected").val());
+                    //getPrice();
+                });
+
+                $("#strap-length").change(function () {
+                    $('#sku').text('');
+                    $('#custom_strap_atc').attr('disabled','disabled');
+                    $('#strap-length-hidden').val($(this).val());
+                    //getPrice();
+                });
+
+                $("#qunatity").change(function () {
+                    if ($('#qunatity').val() != '') {
+                        if ($('#qunatity').val() < 25) {
+                            $('#quantity-require').css("color", "red");
+                        } else {
+                            $('#quantity-require').css("color", "#666");
+                            //getPrice();
+                        }
+                    }
+                });
+
+                $("#custom_strap_apply").click(function() {
+                    if ($('#qunatity').val() >= 25) {
+                     getPrice();
+                 } else {
+                    $('#quantity-require').css("color", "red");
+                    $('#custom_strap_atc').attr('disabled','disabled');
+                }
+            });
+
+                $('#myModal .close').click(function (e) {
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "none";
+                });
+                $('#myModal #ajaxcart_cancel').click(function (e) {
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "none";
+                });
+                $('#custom_strap_atc').click(function (e) {
+                    e.preventDefault();
+                    var strapType = $('#strap-type-hidden').val();
+                    var width = $('#strap-width-hidden').val();
+                    var brand = $('#strap-brand-hidden').val();
+                    var strapLength = $('#strap-length-hidden').val();
+                    var qty = $('#qunatity').val();
+                    var sku = $('#sku').text();
+                    var unitPrice = $('#unit-price').text();
+                    if (strapLength == '') {
+                        $('#length-require').css("color", "red");
+                    } else {
+                        $('#length-require').css("color", "#666");
+                    }
+
+                    if (qty == '') {
+                        $('#quantity-require').css("color", "red");
+                    } else {
+                        $('#quantity-require').css("color", "#666");
+                    }
+
+                    if (strapType != '' && width != '' && brand != '' && strapLength != ''  && sku != '') {
+                        if ($('#qunatity').val() >= 25) {
+                            $('#loader-add-to-cart').css("display", "block");
+                            $.ajax({
+                                url: '<?php echo $block->getUrl('customstrap/index/addProduct') ?>',
+                                type: "post",
+                                data: "&sku=" + sku + "&qty=" + qty + "&price=" + unitPrice + "&brand=" + brand + "&width=" + width + "&strapType=" + strapType + "&strapLength=" + strapLength,
+                                dataType: 'json',
+                                success: function (data) {
+                                    // alert(data.sku);
+                                    var strapType = $('#strap-type-hidden').val();
+                                    // alert(strapType);
+                                    // window.location.href=data;
+
+                                    $('.title_appended_success').css('color','#ffffff').css({'background-color':'#1d1d1d','font-size':'20px'}).show();
+                                    $('.title_appended').css('color','red').hide(1000);
+                                    $('#loader-add-to-cart').css("display", "none");
+                                    var modal = document.getElementById('myModal');
+                                    modal.style.display = "block";
+                                    var brand = $("#brand").find(':selected').text();
+                                    var width = $("#strap-width").find(':selected').text();
+                                    var len = $('.webforms-fields-101:nth-child(3) input').val();
+                                    var qty = $('.webforms-fields-101:nth-child(4) input').val();
+                                    var proname = brand+' '+strapType ;
+                                    $('.product-name').text(proname);
+                                    $('.product-sku span').text(sku);
+                                    $('#strap_material').text(brand);
+                                    $('#strap_width').text(width);
+                                    $('#strap_length').text(len);
+                                    $('#strap_qty').text(qty);
+                                    $('.test_b').css('float','left');
+                                    $('.test_a').css('float','left');
+                                    // $('.test_b img').attr('src',data);
+                                    $(' #strap_style').text(strapType);
+                                    $('#test_img').attr('src',imgName);
+                                    var counter_num=parseInt($('.counter-number-cm.test').text(),10);
+                                    var qty_num=parseInt(qty,10);
+                                    var final_result=counter_num+qty_num;
+                                    $('.counter-number-cm.test').text(final_result);
+
+
+                                    window.onclick = function (event) {
+                                        if (event.target == modal) {
+                                            modal.style.display = "none";
+                                        }
+                                    }
+                                    var sections = ['cart'];
+                                    customerData.invalidate(sections);
+                                    customerData.reload(sections, true);
+                                },
+                                error: function(){
+                                   $('.title_appended_success').show();
+                                   $('.title_appended').css('color','red').show();
+                               },
+                               complete:function(data, status, xhr){
+
+                                 $('#loader-add-to-cart').css("display", "none");
+                                 if(status=='error'){
+                                   $('.title_appended_success').hide();
+                                   $('.title_appended').css('color','red').show(1000);
+                                   $('#myModal').show();
+                               }
+                               $('#myModal').show();
+                           }
+                       });
+} else {
+    $('.overlay.strap-not-found .pop_content').html('Minimum purchase quantity is 25.' + '<span id="close_popup">X</span>');
+    $('.overlay.strap-not-found').css("display", "block");
+    $('span#close_popup').css("display", "block");
+}
+} else {
+    if (sku != 'Not found' && strapLength == '') {
+        $('.overlay.strap-not-found .pop_content').html('Please fill all required fields.' + '<span id="close_popup">X</span>');
+        $('.overlay.strap-not-found').css("display", "block");
+        $('span#close_popup').css("display", "block");
+    }
+    if (qty < 25) {
+        $('.overlay.strap-not-found .pop_content').html('Minimum purchase quantity is 25.' + '<span id="close_popup">X</span>');
+        $('.overlay.strap-not-found').css("display", "block");
+        $('span#close_popup').css("display", "block");
+    }
+}
+
+});
+
+function getPrice() {
+    var strapType = $('#strap-type-hidden').val();
+    var width = $('#strap-width-hidden').val();
+    var brand = $('#strap-brand-hidden').val();
+    var strapLength = $('#strap-length-hidden').val();
+    var qty = $('#qunatity').val();
+
+    if (strapLength == '') {
+        $('#length-require').css("color", "red");
+    } else {
+        $('#length-require').css("color", "#666");
+    }
+
+    if (qty == '') {
+        $('#quantity-require').css("color", "red");
+    } else {
+        $('#quantity-require').css("color", "#666");
+    }
+
+    if (strapType != '' && width != '' && brand != '' && strapLength != '' && qty != '' && qty >= 25) {
+        $('#loader-add-to-cart').show();
+        $.ajax({
+            url: '<?php echo $block->getUrl('customstrap/index/getProduct') ?>',
+            type: "post",
+            data: "brand=" + brand + "&width=" + width + "&strapType=" + strapType + "&strapLength=" + strapLength,
+            dataType: 'json',
+            success: function (response) {
+                $('#loader-add-to-cart').hide();
+                                // alert(response.sku);
+                                if (response == 'Not found') {
+                                    $('#sku').text('Not found');
+                                    $('#price').text('0.0');
+                                    $('#custom_strap_atc').removeClass('btn_thme_primary');
+                                    $('#custom_strap_atc').addClass('btn_thme_secondary');
+
+                                    if ($('#strap-length-hidden').val() < 120) {
+                                        $('.overlay.strap-not-found .pop_content').html('The size selected requires additional information. Please request a custom quote through our ' + '<a href="/custom-strap-form" target="_blank">custom strap form</a>' + '.' + '<span id="close_popup">X</span>');
+
+                                    } else {
+                                        $('.overlay.strap-not-found .pop_content').html('For all strap lengths over 120 inches, please call or email Or request a custom quote through our ' + '<a href="/custom-strap-form" target="_blank">custom strap form</a>' + '.' + '<span id="close_popup">X</span>');
+                                    }
+
+                                    if (qty < 25) {
+                                        $('.overlay.strap-not-found .pop_content').html('Minimum order quantity is 25.');
+                                    }
+                                    $('.overlay.strap-not-found').css("display", "block");
+                                    $('span#close_popup').css("display", "block");
+
+                                } else {
+                                    $('#custom_strap_atc').removeClass('btn_thme_secondary');
+                                    $('#custom_strap_atc').addClass('btn_thme_primary');
+                                    var sku = response.sku;
+                                    var minQty = response.minQty;
+                                    if (minQty > qty) {
+                                        qty = minQty;
+                                        $('#qunatity').val(minQty);
+                                    }
+                                    var finalPrice = qty * response.price;
+                                    $('#price').text(finalPrice.toFixed(2));
+                                    $('#unit-price').text(response.price);
+                                    $('#sku').text(sku);
+                                    $('#custom_strap_atc').removeAttr('disabled');
+                                }
+                            }
+
+                        });
+    }
+}
+
+function hideWidthOnStrapType(strapType){
+    if(strapType == 'Cinch Strap'){
+        $("#strap-width option[value='4']").remove();
+    } else if(!$("#strap-width option[value='4']").length > 0){
+        $("#strap-width").append('<option value="4">4"</option>');
+    }
+    $('#strap-width').trigger('change');
+}
+
+});
+$('.overlay.strap-not-found').click(function () {
+    $('.overlay.strap-not-found').hide();
+})
+
+});
+
+});
+</script>
+<style>
+    .title_appended_success span{font-size:20px;position: relative;top: 10px;    width: 80%;    float: right;}
+    #ajaxcart_cancel{color: #ffffff;}
+    .modal-content .test_a {    margin-bottom: 15px;}
+    .modal-content .test_a div p{    width: 50%;float: left;margin:0px;}
+    .modal-content >div{font-weight: bold;}
+</style>

@@ -1,0 +1,119 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "laminas/laminas-dependency-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "magento/composer-dependency-version-audit-plugin": true,
+            "magento/composer-root-update-plugin": true,
+            "magento/inventory-composer-installer": true,
+            "magento/magento-composer-installer": true
+        }
+    },
+    "version": "2.4.6",
+    "require": {
+        "avalara/avatax-magento": "^2.3",
+        "composer/composer": "@alpha",
+        "d4h/finediff": "^1.0",
+        "ebizmarts/mailchimp-lib": "^3.0",
+        "endroid/qr-code": "^4.3.5",
+        "fooman/emailattachments-implementation-m2": "^107.3",
+        "fooman/pdfcore-m2": "^20.4",
+        "fooman/pdfcustomiser-implementation-m2": "^117.4",
+        "fooman/pdfcustomiser-m2": "^8.9",
+        "fooman/pdfcustomisergraphql-m2": "^1.0",
+        "fooman/pdfdesign-m2": "^2.2",
+        "fooman/printorderpdf-implementation-m2": "^105.2",
+        "laminas/laminas-filter": "^2.31",
+        "laminas/laminas-http": "^2.18",
+        "laminas/laminas-log": "^2.13",
+        "laminas/laminas-serializer": "^2.11",
+        "laminas/laminas-validator": "^2.30",
+        "lcobucci/clock": "^3.0",
+        "magento-ecg/coding-standard": "^4.5",
+        "magento/composer-dependency-version-audit-plugin": "~0.1",
+        "magento/composer-root-update-plugin": "~1.0",
+        "magento/product-community-edition": "2.4.6",
+        "magento/quality-patches": "^1.1",
+        "mandrill/mandrill": "^1.0",
+        "psr/clock": "^1.0",
+        "shipperhq/library-graphql": "^20.4",
+        "shipperhq/library-shipper": "^20.17",
+        "shipperhq/module-common": "^20.10",
+        "shipperhq/module-logger": "^20.7",
+        "shipperhq/module-shipper": "^20.52.0",
+        "whichbrowser/parser": "^2.1"
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "~1.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "friendsofphp/php-cs-fixer": "~2.18.1",
+        "lusitanian/oauth": "~0.8.10",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "^3.0",
+        "pdepend/pdepend": "~2.7.1",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpmd/phpmd": "^2.8.0",
+        "phpstan/phpstan": "^0.12.77",
+        "phpunit/phpunit": "^9",
+        "sebastian/phpcpd": "^6.0.3",
+        "squizlabs/php_codesniffer": "~3.5.4",
+        "symfony/finder": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/"
+        },
+        "psr-0": {
+            "": [
+                "app/code/"
+            ]
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": {
+        "fooman": {
+            "type": "composer",
+            "url": "https://customer-repos.fooman.co.nz/hookandloop.com-783ed0b7569689df87a5045f440cb0f8ef7b9784"
+        },
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "magesycho-magento2-custom-shipping": {
+            "type": "git",
+            "url": "git@github.com:MagePsycho/magento2-custom-shipping.git"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

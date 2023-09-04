@@ -1,0 +1,40 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Aheadworks\Blog\ViewModel\Post\Featured\Renderer $viewModel */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+$viewModel = $block->getViewModel();
+$posts = $block->getPosts();
+?>
+
+<div id="blog-featured-posts" class="block widget">
+    <div class="block-title">
+        <strong class="blog-sidebar-block-title"><?php echo $block->escapeHtml(__('Featured Posts')) ?></strong>
+    </div>
+    <div class="block-content">
+        <ul class="block-featured-posts <?= $block->escapeHtml($block->getPosition()) ?>" data-aw-blog-block="items">
+            <?php foreach ($posts as $post): ?>
+                <li class="block-featured-posts-item">
+                    <div class="block-featured-posts-info">
+                        <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($viewModel->getPostUrl($post)) ?>" class="featured-post-featured-image-link">
+                            <?= /* @noEscape */ $viewModel->getFeaturedImageHtml($block, $post)?>
+                        </a>
+                        <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($viewModel->getPostUrl($post)) ?>"
+                           class="block-featured-post-link">
+                            <?php echo $block->escapeHtml($post->getTitle()) ?>
+                        </a>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#blog-featured-posts": {
+            "awBlogSlider": <?php /* @noEscape */ echo $viewModel->getScriptOptions($block); ?>
+        }
+    }
+</script>

@@ -1,0 +1,41 @@
+<!-- ko if: (isVisible()) -->
+<!-- ko if: (getShippingMethodTitleAndOption()) -->
+<div class="shipping-information">
+    <div class="ship-to">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Ship To:'"></span>
+            <button class="action action-edit" data-bind="click: back">
+                <span data-bind="i18n: 'edit'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <!-- ko foreach: getRegion('ship-to') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+    </div>
+    <div class="ship-via">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Shipping Method:'"></span>
+            <button class="action action-edit" data-bind="click: backToShippingMethod">
+                <span data-bind="i18n: 'edit'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <span class="value" data-bind="text: getShippingMethodTitle()"></span>
+            <!-- ko if: (canShowShippingAccountInfo()) -->
+            <br/>
+            <span class="label" >Shipping Method</span> : <span class="value" data-bind="text: getShippingOptionMethod()"></span>
+            <br/>
+            <span class="label" >Shipping Service</span> : <span id="shipping_save_processor" class="value" data-bind="text: getShippingOptionService()"></span>
+            <br/>
+            <span class="label" >Account Number</span> : <span class="value" data-bind="text: getShippingOptionsAccountNumber()"></span>
+            <br/>
+            <span class="label" >Account Zip Code</span> : <span class="value" data-bind="text: getShippingOptionsAccountZipCodes()"></span>
+            <br/>               
+            <!--/ko-->
+        </div>
+    </div>
+</div>
+<!--/ko-->
+<!--/ko-->

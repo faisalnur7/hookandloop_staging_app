@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   
+   <preference for="Aheadworks\Blog\Block\PostList" type="Ravedigital\Blog\Block\PostList" />
+   <preference for="Aheadworks\Blog\Block\Html\Pager" type="Ravedigital\Blog\Block\Html\Pager" />
+   
+   <preference for="Magento\Framework\Serialize\SerializerInterface" type="Ravedigital\Blog\Serialize\Serializer\Json" />
+
+</config>

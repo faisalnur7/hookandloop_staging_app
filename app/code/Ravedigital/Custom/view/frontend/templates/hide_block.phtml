@@ -1,0 +1,20 @@
+
+<?php
+$businessClass = 'user-business-solution';
+if ($block->shouldShowBlock()) {
+
+    $businessClass = null;
+    // Display the block content for old users
+    echo $block->getLayout()->createBlock(Magento\Cms\Block\Widget\Block::class)
+        ->setBlockId('109')
+        ->setTemplate('widget/static_block/default.phtml')
+        ->toHtml();
+
+}
+    echo '<div class="'.$businessClass.'">
+    ' . $block->getLayout()->createBlock(Magento\Cms\Block\Widget\Block::class)
+        ->setBlockId('113')
+        ->setTemplate('widget/static_block/default.phtml')
+        ->toHtml() . '</div>' ;
+
+?>

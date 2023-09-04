@@ -1,0 +1,17 @@
+<?php
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+?>
+<?php /** @var \Plumrocket\SocialLoginFree\Block\Share $block */ ?>
+<?php if ($block->showPopup()): ?>
+    <div id="pslogin-sharepopup"
+         data-bind="scope:'pslogin-sharepopup'"
+         data-mage-init='{"Magento_Ui/js/core/app":<?= $block->getJsLayout() ?>}'>
+        <!-- ko if: showPopup -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </div>
+<?php endif; ?>

@@ -1,0 +1,31 @@
+{
+    "name": "tigrensolutions/ajaxwishlist",
+    "description": "Tigren Ajax Wishlist for Magento 2",
+    "require": {
+        "php": "~7.4 || ~8.1",
+        "magento/framework": "~100.0.4",
+        "tigren/ajaxsuite": "1.2.*"
+    },
+    "type": "magento2-module",
+    "version": "1.2.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "Tigren Team",
+            "email": "support@tigren.com",
+            "homepage": "http://www.tigren.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Tigren\\Ajaxwishlist\\": ""
+        }
+    }
+}

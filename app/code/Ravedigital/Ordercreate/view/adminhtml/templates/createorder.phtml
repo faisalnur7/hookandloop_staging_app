@@ -1,0 +1,16 @@
+<?php
+  $block->getTempl();
+?>
+<div class="createorder">
+    <div class="order-form">
+    <form action="<?= $block->getBaseUrl().$this->helper('Magento\Backend\Helper\Data')->getAreaFrontName() ?>/ordercreate/missingorder/submitorder" method="post">
+            <input name="form_key" type="hidden" value="<?= $block->getFormKey();?>">
+            <label><?= __('Order Id(s) '); ?></label>
+            <input type="text" name="missing_orderid" value="" size="75" class="missing_orderid" required="true">
+            <br>
+            <span class="note"><?php echo __('Please enter order id Or use comma for more then 1 order id.') ?></span>
+            <br>
+            <input type="submit" class="ordersubmit action-default primary" name="ordersubmit"> 
+    </form>
+</div>
+</div>

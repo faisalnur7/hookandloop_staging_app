@@ -1,0 +1,28 @@
+<?php
+/** @var \Aheadworks\BlogSearch\Block\PostList $block */
+/** @var \Aheadworks\BlogSearch\ViewModel\PostList $viewModel */
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($postList = $viewModel->getPostList()) : ?>
+    <p class="post-list-description"><?php __('A place to learn about Everything in Hook and Loop!™')?></p>
+    <div class="post-list-wrapper">
+        <ol class="post-list grid">
+            <?php foreach ($postList as $post) : ?>
+                <li class="item <?php echo $post->getPostFormat() ?>">
+                    <?php /* @noEscape */ //echo $viewModel->getPostItemRenderedHtml($block, $post) ?>
+                    <?php echo $this->getLayout()->createBlock("Ravedigital\Blog\Block\PostList")->setData('post', $post)->setTemplate("Ravedigital_BlogSearch::post/list/renderer/default.phtml")->toHtml();
+                    ?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+<?php endif; ?>
+
+<?php if ($emptyResultMessage = $viewModel->getEmptyResultMessage()) : ?>
+    <div class="message info empty">
+        <div>
+            <?= $block->escapeHtml($emptyResultMessage) ?>
+        </div>
+    </div>
+<?php endif; ?>

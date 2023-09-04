@@ -1,0 +1,30 @@
+<?php
+/* @var \Aheadworks\Blog\Block\PostList $block
+ * @var \Aheadworks\Blog\ViewModel\PostViewMode $viewToggleBlock
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $posts = $block->getPosts();
+    $currentViewClass = '';
+    if ($viewToggleBlock = $block->getChildBlock('view_toggle')) {
+        $currentView = $viewToggleBlock->getViewModel()->getCurrentViewMode();
+        $currentViewClass = $currentView == 'grid' ? 'grid-view' : '';
+    }
+?>
+<?php if($this->isNeedRenderHtml()): ?>
+    <?php if (count($posts)): ?>
+        <?php echo $block->getChildHtml('view_toggle'); ?>
+        <div class="blog-posts <?= /* @noEscape */ $currentViewClass ?>">
+            <?php foreach ($posts as $post): ?>
+                <?php /* @noEscape */ echo $block->getItemHtml('aw_blog_post', $post) ?>
+            <?php endforeach; ?>
+        </div>
+        <?php echo $block->getChildHtml('pager'); ?>
+    <?php else: ?>
+        <div class="message info empty">
+            <div><?php echo $block->escapeHtml(__('No posts.')) ?></div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="aheadworks_blogsearch_post_fulltext" view_id="aheadworks_blogsearch_post_fulltext" class="Aheadworks\BlogSearch\Model\Indexer\Post\Fulltext">
+        <title translate="true">Aheadworks Blog</title>
+        <description translate="true">Rebuild Blog posts fulltext search index</description>
+    </indexer>
+</config>

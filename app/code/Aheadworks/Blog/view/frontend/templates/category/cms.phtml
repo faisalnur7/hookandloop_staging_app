@@ -1,0 +1,13 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var \Aheadworks\Blog\ViewModel\Category\Cms $viewModel */
+
+$viewModel = $block->getViewModel();
+$currentCategory = $viewModel->getCurrentCategory();
+?>
+
+<?php if ($viewModel->isNeedToDisplayCmsBlock($currentCategory)) :?>
+    <div class="category-cms">
+        <?= /* @noEscape */ $viewModel->renderCmsBlock($block); ?>
+    </div>
+<?php endif; ?>

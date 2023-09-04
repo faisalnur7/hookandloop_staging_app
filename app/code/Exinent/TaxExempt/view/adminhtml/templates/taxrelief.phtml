@@ -1,0 +1,31 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$states = $objectManager->create('Magento\Directory\Model\RegionFactory')
+                ->create()->getCollection()->addFieldToFilter('country_id', 'US');
+?>
+<div id="tax-relief-form">
+    <input id="customer-has-tax-relief" name="customer_has_tax_relief" type="checkbox">
+    <label for="customer-has-tax-relief">Tax Exempt</label>    
+    <ul class="form-list" style="display: none;">
+        <li>
+            <label class="required" for="customer-tax-relief-code"><em>*</em>Tax Exempt Number</label>
+            <div class="input-box">
+                <input id="tax-relief-code" name="tax_relief_code" type="text"  autocomplete="off" />
+            </div>
+            <div id="advice-required-cart-tax" class="validation-advice" style="display: none;color: #ED2227;"></div>
+        </li>
+        <li>
+            <label class="required" for="customer-tax-relief-state"><em>*</em>Tax Exempt State</label>
+            <select name='customer_region' id='customer-region' class="validate-select" >
+                <option>Please select region, state or province</option>
+                <?php
+                foreach ($states->getData() as $region) {
+                    ?>
+                    <option value="<?php echo $region['name'] ?>" ><?php echo $region['name'] ?></option>
+                <?php }
+                ?>
+            </select>
+            <div id="advice-required-cart-tax-state" class="validation-advice" style="display: none;color: #ED2227;">This is a required field.</div>
+        </li>
+    </ul>
+</div>

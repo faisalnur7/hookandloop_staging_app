@@ -1,0 +1,20 @@
+/*-------------- Tax Exempt ------------*/
+.form-list li {
+    list-style: none;
+    padding: 5px 0;
+}
+#customer-region {
+    width: 100%;
+    padding: 5px 0;
+    margin-top: 5px;
+}
+.form-list label {
+    font-weight: 600;
+}
+.form-list .input-box {
+    margin-top: 5px;
+}
+.form-list label em {
+    color: #ED2227;
+    padding: 0px 5px 0 0;
+}

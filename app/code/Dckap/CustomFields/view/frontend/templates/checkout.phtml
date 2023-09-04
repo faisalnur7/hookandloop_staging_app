@@ -1,0 +1,126 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+    <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
+        <div class="loader">
+            <img src="<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>"
+                 alt="<?= /* @escapeNotVerified */ __('Loading...') ?>"
+                 style="position: absolute;">
+        </div>
+    </div>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#checkout": {
+                "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
+            }
+        }
+    </script>
+    <script>
+        window.checkoutConfig = <?= /* @escapeNotVerified */ $block->getSerializedCheckoutConfig() ?>;
+        // Create aliases for customer.js model from customer module
+        window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
+        window.customerData = window.checkoutConfig.customerData;
+        window.checkoutConfig.allShippingoptions = '<?php echo $this->helper('Dckap\CustomFields\Helper\Config')->getShippingOption(); ?>';
+    </script>
+
+    <script>
+        require([
+            'mage/url',
+            'Magento_Ui/js/block-loader'
+        ], function(url, blockLoader) {
+            blockLoader("<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>");
+            return url.setBaseUrl('<?= /* @escapeNotVerified */ $block->getBaseUrl() ?>');
+        })
+    </script>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            
+        ], function ($) {
+            $(document).ready(function () {
+                // $.cookie('is-shipping-option-saved', '', {path: '/', expires: -1});
+                    var isShippingOptionSaved = false;
+                    var temp = setInterval(function () {
+                    var shipping_zipcode = $("input[name=postcode]").val()?$("input[name=postcode]").val():null;
+                    var selected_shipping = $('.shipping-address-item').hasClass('selected-item')?true:false;
+
+
+                    if(shipping_zipcode == null && selected_shipping == false){
+                        $('#s_method_shippingoptions').prop('checked', false);
+                        $('#s_method_shippingoptions').hide();
+                        $('#shipping-options-details-list-wrapper').hide();
+                        $('.col-price').hide();
+                        
+                    } 
+                    else if($('#shipping').is(":visible") && $("#s_method_shippingoptions").prop("checked")){
+
+                        $('#s_method_shippingoptions').show();
+                        $('#shipping-options-details-list-wrapper').show();
+                        $('.col-price').show();            
+                        if($('[name="shipping_option_field[shipping_options_service]"]').val() == null){    
+                            $('[name="shipping_option_field[shipping_options_method]"]').trigger('change');
+                            if(window.checkoutConfig.quoteData.shipping_options_method == $('[name="shipping_option_field[shipping_options_method]"]').val()){
+                                shippingOptionsService =  window.checkoutConfig.quoteData.shipping_options_service;
+                                $('select[name^="shipping_option_field[shipping_options_service]"] option[value="'+shippingOptionsService+'"]').attr("selected","selected");
+                            }
+                        }    
+                        if ($('#shipping-options-details-list-wrapper').length) {
+                            var s1 = $('[name="shipping_option_field[shipping_options_method]"]').val();
+                            var s2 = $('[name="shipping_option_field[shipping_options_service]"]').val();
+                            var s3 = $('[name="shipping_option_field[shipping_options_account_number]"]').val();
+                            var s4 = $('[name="shipping_option_field[shipping_options_account_zip_codes]"]').val();
+
+                        }
+                    } else {
+                        $('.col-price').show();
+                    } 
+                    if ($('[name="shipping_option_field[shipping_options_method]"]').length && s1 !=='' && s2!=='' && s3 !=='' && s4 !=='') {
+                        var isShippingOptionSaved = $.cookie('is-shipping-option-saved'); // Get Cookie Value
+                        $.cookie('is-shipping-option-saved', true); // Set Cookie Value
+                        var shippingMethodObj = {
+                            "shipping_options_method": s1,
+                            "shipping_options_service": s2,
+                            "shipping_options_account_number": s3,
+                            "shipping_options_account_zip_codes": s4
+                        };
+                    }
+                    if (isShippingOptionSaved) {
+                        clearInterval(temp);
+                   }  
+                      
+                    /*});*/
+                }, 1000);
+
+                var hideLoader = setInterval(function () {
+                    if($('body').hasClass('oscHideLoader')) {
+                        if($('.loading-mask').is(':visible') && $('.loading-mask').data('role') == 'loader') {
+                            $('.loading-mask').hide();
+                        }
+                        clearInterval(hideLoader);
+                    }
+                }, 4000);
+
+
+                var setRadio = setInterval(function () {
+                   
+                if($('#shipping-options-details-list-wrapper').is(':visible') && !$('#s_method_shippingoptions').is(':checked')) {
+                    clearInterval(setRadio);
+                    $('#s_method_shippingoptions').prop( "checked", true).trigger('click');
+                }
+                }, 5000);
+                
+                var taxReliefCode = $('#tax-relief-code').val();
+                var taxReliefState = $('#customer-region').val();
+                if(taxReliefCode !='' && taxReliefState!='') {
+                    $("#tax-relief-code").trigger('change');
+                }
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,68 @@
+<?php
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2022 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+
+/** @var \Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\ProAd $block */
+?>
+
+<div class="pro-features">
+    <div class="pro-features_banner">
+        <div class="pro-features_content">
+            <h2 class="pro-features_title"><?= $block->escapeHtml('Upgrade to Social Login Pro') ?></h2>
+            <ul class="pro-features_grid">
+                <li class="pro-features_item"><?= $block->escapeHtml('50+ social networks available for integration') ?></li>
+                <li class="pro-features_item"><?= $block->escapeHtml('Bundled Popup Login extension') ?></li>
+                <li class="pro-features_item"><?= $block->escapeHtml('Connecting multiple social networks to one account') ?></li>
+                <li class="pro-features_item"><?= $block->escapeHtml('Advanced settings to avoid duplicate user accounts') ?></li>
+                <li class="pro-features_item"><?= $block->escapeHtml('User registration only with real email addresses') ?></li>
+                <li class="pro-features_item"><?= $block->escapeHtml('Tracking social login usage with in-depth statistics, and much more') ?></li>
+            </ul>
+        </div>
+        <div class="image-mask">
+            <img src="<?= $block->escapeUrl($block->getViewFileUrl('Plumrocket_SocialLoginFree::images/pro_image.png')) ?>"
+                 alt="Plumrocket Inc."
+                 width="693"
+                 height="328">
+        </div>
+    </div>
+
+    <div class="pro-features_info">
+        <a class="pro-features_btn" href="<?= $block->escapeUrl($block->getProExtensionUrl())?>" target="_blank">
+            <?= $block->escapeHtml('Get Social Login Pro') ?>
+        </a>
+        <div>
+            <?= $block->escapeHtml('Use') ?>
+            <span class="coupon-code">
+                <span>SOCIALPRO10</span>
+                <span class="coupon_icon">
+                    <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2011_2638)"><path d="M12.744 1.84484C12.1825 1.17119 11.1732 1.19791 10.4201 1.49026L5.68887 3.2794C4.30922 2.52983 2.94876 2.74964 2.94767 2.38269C2.94683 2.09587 3.2104 2.15797 3.16877 1.41128C3.1288 0.694342 2.37865 0.16605 1.67123 0.215104C0.963403 0.212954 0.231296 0.757559 0.227215 1.50555C0.176709 2.25915 0.812399 2.95704 1.56205 3.00416C2.44043 3.1323 3.99371 2.59585 4.72696 3.90083C4.18647 4.90495 3.22231 4.91057 2.35043 4.86296C1.62657 4.82343 0.757911 5.03341 0.414798 5.74582C0.0832427 6.42856 0.413214 7.39798 1.17971 7.60439C1.95349 7.88576 3.01391 7.52416 3.1951 6.63486C3.33476 5.94937 2.84875 5.6289 3.03422 5.37966C3.17417 5.1916 4.06681 5.29769 5.65438 4.57898L10.7886 6.37181C11.4372 6.55081 12.2291 6.54243 12.8012 5.90349L7.47772 3.90918L12.744 1.84481L12.744 1.84484ZM2.18188 0.779903C2.92974 1.19457 2.8721 2.32559 2.09688 2.54688C1.39598 2.79327 0.497422 2.11387 0.718866 1.35278C0.84803 0.728443 1.66992 0.496031 2.18188 0.779903ZM2.22798 5.40375C3.00791 5.68917 2.8795 7.00774 2.08778 7.18724C1.56286 7.37122 0.810894 7.11095 0.755923 6.49206C0.651267 5.73969 1.53381 5.05706 2.22798 5.40375Z" fill="currentColor"/></g><defs><clipPath id="clip0_2011_2638"><rect width="13" height="7.8" fill="white"/></clipPath></defs></svg>
+                </span>
+            </span>
+            <?= $block->escapeHtml('coupon code to get $10 OFF') ?>
+        </div>
+    </div>
+
+    <?php if ($integrations = $block->getIntegrations()): ?>
+        <div class="pro-networks">
+            <div class="pro-networks_title">
+                <span class="interactive_line"></span>
+                <h2><?= $block->escapeHtml('See list of all supported networks') ?></h2>
+                <span class="interactive_line"></span>
+            </div>
+            <div class="pro-networks_grid">
+                <?php foreach ($integrations as $integration): ?>
+                    <div class="pro-networks_item">
+                        <img src="<?= $block->escapeUrl($integration['iconUrl']) ?>"
+                             alt="<?= $block->escapeHtmlAttr($integration['name']) ?> icon" width="35" height="35">
+                        <span><?= $block->escapeHtml($integration['name']) ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <a href="#" class="pro-networks_btn"><?= $block->escapeHtml('show more') ?></a>
+        </div>
+    <?php endif; ?>
+</div>

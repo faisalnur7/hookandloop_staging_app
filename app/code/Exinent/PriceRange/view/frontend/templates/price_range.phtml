@@ -1,0 +1,153 @@
+<?php $result = $block->getConfigdata(); ?>
+<?php if($result) : 
+$currencySymbol = "$";
+$priceprop = str_replace($currencySymbol, '', $result['price']);
+?>
+<div class='configurable-pricerange'>
+    <span class="price" id="dynamic-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <?= $result['price']; ?>
+            <span  id="product-price-<?= $block->getProductId();?>" data-price-amount="<?= $priceprop; ?>" data-price-type="finalPrice" 
+            class="price-wrapper">
+            </span>
+        <!-- <meta itemprop="price" content="<?php // $result['itemprop-price'] ?>" /> -->
+        <meta itemprop="price" content="<?= $priceprop ?>" />
+        
+            <meta itemprop="priceCurrency" content="USD" />
+    </span>
+    <span class="old-price">
+    </span>
+</div>
+<script>
+
+        requirejs(['jquery'], function (jQuery) {
+            var configdataorg = <?php echo $result['json']; ?>;
+            jQuery(document).on('click', '.page-product-configurable .swatch-option', function () {
+
+                //jQuery(document).trigger('update_price_range');
+                // calculateRemainingQuantity();
+
+                var configdata = JSON.parse(JSON.stringify(configdataorg));
+                selected = [];
+                var selectedoptions = jQuery(this).parents('.product-add-form').find('.selected');
+                var attr = jQuery(this).parents('.product-add-form').find('.swatch-attribute');
+                var flag = 0;
+                
+                 // Check if all swatch options are selected
+                var allSelected = true;
+
+                jQuery(attr).each(function () {
+                    var val = jQuery(this).find('.swatch-attribute-selected-option').text();
+                    //check all selected
+                    if (val == "") {
+                        allSelected = false;
+                        return false; // Break out of the loop if any option is not selected
+                    }
+                });
+                
+                //Triggred discount function
+                 if (allSelected) {
+                    // Trigger the event only when all swatch options are selected
+                    jQuery(document).trigger('update_price_range');
+                }
+                
+                jQuery('#configured_price').val('<?= $result['price']?>');
+                jQuery(selectedoptions).each(function () {
+                    var attr = jQuery(this).parents('.swatch-attribute').attr('attribute-code');
+                    var option = jQuery(this).attr('option-id');
+                    selected.push({key: attr, value: option});
+                });
+                for (var i = 0; i < selected.length; i++) {
+                    var attributecode = selected[i].key;
+                    var optionid = selected[i].value;
+                    for (var simpleid in configdata) {
+                        var options = configdata[simpleid];
+                        if (optionid !== options[attributecode])
+                        {
+                            delete configdata[simpleid];
+                        }
+                    }
+                }
+                pricearray = [];
+                
+                jQuery.each(configdata, function (key, val) {
+                    jQuery.each(val, function (k, v) {
+                        if (k == 'price')
+                            pricearray.push(v);
+                    });
+                });
+                if(pricearray != ''){
+                    var minValueInArray = Math.min.apply(Math, pricearray);
+                    var maxValueInArray = Math.max.apply(Math, pricearray);
+                    if (minValueInArray === maxValueInArray)
+                    {
+                       var pricerange = '$' + (minValueInArray * jQuery('#qty').val()).toFixed(2);
+                         
+                    } else
+                       {                    
+                           var pricerange = '$' + minValueInArray.toFixed(2) + '-$' + maxValueInArray.toFixed(2);
+                    }
+                    jQuery('.page-product-configurable .configurable-pricerange .price').text(pricerange);
+                }else{
+
+                    var configdata_both = JSON.parse(JSON.stringify(configdataorg));
+                    var configdata_loop = JSON.parse(JSON.stringify(configdataorg));
+
+                    $check_both_exist = 0;
+
+                    for (var j = 0; j < selected.length; j++) { 
+                        var attributecode_both = selected[j].key;
+                        var optionid_both = selected[j].value;
+                        
+                        for (var simpleid in configdata_both) {
+                            var options_both = configdata_both[simpleid];
+                            if(optionid_both == '180-181'){
+                                optionid_both = '180';
+                                $check_both_exist = 1; 
+                              }                         
+                            if (optionid_both !== options_both[attributecode_both])
+                            {
+                                delete configdata_both[simpleid];
+                            }  
+                        }
+                         var optionid_both1 = selected[j].value;
+                        for (var simpleid in configdata_loop) {
+                            var options_both = configdata_loop[simpleid];
+                             if(optionid_both1 == '180-181'){
+                                optionid_both1 = '181';
+                                $check_both_exist = 1; 
+                             }
+                                if (optionid_both1 !== options_both[attributecode_both])
+                                {
+                                    delete configdata_loop[simpleid];
+                                }
+                        }
+                        var allConfig = configdata_both.concat(configdata_loop);
+                        jQuery.each(allConfig, function(key, value){
+                            if (value === "" || value === null){
+                                delete allConfig[key];
+                            }
+                        });
+                    }
+                    var pricearray_both = 0;
+                    jQuery.each(allConfig, function (key, val) {
+                        jQuery.each(val, function (k, v) {
+                            if (k == 'price')
+                                pricearray_both += parseFloat(v);
+                        });
+                    });
+                    priceranges = '$' + (pricearray_both * jQuery('#qty').val()).toFixed(2);  
+                    if(flag == 0){
+                        if($check_both_exist == 1){   
+                           jQuery('.page-product-configurable .configurable-pricerange .price').text(priceranges);
+                           jQuery('.price-final_price .price-wrapper').attr('finalprice',pricearray_both);
+                        }else{
+                           jQuery('.page-product-configurable .configurable-pricerange .price').text(pricerange);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+<?php endif;?>
+
+

@@ -1,0 +1,21 @@
+<?php
+/** @var \Aheadworks\BlogSearch\Block\PostList $block */
+/** @var \Aheadworks\BlogSearch\ViewModel\PostList $viewModel */
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($postList = $viewModel->getPostList()): ?>
+    <div class="blog-posts">
+        <?php foreach ($postList as $post): ?>
+            <?= /* @noEscape */ $block->getItemHtml('aw_blog_post', $post) ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($emptyResultMessage = $viewModel->getEmptyResultMessage()): ?>
+    <div class="message info empty">
+        <div>
+            <?= $block->escapeHtml($emptyResultMessage) ?>
+        </div>
+    </div>
+<?php endif; ?>

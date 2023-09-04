@@ -1,0 +1,300 @@
+type Query {
+    awBlogConfig (
+        storeId: Int @doc(description: "Store id.")
+    ): AwBlogConfig @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\Config") @doc(description: "The query returns information about Blog Config")
+    awBlogCategories (
+        filter: AwBlogCategoryFilterInput @doc(description: "Identifies which category attributes to search for and return."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AwBlogCategorySortInput @doc(description: "Specifies which attribute to sort on, and whether to return the results in ascending or descending order."),
+        storeId: Int @doc(description: "Store id.")
+    ): AwBlogCategories @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\Categories") @doc(description: "The query returns information about Blog Categories")
+    awBlogPosts (
+        filter: AwBlogPostFilterInput @doc(description: "Identifies which post attributes to search for and return."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AwBlogPostSortInput @doc(description: "Specifies which attribute to sort on, and whether to return the results in ascending or descending order."),
+        storeId: Int @doc(description: "Store id.")
+    ): AwBlogPosts @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\Posts") @doc(description: "The query returns information about Blog Posts")
+    awBlogPostWithRelatedPosts (
+        postId: Int @doc(description: "Post id."),
+        storeId: Int @doc(description: "Store id.")
+    ): AwBlogPost @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\PostWithRelatedPosts") @doc(description: "The query returns information about Blog Post with list of related posts")
+    awBlogAuthors (
+        filter: AwBlogAuthorFilterInput @doc(description: "Identifies which author attributes to search for and return."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AwBlogAuthorSortInput @doc(description: "Specifies which attribute to sort on, and whether to return the results in ascending or descending order.")
+    ): AwBlogAuthors @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\Authors") @doc(description: "The query returns information about Blog Authors")
+    awBlogTags (
+        filter: AwBlogTagFilterInput @doc(description: "Identifies which tag attributes to search for and return."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AwBlogTagSortInput @doc(description: "Specifies which attribute to sort on, and whether to return the results in ascending or descending order."),
+        storeId: Int @doc(description: "Tag posts store id.")
+    ): AwBlogTags @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\Tags") @doc(description: "The query returns information about Blog Tags")
+    awBlogTagsCloud (
+        filter: AwBlogTagCloudFilterInput @doc(description: "Identifies which tag cloud attributes to search for and return."),
+        storeId: Int @doc(description: "Store id."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: AwBlogTagCloudSortInput @doc(description: "Specifies which attribute to sort on, and whether to return the results in ascending or descending order.")
+    ): AwBlogTagsCloud @resolver(class: "Aheadworks\\BlogGraphQl\\Model\\Resolver\\TagsCloud") @doc(description: "The query returns information about Blog Tags Cloud")
+}
+
+type AwBlogConfig @doc(description: "Blog config information") {
+    enabled: Boolean @doc(description: "Blog is enabled")
+    navigation_menu_link_enabled: Boolean @doc(description: "Navigation menu link is enabled")
+    route_to_blog: String @doc(description: "Blog route")
+    route_to_authors: String @doc(description: "Authors page route")
+    blog_title: String @doc(description: "Blog title")
+    posts_per_page: Int @doc(description: "Blog post per page")
+    related_posts_qty: Int @doc(description: "Related posts qty")
+    is_grid_view_enabled: Boolean @doc(description: "Grid view is enabled")
+    grid_view_column_count: Int @doc(description: "Grid view column count")
+    post_view_default: String @doc(description: "Default posts view")
+    display_sharing_buttons_at: [String] @doc(description: "Positions of sharing buttons to display")
+    are_authors_displayed: Boolean @doc(description: "Authors is displayed")
+    comments_enabled: Boolean @doc(description: "Comments is enabled")
+    recent_posts: Int @doc(description: "Number of recent posts to display")
+    popular_tags: Int @doc(description: "Number of most popular tags to display")
+    featured_posts_qty: Int @doc(description: "Featured posts qty")
+    featured_posts_position: String @doc(description: "Featured posts position")
+    highlight_popular_tags: Boolean @doc(description: "Check if popular tags should be highlighted")
+    cms_block: Int @doc(description: "Sidebar CMS block ID")
+    category_listing_enabled: Boolean @doc(description: "Check if category listing visible in sidebar")
+    category_listing_limit: Int @doc(description: "Sidebar category listing limit")
+    areMetaTagsEnabled: Boolean @doc(description: "Metatags is enabled")
+    meta_description: String @doc(description: "Blog meta description")
+    title_prefix: String @doc(description: "Blog title prefix")
+    title_suffix: String @doc(description: "Blog title suffix")
+    url_suffix_for_other_pages: String @doc(description: "Url suffix for other pages")
+    url_type: String @doc(description: "Seo url type")
+    post_url_suffix: String @doc(description: "Post url suffix")
+    author_url_suffix: String @doc(description: "Author url suffix")
+    display_posts_on_product_page: Boolean @doc(description: "Check if display blog posts tab on product page")
+    block_position: String @doc(description: "Display related products block on post page")
+    block_layout: String @doc(description: "Display related products block layout")
+    products_limit: Int @doc(description: "Max products to display")
+    display_add_to_cart: Boolean @doc(description: "Display Add to Cart button")
+}
+
+type AwBlogCategory @doc(description: "Blog category defines all category information") {
+    id: Int @doc(description: "Blog category id")
+    url_key: String @doc(description: "URL key of Blog category")
+    name: String @doc(description: "Blog category name")
+    status: Int @doc(description: "The category status.")
+    sort_order: Int @doc(description: "The category sort order.")
+    store_ids: [Int] @doc(description: "The category store ids.")
+    meta_description: String @doc(description: "Blog category meta description")
+    meta_title: String @doc(description: "Blog category meta title")
+    meta_keywords: String @doc(description: "Blog category meta keywords")
+    meta_prefix: String @doc(description: "Blog category meta prefix")
+    meta_suffix: String @doc(description: "Blog category meta suffix")
+    image_file_name: String @doc(description: "Blog category image file name")
+    image_title: String @doc(description: "Blog category image title")
+    image_alt: String @doc(description: "Blog category image alt")
+    parent_id: Int @doc(description: "Blog category parent id")
+    path: String @doc(description: "Blog category path")
+    children: AwBlogCategories @doc(description: "Blog category child categories")
+    parent: AwBlogCategory @doc(description: "Blog category parent category")
+}
+
+type AwBlogCategories @doc(description: "Blog categories information") {
+    items: [AwBlogCategory] @doc(description: "An array of Blog categories")
+}
+
+input AwBlogCategoryFilterInput @doc(description: "CategoryFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    id: FilterTypeInput @doc(description: "The category id.")
+    url_key: FilterTypeInput @doc(description: "The category url key.")
+    name: FilterTypeInput @doc(description: "The category name.")
+    sort_order: FilterTypeInput @doc(description: "The category sort order.")
+    parent_id: FilterTypeInput @doc(description: "The category parent id.")
+    meta_description: FilterTypeInput @doc(description: "A brief overview of the category for search results listings, maximum 255 characters.")
+    or: AwBlogCategoryFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input AwBlogCategorySortInput  @doc(description: "CategorySortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order") {
+    url_key: SortEnum @doc(description: "The category url key.")
+    name: SortEnum @doc(description: "The category name.")
+    status: FilterTypeInput @doc(description: "The category status.")
+    sort_order: SortEnum @doc(description: "The category sort order.")
+    parent_id: SortEnum @doc(description: "The category parent id.")
+    meta_description: SortEnum @doc(description: "A brief overview of the category for search results listings, maximum 255 characters.")
+}
+
+type AwBlogPost @doc(description: "Blog post defines all post information") {
+    id: Int @doc(description: "Blog post id")
+    url_key: String @doc(description: "URL key of Blog post")
+    title: String @doc(description: "Blog post title")
+    short_content: String @doc(description: "Blog post short content")
+    content: String @doc(description: "Blog post content")
+    status: String @doc(description: "Blog post status")
+    author_id: Int @doc(description: "Blog post author id")
+    author: AwBlogAuthor @doc(description: "Blog post author")
+    created_at: String @doc(description: "Blog post created at")
+    updated_at: String @doc(description: "Blog post updated at")
+    publish_date: String @doc(description: "Blog post publish date")
+    is_allow_comments: Boolean @doc(description: "Blog post is allow comments")
+    store_ids: [Int] @doc(description: "Blog post store ids")
+    category_ids: [Int] @doc(description: "Blog post category ids")
+    canonical_category_id: Int @doc(description: "Blog post canonical category id")
+    tag_names: [String] @doc(description: "Blog post tags")
+    meta_title: String @doc(description: "Blog post meta title")
+    meta_keywords: String @doc(description: "Blog post meta keywords")
+    meta_description: String @doc(description: "Blog post meta description")
+    meta_prefix: String @doc(description: "Blog post meta prefix")
+    meta_suffix: String @doc(description: "Blog post meta suffix")
+    related_product_ids: [Int] @doc(description: "Blog post product ids")
+    related_post_ids: [Int] @doc(description: "Blog post related post ids")
+    customer_groups: [String] @doc(description: "Blog post customer groups")
+    meta_twitter_site: String @doc(description: "Blog post meta twitter site")
+    featured_image_file: String @doc(description: "Blog post featured image")
+    featured_image_mobile_file: String @doc(description: "Blog post featured image for mobile")
+    featured_image_title: String @doc(description: "Blog post featured image title")
+    featured_image_alt: String @doc(description: "Blog post featured image alt")
+    categories: AwBlogCategories @doc(description: "Blog post categories")
+    tags: AwBlogTags @doc(description: "Blog post tags")
+    next_post: AwBlogPost @doc(description: "Blog post next post")
+    previous_post: AwBlogPost @doc(description: "Blog post previous post")
+    related_posts: AwBlogPosts @doc(description: "Blog posts related")
+}
+
+type AwBlogPosts @doc(description: "Blog posts information") {
+    items: [AwBlogPost] @doc(description: "An array of Blog posts")
+    total_count: Int @doc(description: "Blog posts total count")
+}
+
+input AwBlogPostFilterInput @doc(description: "PostFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    id: FilterTypeInput @doc(description: "Blog post id")
+    url_key: FilterTypeInput @doc(description: "URL key of Blog post")
+    title: FilterTypeInput @doc(description: "Blog post title")
+    short_content: FilterTypeInput @doc(description: "Blog post short content")
+    content: FilterTypeInput @doc(description: "Blog post content")
+    author_id: FilterTypeInput @doc(description: "Blog post author id")
+    created_at: FilterTypeInput @doc(description: "Blog post created at")
+    updated_at: FilterTypeInput @doc(description: "Blog post updated at")
+    publish_date: FilterTypeInput @doc(description: "Blog post publish date")
+    is_allow_comments: FilterTypeInput @doc(description: "Blog post is allow comments")
+    category_ids: FilterTypeInput @doc(description: "Blog post category ids")
+    canonical_category_id: FilterTypeInput @doc(description: "Blog post canonical category id")
+    category_name: FilterTypeInput @doc(description: "Blog post category name")
+    category_url_key: FilterTypeInput @doc(description: "Blog post category url key")
+    tag_id: FilterTypeInput @doc(description: "Blog post tags")
+    tag_name: FilterTypeInput @doc(description: "Blog post tag name")
+    author_url_key: FilterTypeInput @doc(description: "Blog post author url key")
+    meta_description: FilterTypeInput @doc(description: "Blog post meta description")
+    product_id: FilterTypeInput @doc(description: "Blog post product ids")
+    meta_twitter_site: FilterTypeInput @doc(description: "Blog post meta twitter site")
+    featured_image_file: FilterTypeInput @doc(description: "Blog post featured image")
+    featured_image_title: FilterTypeInput @doc(description: "Blog post featured image title")
+    featured_image_alt: FilterTypeInput @doc(description: "Blog post featured image alt")
+    or: AwBlogPostFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input AwBlogPostSortInput  @doc(description: "CategorySortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order") {
+    url_key: SortEnum @doc(description: "URL key of Blog post")
+    title: SortEnum @doc(description: "Blog post title")
+    author_id: SortEnum @doc(description: "Blog post author id")
+    created_at: SortEnum @doc(description: "Blog post created at")
+    updated_at: SortEnum @doc(description: "Blog post updated at")
+    publish_date: SortEnum @doc(description: "Blog post publish date")
+}
+
+type AwBlogTag @doc(description: "Blog tag defines all tag information") {
+    id: Int @doc(description: "Blog tag id")
+    name: String @doc(description: "Blog tag name")
+    url_key: String @doc(description: "Blog tag url key")
+    created_at: String @doc(description: "The tag created at.")
+    updated_at: String @doc(description: "The tag updated at.")
+    count_posts: Int @doc(description: "Blog tag count posts")
+}
+
+type AwBlogTags @doc(description: "Blog tags information") {
+    items: [AwBlogTag] @doc(description: "An array of Blog tags")
+}
+
+input AwBlogTagFilterInput @doc(description: "TagFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    id: FilterTypeInput @doc(description: "The tag id.")
+    name: FilterTypeInput @doc(description: "The tag name.")
+    url_key: FilterTypeEqualInput @doc(description: "The tag url key.")
+    created_at: FilterTypeInput @doc(description: "The tag created at.")
+    updated_at: FilterTypeInput @doc(description: "The tag updated at.")
+    or: AwBlogTagFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input AwBlogTagSortInput @doc(description: "TagSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order") {
+    name: SortEnum @doc(description: "The tag name.")
+    created_at: SortEnum @doc(description: "The tag created at.")
+    updated_at: SortEnum @doc(description: "The tag updated at.")
+    count_posts: SortEnum @doc(description: "The tag count posts.")
+}
+
+type AwBlogTagCloud @doc(description: "Blog tag cloud defines all tag information") {
+    tag: AwBlogTag @doc(description: "Blog tag cloud tag")
+    post_count: Int @doc(description: "The tag cloud post count.")
+}
+
+type AwBlogTagsCloud @doc(description: "Blog tags cloud information") {
+    items: [AwBlogTagCloud] @doc(description: "An array of Blog tags cloud")
+}
+
+input AwBlogTagCloudFilterInput @doc(description: "TagCloudFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    tag_id: FilterTypeInput @doc(description: "The tag cloud category tag id.")
+    category_id: FilterTypeInput @doc(description: "The tag cloud category id.")
+    post_count: FilterTypeInput @doc(description: "The tag cloud post count.")
+    or: AwBlogTagCloudFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input AwBlogTagCloudSortInput @doc(description: "TagCloudSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order") {
+    post_count: SortEnum @doc(description: "The tag cloud post count.")
+}
+
+type AwBlogAuthor @doc(description: "Blog Author defines all author information") {
+    id: Int @doc(description: "Blog author id")
+    url_key: String @doc(description: "URL key of Blog author")
+    firstname: String @doc(description: "Blog author first name")
+    lastname: String @doc(description: "Blog author last name")
+    image_file: String @doc(description: "The author image file name")
+    short_bio: String @doc(description: "The author short bio")
+    job_position: String @doc(description: "The author job position")
+    twitter_id: String @doc(description: "The author twitter id")
+    facebook_id: String @doc(description: "The author facebook id")
+    linkedin_id: String @doc(description: "The author LinkedIn id")
+    meta_title: String @doc(description: "The author meta title")
+    meta_keywords: String @doc(description: "The author meta keywords")
+    meta_description: String @doc(description: "The author meta description")
+    meta_prefix: String @doc(description: "The author meta prefix")
+    meta_suffix: String @doc(description: "The author meta suffix")
+}
+
+type AwBlogAuthors @doc(description: "Blog authors information") {
+    items: [AwBlogAuthor] @doc(description: "An array of Blog Authors")
+}
+
+input AwBlogAuthorFilterInput @doc(description: "AuthorFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    id: FilterTypeInput @doc(description: "The Author id.")
+    url_key: FilterTypeInput @doc(description: "The Author url key.")
+    firstname: FilterTypeInput @doc(description: "The Author first name.")
+    lastname: FilterTypeInput @doc(description: "The Author last name.")
+    twitter_id: FilterTypeInput @doc(description: "The Author twitter id.")
+    facebook_id: FilterTypeInput @doc(description: "The Author facebook id.")
+    linkedin_id: FilterTypeInput @doc(description: "The Author LinkedIn id.")
+    job_position: FilterTypeInput @doc(description: "The Author job position.")
+    or: AwBlogAuthorFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input AwBlogAuthorSortInput  @doc(description: "AuthorSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order") {
+    id: SortEnum @doc(description: "The Author id.")
+    url_key: SortEnum @doc(description: "The Author url key.")
+    firstname: SortEnum @doc(description: "The Author first name.")
+    lastname: SortEnum @doc(description: "The Author last name.")
+    twitter_id: SortEnum @doc(description: "The Author twitter id.")
+    facebook_id: SortEnum @doc(description: "The Author facebook id.")
+    linkedin_id: SortEnum @doc(description: "The Author LinkedIn id.")
+    job_position: SortEnum @doc(description: "The Author job position.")
+}
+
+input FilterTypeEqualInput @doc(description: "FilterTypeEqualInput specifies equal action in a query ") {
+    eq: String @doc(description: "Equals")
+}

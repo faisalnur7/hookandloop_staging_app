@@ -1,0 +1,33 @@
+<?php
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2018 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+
+/** @var \Plumrocket\SocialLoginFree\Block\Customer\Form\Register $block */
+?>
+<?php if ($data = $block->getPsloginData()) : ?>
+
+    <?php
+        $emailReadOnly = (int) $block->isFakeEmail($data['email']);
+        $dobReadOnly = $data['dob'] === null ? 1 : 0;
+        $genderNotSpecified = \Plumrocket\SocialLoginFree\Model\Account\Data\FakeDataGenerator::GENDER_NOT_SPECIFIED;
+    ?>
+
+    <script>
+        window.psloginFirstNameReadOnly = '<?= /* @noEscape */ $data['firstname'] === '-' ? 1 : 0 ?>';
+        window.psloginLastNameReadOnly = '<?= /* @noEscape */ $data['lastname'] === '-' ? 1 : 0 ?>';
+        window.psloginDobReadOnly = '<?= /* @noEscape */ $dobReadOnly ?>';
+        window.psloginGenderReadOnly = '<?= /* @noEscape */ $data['gender'] === $genderNotSpecified ? 1 : 0 ?>';
+        window.psloginEmailReadOnly = '<?= /* @noEscape */ $emailReadOnly ?>';
+        window.psloginGeneratedPassword = '<?= /* @noEscape */ $data['password'] ?>';
+    </script>
+
+    <?php if ($emailReadOnly === 0) : ?>
+        <input type="hidden" name="email" value="<?= $block->escapeHtmlAttr($data['email']) ?>">
+    <?php endif; ?>
+    <?php if ($dobReadOnly === 0) : ?>
+        <input type="hidden" name="dob" id="dob_hide" value="">
+    <?php endif; ?>
+<?php endif; ?>

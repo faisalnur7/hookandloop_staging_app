@@ -1,0 +1,81 @@
+#backorder-background {
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+}
+#confirmBox{
+    display: none;
+    background-color: #fff;
+    border: 6px solid rgba(0,0,0,0.6);
+    position: fixed;
+    left: 50%;
+    right: 0;
+    top: 25%;
+    max-width: 600px;
+    padding: 20px 8px 28px;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+    box-sizing: border-box;
+    z-index: 9999;
+}
+#confirmBox .close-btn{
+    background-color: #f00;
+    color: #fff;
+    font-size: 16px;
+    height: 28px;
+    line-height: 26px;
+    opacity: 1;
+    position: absolute;
+    cursor: pointer;
+    right: 2px;
+    text-align: center;
+    top: 2px;
+    width: 28px;
+}
+#confirmBox .message{
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+    padding: 0px 0 5px;
+    font-size: 18px;
+    color: #222;
+}
+#confirmBox .message span.txt01{
+    display: inline-block;
+    color: #ed2328;
+    position: relative;
+    text-decoration: underline;
+}
+#confirmBox .message span.txt02{
+    display: none;
+}
+#confirmBox button{
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    width: 45%;
+    cursor: pointer;
+    vertical-align: top;
+    color: #fff;
+}
+#confirmBox button.yes{
+    background-color: #ed2328;
+}
+#confirmBox button.no{
+    background-color: #444;
+}
+.action.primary.checkout{
+    display: none;
+}
+.action.primary.checkout.partial-shipment{
+    display: block;
+}

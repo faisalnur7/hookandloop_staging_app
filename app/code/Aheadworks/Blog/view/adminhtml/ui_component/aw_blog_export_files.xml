@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_blog_export_files.aw_blog_export_files_data_source</item>
+            <item name="deps" xsi:type="string">aw_blog_export_files.aw_blog_export_files_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">aw_blog_export_files_columns</item>
+    </argument>
+    <dataSource name="aw_blog_export_files_data_source" component="Magento_Ui/js/grid/provider">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Aheadworks\Blog\Ui\DataProvider\Export\FileDataProvider</argument>
+            <argument name="name" xsi:type="string">aw_blog_export_files_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">file_name</argument>
+            <argument name="requestFieldName" xsi:type="string">file_name</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">file_name</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="aw_blog_export_files_columns">
+        <column name="file_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">File name</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Aheadworks\Blog\Ui\Component\Export\Columns\GridActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">file_name</item>
+                    <item name="bodyTmpl" xsi:type="string">Aheadworks_Blog/ui/export/grid/cells/actions</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

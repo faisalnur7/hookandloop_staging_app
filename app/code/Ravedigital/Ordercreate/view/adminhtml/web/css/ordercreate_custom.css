@@ -1,0 +1,30 @@
+.createorder {
+    padding:90px 22%;
+}
+.createorder span.note {
+    font-size: 12px;
+}
+
+
+.createorder .ordersubmit {
+    padding: 6px 19px;
+   /* color: #FFFFFF;
+    background-color: #eb5202;
+    border-color: #eb5202;
+    font-size: 18px;*/
+    margin:12px 75px;
+}
+
+.createorder .ordersubmit:hover{
+    background-color: #ba4000;
+    color:#FFFFFF;
+}
+
+.createorder .order-form span.note {
+    margin-left: 75px;
+}
+
+.order-form .missing_orderid{
+    padding: 5px;
+    margin-left: 3px;
+}

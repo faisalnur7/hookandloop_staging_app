@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="aw_blog_sidebar"/>
+    <update handle="rave_blog_post_list"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="rave_blog_category.details"
+                   template="Aheadworks_Blog::category/details.phtml"
+                   before="rave_blog_post_list">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Category\Details</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

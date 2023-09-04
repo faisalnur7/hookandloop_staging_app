@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="aw_blog_sidebar"/>
+    <update handle="aw_blog_disqus"/>
+    <head>
+        <css src="Aheadworks_Blog::css/styles.css"/>
+        <css src="Aheadworks_Blog::css/slider.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Blog\Block\Post" name="aw_blog_post.view" 
+                   template="Ravedigital_Blog::post.phtml"
+            >
+                <block class="Aheadworks\Blog\Block\Post\PrevNext" name="aw_blog.prev_next" as="prev_next" template="post/prev_next.phtml" />
+                <block class="Aheadworks\Blog\Block\Post\RelatedPost" name="aw_blog.related_post" as="related_post" template="post/related_post.phtml" />
+                <block class="Aheadworks\Blog\Block\Disqus" name="aw_blog.disqus.embed" as="disqus_embed" template="disqus/embed.phtml" />
+                <block class="Aheadworks\Blog\Block\Post\RelatedProduct" name="aw_blog.related_product" as="post_related_product" />
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                    <argument name="social_icons_block" xsi:type="string">Aheadworks\Blog\Block\Sharethis</argument>
+                </arguments>
+
+                <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_post.post_image">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                        <argument name="img_class" xsi:type="string">blog-post-featured-image</argument>
+                    </arguments>
+                </block>
+
+                <block name="aw_blog_post.author_badge" template="Aheadworks_Blog::author/badge.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Author\Badge</argument>
+                    </arguments>
+                </block>
+
+                <block class="Aheadworks\Blog\Block\Post\PrevNext" name="aw_blog.prev_next" as="prev_next" template="post/prev_next.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                    </arguments>
+                    <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog.prev_next_post_image">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                            <argument name="img_class" xsi:type="string">post-featured-image</argument>
+                        </arguments>
+                    </block>
+                </block>
+
+                <block class="Aheadworks\Blog\Block\Post\RelatedPost" name="aw_blog.related_post" as="related_post" template="post/related_post.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                    </arguments>
+                    <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog.related_post_image">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                            <argument name="img_class" xsi:type="string">recent-post-featured-image</argument>
+                        </arguments>
+                    </block>
+                </block>
+
+                <block class="Aheadworks\Blog\Block\Disqus" name="aw_blog.disqus.embed" as="disqus_embed" template="disqus/embed.phtml" />
+                <block class="Aheadworks\Blog\Block\Post\RelatedProduct" name="aw_blog.related_product" as="post_related_product" />
+            </block>
+        </referenceContainer>
+        <referenceBlock name="head.additional">
+            <block class="Aheadworks\Blog\Block\Post\MetaData" name="aw_blog.meta_data" as="post_meta_data" template="post/meta_data.phtml" />
+            <block class="Magento\Framework\View\Element\Template"
+                   name="aw_blog.structured_data"
+                   template="Aheadworks_Blog::post/structured_data.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post\StructuredData</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

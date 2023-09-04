@@ -1,0 +1,12 @@
+<?php
+/* @var $block \Magento\Framework\View\Element\Template */
+/* @var $viewModel \Aheadworks\Blog\ViewModel\Post\FeaturedList */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+$viewModel = $block->getViewModel();
+$posts = $viewModel->getFeaturedPosts();
+?>
+
+<?= $viewModel->renderFeaturedPosts($block, $posts) ?>

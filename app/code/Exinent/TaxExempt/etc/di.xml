@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Tax\Model\TaxCalculation">
+	    <plugin name="taxexempt" type="Exinent\TaxExempt\Plugin\Model\Tax\TaxCalculationPlugin" />
+	</type>
+	<type name="ClassyLlama\AvaTax\Framework\Interaction\TaxCalculation">
+	    <plugin name="avatax_taxexempt" type="Exinent\TaxExempt\Plugin\Model\Tax\TaxCalculationPluginAvatax" />
+	</type>
+</config>

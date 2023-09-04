@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--**
+ * Exinent_AmazonProductMapping Module 
+ *
+ * @category    AmazonProductMapping
+ * @package     Exinent_AmazonProductMapping
+ * @author      pawan
+ *
+ *-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    
+<!--    <group id="default"> 
+        <job name="amazon_product_mapping" instance="Exinent\AmazonProductMapping\Model\Cron\Amazon" method="productMapping">
+            <schedule>*/10 * * * *</schedule>  run 10th minutes 
+        </job>
+    </group>-->
+    <group id="default">
+        <job name="amazon_product_mapping" instance="Exinent\AmazonProductMapping\Model\Cron\Amazon" method="productMapping">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="amazon_order_creation" instance="Exinent\AmazonProductMapping\Model\Cron\Amazon" method="orderCreation">
+            <schedule>* * * * *</schedule>
+        </job>
+        <!-- <job name="exinent_catalog_reindex_stock_data" instance="Exinent\AmazonProductMapping\Model\Cron\CustomReindexStockData" method="productMapping">
+            <schedule>* * * * *</schedule>
+        </job> -->
+    </group>
+    
+</config>

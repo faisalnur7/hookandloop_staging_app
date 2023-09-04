@@ -1,0 +1,370 @@
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+
+#psloginfree_buttons_sortable_drag_and_drop .social-td {
+    padding-top: 2.2rem;
+}
+
+#row_psloginfree_buttons_sortable .label label span {
+    font-size: 0;
+}
+
+#psloginfree_buttons_sortable_drag_and_drop .ui-sortable {
+    margin-bottom: 0;
+}
+
+#row_psloginfree_buttons_sortable td {
+    padding-top: 10px;
+}
+
+#row_psloginfree_buttons_sortable td.value {
+    padding-top: 0;
+}
+
+#sortable-visible {
+    background-color: #FFFFFF;
+}
+
+#psloginfree_buttons_enable_for {
+  max-height: 150px;
+}
+
+.soc-networks {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    height: 110px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #aaa;
+}
+
+.soc-networks.ui-sortable-disabled {
+    background: #EAEAEA !important;
+    color: #8E8E8E;
+}
+
+.soc-networks.ui-sortable-disabled li:hover {
+    background: #EAEAEA !important;
+    cursor: auto;
+}
+
+.soc-networks li.ui-sortable-helper {
+    border: 1px solid #CCC;
+}
+
+.soc-networks li {
+    line-height: 30px;
+    border-bottom: 1px solid #CCC;
+    font-size: 13px;
+}
+
+.soc-networks li:hover {
+    background: #F6F6F6;
+    cursor: pointer;
+}
+
+.soc-networks li img {
+    float: left;
+    margin-right: 5px;
+    height: 16px;
+}
+
+#sortable-visible li {
+    margin: 0;
+    padding: 5px;
+    font-size: 13px;
+    line-height: 16px;
+    height: 28px;
+}
+
+.psloginfree-form ul li .soc-li-icon {
+    background: url('images/social_admin.png');
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 0 5px 0 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.psloginfree-form ul li .soc-li-text {
+    display: block;
+    float: left;
+    height: 16px;
+    line-height: 16px;
+}
+
+.psloginfree-form ul li.facebook .soc-li-icon { background-position: 0 0; background-color: #1e4389; }
+.psloginfree-form ul li.twitter .soc-li-icon { background-position: -17px 0; background-color: #28a9e2; }
+
+
+/* ----------     Pro Features     ---------- */
+
+.pro-features{
+    margin: 70px 0;
+    padding-bottom: 35px;
+    background: #e9f0f5;
+}
+
+.pro-features_banner{
+    padding: 50px 40% 50px 60px;
+    position: relative;
+    margin-bottom: 20px;
+    min-height: 328px;
+    box-sizing: border-box;
+}
+
+.pro-features_content{
+    position: relative;
+    z-index: 2;
+}
+
+.pro-features .pro-features_title{
+    color: #373c43;
+    font: 800 24px/1.2 'Open Sans', sans-serif;
+    margin-bottom: 30px;
+}
+
+.pro-features_grid{
+    list-style: none;
+    margin: 0;
+}
+
+.pro-features_item{
+    font: 400 18px/1.2 'Open Sans', sans-serif;
+    padding-left: 28px;
+    position: relative;
+}
+
+.pro-features_item:not(:last-child){
+    margin-bottom: 13px;
+}
+
+.pro-features_item:before{
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 10px;
+    background: url("./images/checkmark.svg") no-repeat center;
+    background-size: contain;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.image-mask{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+}
+
+.image-mask img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.pro-features_info{
+    padding: 0 60px;
+    font: 400 16px/2 'Roboto', 'Open-Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.pro-features .pro-features_btn{
+    box-sizing: border-box;
+    margin: 0 30px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    width: 285px;
+    max-width: 100%;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #fff;
+    background: #ff5607;
+    font: 500 18px/1.2 'Roboto', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    transition: background .3s ease;
+}
+
+.pro-features .pro-features_btn:hover{
+    background: #de4a00;
+}
+
+.coupon-code{
+    box-sizing: border-box;
+    margin: 15px 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    border: 1px dashed #ff5607;
+    border-radius: 4px;
+    color: #2a84ff;
+    font-weight: 500;
+    line-height: 1.2;
+    min-height: 40px;
+    position: relative;
+    user-select: text;
+}
+
+.coupon_icon{
+    color: #ff5607;
+    background: #e9f0f5;
+    position: absolute;
+    bottom: 1px;
+    left: 20%;
+    transform: translateY(50%);
+}
+
+/*   Supported networks list   */
+
+.pro-networks{
+    padding: 0 60px;
+    text-align: center;
+}
+
+.pro-networks_title{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+}
+
+.pro-networks_title .interactive_line{
+    height: 1px;
+    background: #c5d5e1;
+    width: 50%;
+}
+
+.pro-networks_title h2{
+    font: 300 18px/1.4 'Roboto', Arial sans-serif;
+    color: #8bb0cb;
+    display: inline-block;
+    flex-shrink: 0;
+    margin: 0 25px;
+}
+
+.pro-networks_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 100px));
+    grid-gap: 30px;
+    justify-content: space-between;
+    height: 100px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+}
+
+.pro-networks_item{
+    text-align: center;
+}
+
+.pro-networks_item img{
+    display: block;
+    max-width: 35px;
+    margin: 0 auto 10px auto;
+    border-radius: 5px;
+}
+
+.pro-networks_btn-wrp{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pro-networks .pro-networks_btn{
+    font: 300 14px/1 'Roboto', Arial sans-serif;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    padding: 8px;
+    max-width: 110px;
+    background: #f4f8fa;
+    color: #8bb0cb;
+    border: 1px solid #ccdbe5;
+    border-radius: 25px;
+    box-sizing: border-box;
+    transition: all .2s ease;
+    flex-shrink: 0;
+}
+
+.pro-networks_btn:hover{
+    text-decoration: none;
+    color: #84b3d3;
+    border-color: #84b3d3;
+}
+
+
+.pro-networks .pro-networks_btn:before,
+.pro-networks .pro-networks_btn:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    background: #ccdbe5;
+    width: 60px;
+    transition: width .2s ease;
+}
+
+.pro-networks .pro-networks_btn:before{
+    right: 100%;
+    background: linear-gradient(to left, #ccdbe5 0%, transparent 85%);
+}
+
+.pro-networks .pro-networks_btn:after{
+    left: 100%;
+    background: linear-gradient(to right, #ccdbe5 0%, transparent 85%);
+}
+
+.pro-networks_btn:hover:before{
+    width: 80px;
+    background: linear-gradient(to left, #84b3d3 0%, transparent 85%);
+}
+
+.pro-networks_btn:hover:after{
+    width: 80px;
+    background: linear-gradient(to right, #84b3d3 0%, transparent 85%);
+}
+
+@media (min-width: 1280px){
+    .image-mask img{
+        object-fit: contain;
+        object-position: right top;
+    }
+}
+
+@media (min-width: 1800px){
+    .pro-features_banner{
+        padding: 50px 55% 50px 60px;
+    }
+
+    .image-mask{
+        max-width: 693px;
+        left: 47%;
+    }
+}

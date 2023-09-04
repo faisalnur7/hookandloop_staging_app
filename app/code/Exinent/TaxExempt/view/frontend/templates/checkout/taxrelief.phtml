@@ -1,0 +1,56 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$states = $objectManager->create('Magento\Directory\Model\RegionFactory')
+                ->create()->getCollection()->addFieldToFilter('country_id', 'US'); 
+?>
+<form id="tax-relief-form" style="display: none;">
+    <?php $taxCode = $this->getTaxcode(); ?>
+    <?php $taxState = $this->getTaxregion(); ?>
+    <input id="customer-has-tax-relief" name="customer_has_tax_relief" type="checkbox"
+    <?php
+    if (($taxCode) && ($taxState))
+        echo 'checked';
+    ?>
+           >
+    <label for="customer-has-tax-relief">Tax Exempt</label>
+    
+    <div class="checkmark item" >
+        <span class="custom-checkout-tooltip">
+            <a href="#" class="custom-tooltip-toggle"></a>
+            <span class="tooltip-content"><?= __('If tax exempt, please enter your exemption ID here to remove tax from your order. Please provide necessary documentation to <a href="mailto:tax@hookandloop.com">tax@hookandloop.com.</a>')?>
+            </span>
+        </span>
+    </div>
+
+    <ul class="form-list" style="display: none;">
+        <li>
+            <label class="required" for="customer-tax-relief-code"><em>*</em>Tax Exempt Number</label>
+            <div class="input-box">
+                <input id="tax-relief-code" name="tax_relief_code" type="text"  autocomplete="off" value="<?php
+                if ($taxCode): echo $taxCode;
+                endif;
+                ?>"
+                       />
+            </div>
+            <div id="advice-required-cart-tax" class="validation-advice" style="display: none;color: #ED2227;"></div>
+        </li>
+        <li>
+            <label class="required" for="customer-tax-relief-state"><em>*</em>Tax Exempt State</label>
+            <select name='customer_region' id='customer-region' class="validate-select" >
+                <option>Please select region, state or province</option>
+                <?php
+                foreach ($states->getData() as $region) {
+                    ?>
+                    <option <?php
+                    if ($region['default_name'] == $taxState) {
+                        echo "selected";
+                    }
+                    ?> value="<?php echo $region['default_name'] ?>" ><?php echo $region['default_name'] ?></option>
+                    <?php }
+                    ?>
+            </select>
+            <div id="advice-required-cart-tax-state" class="validation-advice" style="display: none;color: #ED2227;">This is a required field.</div>
+        </li>
+    </ul>
+</form>

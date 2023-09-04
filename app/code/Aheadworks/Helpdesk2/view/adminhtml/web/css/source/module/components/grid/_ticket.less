@@ -1,0 +1,30 @@
+//
+//  Ticket grid
+//  _____________________________________________
+
+.aw_helpdesk2-ticket-index {
+    .data-grid {
+        tr {
+            &.highlight-same-customer-ticket {
+                td {
+                    background-color: #dbf0e0;
+                }
+            }
+
+            &.highlight-last-reply-admin-ticket {
+                td {
+                    background-color: #fffbe0;
+                }
+            }
+            td {
+                &.ticket-department {
+                    max-width: 460px;
+                    word-break: break-all;
+                }
+            }
+        }
+    }
+    .admin__data-grid-wrap {
+        overflow: visible !important;
+    }
+}

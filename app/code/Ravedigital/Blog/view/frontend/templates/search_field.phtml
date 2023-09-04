@@ -1,0 +1,32 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var \Aheadworks\BlogSearch\ViewModel\SearchField $viewModel */
+$viewModel = $block->getViewModel();
+$searchQueryMinLength = $viewModel->getSearchQueryMinLength();
+$searchQueryMaxLength = $viewModel->getSearchQueryMaxLength();
+?>
+
+<div class="block-search aw_blog_search-container">
+    <form action="<?= $block->escapeUrl($viewModel->getBlogSearchUrl()) ?>" method="get" role="search">
+        <input type="text"
+               class="input-text aw_blog_search-input"
+               placeholder="<?= $block->escapeHtml(__("Search Posts"))?>"
+               name="<?= /* @noEscape */ $viewModel->getSearchQueryParamName() ?>"
+               role="combobox"
+               aria-required="true"
+               required
+               value="<?php echo $block->escapeHtml($viewModel->getSearchQueryValue()) ?>"
+               <?=  /* @noEscape */ $searchQueryMinLength ? ('minlength=' . $searchQueryMinLength) : '' ?>
+               <?=  /* @noEscape */ $searchQueryMaxLength ? ('maxlength=' . $searchQueryMaxLength) : '' ?>
+        />
+        <!--<button type="submit" value="Search" class="ac">Search</button>-->
+        <button type="submit"  class="action focus primary"
+                title="<?php echo __('Search') ?>"
+            >
+            <span><?php echo __('Search') ?></span>
+    </button>
+    </form>
+</div>
+<div>
+    <span>A place to learn about Everything in Hook and Loop!™</span>
+</div>

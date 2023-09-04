@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="pslogin.customer.form.login.buttons">
+            <arguments>
+                <argument name="position" xsi:type="const">Plumrocket\SocialLoginFree\Model\OptionSource\Position::BUTTONS_POSITION_CHECKOUT</argument>
+            </arguments>
+            <action method="setOutput2js" />
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <referenceBlock name="checkout.root">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="checkout" xsi:type="array">
+                                <item name="children" xsi:type="array">
+                                    <item name="authentication" xsi:type="array">
+                                        <item name="component" xsi:type="helper" helper="Plumrocket\SocialLoginFree\Helper\JsLayout::getCheckoutAuthenticationComponent"/>
+                                    </item>
+
+                                    <item name="steps" xsi:type="array">
+                                        <item name="children" xsi:type="array">
+                                            <item name="shipping-step" xsi:type="array">
+                                                <item name="children" xsi:type="array">
+                                                    <item name="shippingAddress" xsi:type="array">
+                                                        <item name="children" xsi:type="array">
+                                                            <item name="customer-email" xsi:type="array">
+                                                                <item name="component" xsi:type="helper" helper="Plumrocket\SocialLoginFree\Helper\JsLayout::getCheckoutEmailComponent"/>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                            <item name="billing-step" xsi:type="array">
+                                                <item name="children" xsi:type="array">
+                                                    <item name="payment" xsi:type="array">
+                                                        <item name="children" xsi:type="array">
+                                                            <item name="customer-email" xsi:type="array">
+                                                                <item name="component" xsi:type="helper" helper="Plumrocket\SocialLoginFree\Helper\JsLayout::getCheckoutEmailComponent"/>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

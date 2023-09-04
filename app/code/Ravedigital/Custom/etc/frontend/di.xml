@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<!-- <type name="Magento\Checkout\CustomerData\Cart">
+		<plugin name="extra_data" type="Ravedigital\Custom\Plugin\Checkout\CustomerData\Cart"/>
+	</type> -->
+     <preference for="Magento\Checkout\CustomerData\Cart"
+                 type="Ravedigital\Custom\Plugin\Checkout\CustomerData\Cart" />
+
+       <preference for="Magento\Customer\Controller\Account\LoginPost"
+                 type="Ravedigital\Custom\Controller\Account\LoginPost" />
+
+         <preference for="Magento\Customer\Controller\Account\ForgotPasswordPost"
+                 type="Ravedigital\Custom\Controller\Account\ForgotPasswordPost" />         
+                 
+	 <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="cms_block_config_provider" xsi:type="object">Ravedigital\Custom\Model\ConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\CustomerData\ItemPool">
+        <arguments>
+            <argument name="defaultItemId" xsi:type="string">Ravedigital\Custom\CustomerData\DefaultItem</argument>
+        </arguments>
+    </type>
+</config>

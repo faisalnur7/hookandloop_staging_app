@@ -1,0 +1,34 @@
+<?php
+/* @var $block \Aheadworks\Blog\Block\Sidebar\Recent */
+/** @var \Aheadworks\Blog\ViewModel\Post $viewModel */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $posts = $block->getPosts();
+    $viewModel = $block->getViewModel();
+?>
+<?php if (count($posts)): ?>
+    <div id="blog-sidebar-recent-posts" class="block widget blog-sidebar-block">
+        <div class="block-title">
+            <strong class="blog-sidebar-block-title"><?php echo $block->escapeHtml(__('Recent posts')) ?></strong>
+        </div>
+        <div class="block-content blog-sidebar-block-content">
+            <ul class="block-recent-posts">
+                <?php foreach ($posts as $post): ?>
+                    <li class="block-recent-posts-item">
+                        <?php if ($viewModel->isFeaturedImageLoaded($post) || $viewModel->isPlaceholderImageLoaded()): ?>
+                            <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>" class="recent-post-featured-image-link">
+                                <?= /* @noEscape */ $viewModel->getFeaturedImageHtml($block, 'aw_blog_sidebar.recent_post_image', $post)?>
+                            </a>
+                        <?php endif; ?>
+                        <a href="<?php /* @noEscape */ echo $block->escapeXssInUrl($block->getPostUrl($post)) ?>"
+                           class="block-recent-posts-link">
+                            <?php echo $block->escapeHtml($post->getTitle()) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>

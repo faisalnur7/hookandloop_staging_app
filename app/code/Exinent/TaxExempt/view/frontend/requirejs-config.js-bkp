@@ -1,0 +1,7 @@
+var config = {
+    map: {
+        '*': {
+            ajaxQty: 'Exinent_TaxExempt/js/customscript'
+        }
+    }
+};

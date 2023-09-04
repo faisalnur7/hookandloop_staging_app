@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shipping-address-fieldset" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <!--Remove fields-->
+                                                                <item name="shippingAddress" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="shippingMethodItemTemplate" xsi:type="string">Exinent_ShippingOptions/shipping-address/shipping-method-item</item>
+                                                                    </item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="shipping-options" xsi:type="array">
+                                                                            <item name="children" xsi:type="array">
+                                                                                <item name="shipping-options-input" xsi:type="array">
+                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                                    <item name="config" xsi:type="array">
+                                                                                        <item name="customScope" xsi:type="string">shippingOptions</item>
+                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                                        <item name="id" xsi:type="string">shipping-options-input</item>
+                                                                                    </item>
+                                                                                    <item name="dataScope" xsi:type="string">shippingOptions.shipping_options_field[shipping-options-input]</item>
+                                                                                    <item name="label" xsi:type="string">Account Number</item>
+                                                                                    <!--<item name="caption" xsi:type="string">Please select</item>-->
+                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                                    <item name="visible" xsi:type="boolean">false</item>
+                                                                                    <item name="validation" xsi:type="array">
+                                                                                        <item name="required-entry" xsi:type="boolean">true</item>
+                                                                                    </item>
+                                                                                    <item name="sortOrder" xsi:type="number">2</item>
+                                                                                    <item name="id" xsi:type="string">shipping_options_field[shipping-options-input]</item>
+                                                                                </item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.shipping">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-summary" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

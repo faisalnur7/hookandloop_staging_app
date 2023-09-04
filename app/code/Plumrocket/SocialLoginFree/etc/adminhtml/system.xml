@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="psloginfree" translate="label" type="text" sortOrder="12168231" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label><![CDATA[Twitter & Facebook Login]]></label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_SocialLoginFree::config</resource>
+            <group id="toolbox" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\ToolbarFieldset</frontend_model>
+                <field id="version" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                    <attribute type="pr_extension_name">SocialLoginFree</attribute>
+                </field>
+            </group>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="enable" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="replace_templates" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Replace Templates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Set "Yes" to replace your customer login/registration template with this extension template and display the social login buttons automatically. Please see our online documentation if you want to keep your own template and install social buttons manually.</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="validate_ignore" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ignore Missing Data from Social Networks</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Many (but not all) social networks share only limited user profile/personal information. If this option is enabled, all required fields in magento that are missing will be pre-filled with temporary data to speed-up the registration process. If this option is set to "No" - the user will be sent to the registration form to enter missing info.</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="enable_subscription" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscribe Customer To Email Newsletter</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Automatically sign up customer to the Newsletter Subscribers list during the registration</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="enable_photo" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Customer Photo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display customer photo from social network in your website header. Please see our online documentation for manual installation instructions if the photo is not shown.</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="redirect_for_login" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Success Page</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\Config\Source\Redirectto</source_model>
+                    <comment>User will be redirected to this page after each successful login</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                    <attribute type="pl_stat_anonymize_cms">1</attribute>
+                </field>
+                <field id="redirect_for_login_link" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Custom Success Page URL</label>
+                    <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
+                    <depends>
+                        <field id="redirect_for_login">__custom__</field>
+                    </depends>
+                </field>
+                <field id="redirect_for_register" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Success Page</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\Config\Source\Redirectto</source_model>
+                    <comment>User will be redirected to this page after successful registration</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                    <attribute type="pl_stat_anonymize_cms">1</attribute>
+                </field>
+                <field id="redirect_for_register_link" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Custom Success Page URL</label>
+                    <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
+                    <depends>
+                        <field id="redirect_for_register">__custom__</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="buttons" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social Login Buttons</label>
+                <field id="enable_for" translate="label comment" type="multiselect" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display On</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\OptionSource\Position</source_model>
+                    <config_path>psloginfree/general/enable_for</config_path>
+                </field>
+                <field id="sortable_drag_and_drop" translate="label comment" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sorting</label>
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\Sortable</frontend_model>
+                    <config_path>psloginfree/general/sortable_drag_and_drop</config_path>
+                </field>
+                <field id="sortable" translate="label comment" type="hidden" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sorting</label>
+                    <comment>Drag and drop social buttons to set their order on the frontend.</comment>
+                    <config_path>psloginfree/general/sortable</config_path>
+                </field>
+                <field id="design" translate="label" type="Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\Element\ImageRadioButtons" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Design</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\OptionSource\ButtonDesign</source_model>
+                    <frontend_model>Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\CustomisableField</frontend_model>
+                </field>
+            </group>
+
+            <group id="share" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social Share</label>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display social share popup after successful user registration</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Title</label>
+                </field>
+                <field id="description" translate="label comment" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Message</label>
+                    <frontend_model>Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\Editor</frontend_model>
+                    <attribute type="pr_editor_height">300px</attribute>
+                </field>
+                <field id="page" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Share Page</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\Config\Source\Shareurl</source_model>
+                    <comment>Selected page of your store will be shared on social networks.</comment>
+                </field>
+                <field id="page_link" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Share Page URL</label>
+                    <comment>Please enter the full URL of the page, including the domain name.</comment>
+                    <depends>
+                        <field id="page">__custom__</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="developer" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Settings</label>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable logging of all errors returned by the social media networks and services</comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="download" translate="label comment" type="button" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Download Log File</label>
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\DownloadButton</frontend_model>
+                    <comment>The log is located at: /var/log/pslogin.log</comment>
+                </field>
+            </group>
+
+            <group id="facebook" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Facebook</label>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Follow our <a href="https://plumrocket.com/docs/magento-social-login-pro/integrations/facebook" target="_blank">step-by-step guide</a> to set up the integration correctly.]]></comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="application_id" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App ID</label>
+                </field>
+                <field id="secret" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Callback URL</label>
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="deletion_callbackurl" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Deletion Callback Url</label>
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\DeletionCallbackUrl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="enable_birthday" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ask for Birthday</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Request customer's birthday date from Facebook</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+
+            <group id="twitter" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Twitter</label>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Follow our <a href="https://plumrocket.com/docs/magento-social-login-pro/integrations/twitter" target="_blank">step-by-step guide</a> to set up the integration correctly.]]></comment>
+                    <attribute type="pr_use_in_statistic">1</attribute>
+                </field>
+                <field id="api_version" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>OAuth Version</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\Network\Integration\Twitter\SourceModel\ApiVersion</source_model>
+                </field>
+                <field id="application_id" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consumer Key (API Key)</label>
+                    <depends>
+                        <field id="api_version">0</field>
+                    </depends>
+                </field>
+                <field id="secret" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consumer Secret (API Secret)</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="api_version">0</field>
+                    </depends>
+                </field>
+                <field id="client_id" translate="label comment" type="text" sortOrder="2" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Client ID</label>
+                    <depends>
+                        <field id="api_version">1</field>
+                    </depends>
+                </field>
+                <field id="client_secret" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Client Secret</label>
+                    <depends>
+                        <field id="api_version">1</field>
+                    </depends>
+                </field>
+                <field id="callbackurl" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Callback URL</label>
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+            <group id="pro_ad" translate="label" type="text" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\PureFieldset</frontend_model>
+                <field id="pro_ad" translate="label" type="hidden" sortOrder="0" showInDefault="1">
+                    <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\ProAd</frontend_model>
+                </field>
+            </group>
+        </section>
+        <section id="prpopuplogin">
+            <group id="social_login_buttons">
+                <field id="login_design" translate="label" type="Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\Element\ImageRadioButtons" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Buttons Design</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\OptionSource\ButtonDesign</source_model>
+                    <frontend_model>Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\CustomisableField</frontend_model>
+                </field>
+                <field id="registration_design" translate="label" type="Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\Element\ImageRadioButtons" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Buttons Design</label>
+                    <source_model>Plumrocket\SocialLoginFree\Model\OptionSource\ButtonDesign</source_model>
+                    <frontend_model>Plumrocket\ExtendedAdminUi\Block\Adminhtml\System\Config\Form\CustomisableField</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

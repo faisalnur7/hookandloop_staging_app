@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+<preference for="Magento\Checkout\Controller\Cart\Add" type="Ravedigital\Addtocart\Controller\Cart\Add" />
+     <type name="Magento\Paypal\Model\Config">
+           <plugin name="PaypalModelConfig" type="Ravedigital\Addtocart\Plugin\Paypalcredit" sortOrder="10"/>
+     </type>
+     <type name="Magento\Catalog\Model\Product\Option\Type\Select">
+          <plugin name="rave-optionfeatures-around-get-option-price"
+               type="Ravedigital\Addtocart\Plugin\AroundGetOptionPrice"
+               sortOrder="10"
+               disabled="false"
+             />
+     </type>
+
+     <type name="Magento\Checkout\CustomerData\AbstractItem"> 
+          <plugin name="Rave_Addtocart_DefaultItemPlugin" type="Ravedigital\Addtocart\Plugin\DefaultItemPlugin" sortOrder="10" disabled="false" /> 
+     </type>
+</config>

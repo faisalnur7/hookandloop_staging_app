@@ -1,0 +1,27 @@
+<iframe className="data-grid-cell-content"
+        data-bind="css: additionalClasses, attr: { srcdoc: $col.getLabel($row()) }"
+        onLoad="
+        var self = this
+        setTimeout(function(){
+            if (self.contentWindow.document.body) {
+                var height = self.contentWindow.document.body.clientHeight + 20
+                self.style.height = Math.min(height + 20, 333) + 'px';
+            }
+        })
+        this.style.width = '100%';
+        var style = document.createElement('style')
+        if(this.contentWindow.document.querySelectorAll('a')){
+            this.contentWindow.document.querySelectorAll('a').forEach(function(a){
+                a.addEventListener('click',function(link){
+                    var a = window.parent.document.createElement('a')
+                    a.target='_blank'
+                    a.href = link.target.href
+                    a.click()
+                    link.stopPropagation()
+                    link.preventDefault()
+                })
+            })
+        }
+        style.innerHTML = 'body {font-size: 14px;word-break: break-word;white-space: pre-line;font-family: \'Open Sans\', \'Helvetica Neue\', Helvetica, Arial, sans-serif;\n}'
+        this.contentWindow.document.querySelector('head').append(style)"
+        sandbox="allow-same-origin"></iframe>

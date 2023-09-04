@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="aw_blog">
+            <group id="aw_blog_search" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Blog Search</label>
+                <field id="search_query_min_length" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Search query min length</label>
+                    <validate>validate-greater-than-zero</validate>
+                </field>
+                <field id="search_query_max_length" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Search query max length</label>
+                    <validate>validate-greater-than-zero</validate>
+                </field>
+                <field id="post_title_weight" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post title weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_content_weight" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post content weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_tags_weight" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post tags weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_meta_title_weight" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post meta title weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_meta_keywords_weight" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post meta keywords weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_meta_description_weight" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post meta description weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+                <field id="post_author_weight" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Post author weight</label>
+                    <validate>required validate-digits validate-digits-range digits-range-1-100</validate>
+                    <comment><![CDATA[number 1-100]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2022 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+-->
+<networks xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:module:Plumrocket_SocialLoginFree:etc/pr_social_login_network.xsd">
+    <network code="facebook">
+        <modal height="650" width="450">
+            <url resolver="Plumrocket\SocialLoginFree\Model\Network\Integration\FacebookUrlResolver">
+                <path>https://www.facebook.com/dialog/oauth</path>
+                <param name="client_id">{{APP_ID}}</param>
+                <param name="response_type">code</param>
+                <param name="scope">email</param>
+                <param name="display">popup</param>
+                <param name="redirect_uri">{{REDIRECT_URL}}</param>
+            </url>
+        </modal>
+        <connector class="Plumrocket\SocialLoginFree\Model\Network\Integration\Facebook"/>
+    </network>
+    <network code="twitter">
+        <button resolver="Plumrocket\SocialLoginFree\Model\Network\Integration\Twitter\ButtonsResolver" />
+        <modal height="630" width="650">
+            <url resolver="Plumrocket\SocialLoginFree\Model\Network\Integration\Twitter\TwitterComposite"/>
+        </modal>
+        <connector class="Plumrocket\SocialLoginFree\Model\Network\Integration\Twitter\TwitterComposite"/>
+    </network>
+</networks>

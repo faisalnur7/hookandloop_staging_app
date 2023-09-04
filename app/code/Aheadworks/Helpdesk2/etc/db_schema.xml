@@ -1,0 +1,675 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aw_helpdesk2_ticket_status" resource="default" engine="innodb" comment="Ticket Status Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Status ID"/>
+        <column xsi:type="smallint" name="is_system" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Status System"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="50" comment="Status Label"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_ticket_priority" resource="default" engine="innodb" comment="Ticket Priority Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Priority ID"/>
+        <column xsi:type="smallint" name="is_system" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Priority System"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="50" comment="Priority Label"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_email_rejecting_pattern" resource="default" engine="innodb"
+           comment="Email Rejecting Pattern Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Pattern ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Pattern Active"/>
+        <column xsi:type="varchar" name="pattern" nullable="false" length="255" comment="Pattern"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_email_rejecting_pattern_scope" resource="default" engine="innodb"
+           comment="Pattern to Scope Type Relation Table">
+        <column xsi:type="int" name="pattern_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Pattern ID"/>
+        <column xsi:type="varchar" name="scope" nullable="false" length="16" comment="Scope"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pattern_id"/>
+            <column name="scope"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_5EABD264E2035ABDD2E8BC450C63F60D"
+                    table="aw_helpdesk2_email_rejecting_pattern_scope" column="pattern_id"
+                    referenceTable="aw_helpdesk2_email_rejecting_pattern" referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_gateway" resource="default" engine="innodb" comment="Gateway Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Gateway ID"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Gateway Active"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="smallint" name="default_store_id" padding="6" unsigned="false" nullable="false"
+                identity="false" comment="Default Store Id"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="32" comment="Gateway Type"/>
+        <column xsi:type="varchar" name="gateway_protocol" nullable="true" length="64" comment="Gateway Protocol"/>
+        <column xsi:type="varchar" name="host" nullable="true" length="255" comment="Gateway Host"/>
+        <column xsi:type="varchar" name="authorization_type" nullable="true" length="32" comment="Authorization Type"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="login" nullable="true" length="255" comment="Login"/>
+        <column xsi:type="varchar" name="password" nullable="true" length="255" comment="Password"/>
+        <column xsi:type="text" name="client_id" nullable="true" comment="Client ID"/>
+        <column xsi:type="text" name="client_secret" nullable="true" comment="Client Secret"/>
+        <column xsi:type="text" name="tenant_id" nullable="true" comment="Tenant ID"/>
+        <column xsi:type="varchar" name="security_protocol" nullable="true" length="10" comment="Security protocol"/>
+        <column xsi:type="varchar" name="port" nullable="true" length="10" comment="Port"/>
+        <column xsi:type="text" name="access_token" nullable="true" comment="Access Token"/>
+        <column xsi:type="boolean" name="is_verified" nullable="true" comment="Is Verified"/>
+        <column xsi:type="boolean" name="is_delete_from_host" nullable="false" comment="Is Delete From Host"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_gateway_email" resource="default" engine="innodb" comment="Gateway Email Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="uid" nullable="false" length="255" comment="Mail UID"/>
+        <column xsi:type="int" name="gateway_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Gateway ID"/>
+        <column xsi:type="varchar" name="from" nullable="false" length="255" comment="Email Sender"/>
+        <column xsi:type="varchar" name="to" nullable="false" length="255" comment="Email Recipient"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="Mail Status"/>
+        <column xsi:type="text" name="subject" nullable="false" comment="Mail Subject"/>
+        <column xsi:type="text" name="body" nullable="false" comment="Mail Body"/>
+        <column xsi:type="text" name="headers" nullable="false" comment="Mail Headers"/>
+        <column xsi:type="varchar" name="content_type" nullable="false" length="64" comment="Mail Content Type"/>
+        <column xsi:type="int" name="reject_pattern_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Reject Pattern ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Date"/>
+        <column xsi:type="text" name="cc_recipients" nullable="true" comment="CC Recipients"/>
+        <column xsi:type="int" name="ticket_message_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Ticket message id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_GATEWAY_EMAIL_GATEWAY_ID_AW_HELPDESK2_GATEWAY_ID"
+                    table="aw_helpdesk2_gateway_email" column="gateway_id" referenceTable="aw_helpdesk2_gateway"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_858073BFD085CD6BDD3946ECA2753A32"
+                    table="aw_helpdesk2_gateway_email" column="reject_pattern_id"
+                    referenceTable="aw_helpdesk2_email_rejecting_pattern" referenceColumn="id" onDelete="SET NULL"/>
+        <index referenceId="AW_HELPDESK2_GATEWAY_EMAIL_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_gateway_email_attachment" resource="default" engine="innodb"
+           comment="Gateway Email Attachment Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Attachment ID"/>
+        <column xsi:type="int" name="email_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Message ID"/>
+        <column xsi:type="varchar" name="file_name" nullable="true" length="255" comment="File name"/>
+        <column xsi:type="varchar" name="file_path" nullable="false" length="255" comment="File path"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_0E7B280E12A33E9D372A0B789AB40FFA"
+                    table="aw_helpdesk2_gateway_email_attachment" column="email_id"
+                    referenceTable="aw_helpdesk2_gateway_email" referenceColumn="id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_GATEWAY_EMAIL_ATTACHMENT_EMAIL_ID" indexType="btree">
+            <column name="email_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_department" resource="default" engine="innodb" comment="Department Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Department ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Department Active"/>
+        <column xsi:type="int" name="primary_agent_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Primary Agent ID"/>
+        <column xsi:type="boolean" name="is_allow_guest" nullable="false" default="true" comment="Is Allow Guest"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Sort Order"/>
+        <column xsi:type="varchar" name="email_to_send_from" nullable="true" length="255" comment="Send As Agent"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_DEPARTMENT_PRIMARY_AGENT_ID_ADMIN_USER_USER_ID"
+                    table="aw_helpdesk2_department" column="primary_agent_id" referenceTable="admin_user"
+                    referenceColumn="user_id" onDelete="SET NULL"/>
+    </table>
+    <table name="aw_helpdesk2_department_store" resource="default" engine="innodb"
+           comment="Department to Store Relation Table">
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_CAB252622D7051A2F800CE3C76DC3111"
+                    table="aw_helpdesk2_department_store" column="department_id"
+                    referenceTable="aw_helpdesk2_department" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_DEPARTMENT_STORE_STORE_ID_STORE_STORE_ID"
+                    table="aw_helpdesk2_department_store" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_DEPARTMENT_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_department_permission" resource="default" engine="innodb"
+           comment="Department to Permission Relation Table">
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="32" comment="Type"/>
+        <column xsi:type="int" name="role_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Role ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_id"/>
+            <column name="type"/>
+            <column name="role_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_014640F47436AE0393F670086FD8F23C"
+                    table="aw_helpdesk2_department_permission" column="department_id"
+                    referenceTable="aw_helpdesk2_department" referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_department_agent" resource="default" engine="innodb"
+           comment="Department to Store Relation Table">
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Agent ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_id"/>
+            <column name="agent_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_9505CFB5CADDBF726BFA80E65B677F01"
+                    table="aw_helpdesk2_department_agent" column="department_id"
+                    referenceTable="aw_helpdesk2_department" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_DEPARTMENT_AGENT_AGENT_ID_ADMIN_USER_USER_ID"
+                    table="aw_helpdesk2_department_agent" column="agent_id" referenceTable="admin_user"
+                    referenceColumn="user_id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_department_gateway" resource="default" engine="innodb"
+           comment="Department to Gateway Relation Table">
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="int" name="gateway_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Gateway ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_id"/>
+            <column name="gateway_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_2DF81AA1EB02F032218D386C126292AE"
+                    table="aw_helpdesk2_department_gateway" column="department_id"
+                    referenceTable="aw_helpdesk2_department" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_1203401583A2009DFEAFC736D5DCFD2A"
+                    table="aw_helpdesk2_department_gateway" column="gateway_id" referenceTable="aw_helpdesk2_gateway"
+                    referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_department_option" resource="default" engine="innodb"
+           comment="Department to Option Relation Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="80" comment="Type"/>
+        <column xsi:type="boolean" name="is_required" nullable="false" comment="Is Option Required"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_54120BC9018AA63B36459BDD89879FC5"
+                    table="aw_helpdesk2_department_option" column="department_id"
+                    referenceTable="aw_helpdesk2_department" referenceColumn="id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_DEPARTMENT_OPTION_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_department_option_type_value" resource="default" engine="innodb"
+           comment="Option to Option Type Value Relation Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="option_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Option ID"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_C55F4826ECC5B5139833F7BBD841031E"
+                    table="aw_helpdesk2_department_option_type_value" column="option_id"
+                    referenceTable="aw_helpdesk2_department_option" referenceColumn="id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_DEPARTMENT_OPTION_TYPE_VALUE_OPTION_ID" indexType="btree">
+            <column name="option_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_entity" resource="default" engine="innodb" comment="Ticket Entity Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="uid" nullable="false" length="10" comment="Ticket Unique ID"/>
+        <column xsi:type="int" name="rating" padding="11" unsigned="false" nullable="false" identity="false" default="0"
+                comment="Rating"/>
+        <column xsi:type="text" name="subject" nullable="false" comment="Subject"/>
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="int" name="agent_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Agent ID"/>
+        <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_name" nullable="true" length="255" comment="Customer Name"/>
+        <column xsi:type="text" name="cc_recipients" nullable="true" comment="CC Recipients"/>
+        <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Status ID"/>
+        <column xsi:type="int" name="priority_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Priority ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Date"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At Date"/>
+        <column xsi:type="text" name="internal_note" nullable="true" comment="Internal Note"/>
+        <column xsi:type="varchar" name="external_link" nullable="false" length="255" comment="External Link"/>
+        <column xsi:type="int" name="customer_rating" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Customer Rating"/>
+        <column xsi:type="int" name="order_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Order Id"/>
+        <column xsi:type="boolean" name="is_locked" nullable="false" default="false" comment="Is Ticket Locked"/>
+        <column xsi:type="varchar" name="telephone" nullable="true" length="255" comment="Phone Number"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTITY_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="aw_helpdesk2_ticket_entity" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="SET NULL"/>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_CUSTOMER_EMAIL" indexType="btree">
+            <column name="customer_email"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_entity_varchar" resource="default" engine="innodb"
+           comment="Ticket Entity Varchar Attribute Backend Table">
+        <column xsi:type="int" name="value_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Value ID"/>
+        <column xsi:type="smallint" name="attribute_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Attribute ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Entity ID"/>
+        <column xsi:type="varchar" name="value" nullable="true" length="255" comment="Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="value_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTT_VCHR_ATTR_ID_EAV_ATTR_ATTR_ID"
+                    table="aw_helpdesk2_ticket_entity_varchar" column="attribute_id" referenceTable="eav_attribute"
+                    referenceColumn="attribute_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_7EB740F1A79F1C215DE98500B929CA2F"
+                    table="aw_helpdesk2_ticket_entity_varchar" column="entity_id"
+                    referenceTable="aw_helpdesk2_ticket_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTITY_VARCHAR_STORE_ID_STORE_STORE_ID"
+                    table="aw_helpdesk2_ticket_entity_varchar" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AW_HELPDESK2_TICKET_ENTT_VCHR_ENTT_ID_ATTR_ID_STORE_ID">
+            <column name="entity_id"/>
+            <column name="attribute_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_VARCHAR_ATTRIBUTE_ID" indexType="btree">
+            <column name="attribute_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_VARCHAR_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_entity_int" resource="default" engine="innodb"
+           comment="Ticket Entity Int Attribute Backend Table">
+        <column xsi:type="int" name="value_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Value ID"/>
+        <column xsi:type="smallint" name="attribute_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Attribute ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Entity ID"/>
+        <column xsi:type="int" name="value" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="value_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTT_INT_ATTR_ID_EAV_ATTR_ATTR_ID"
+                    table="aw_helpdesk2_ticket_entity_int" column="attribute_id" referenceTable="eav_attribute"
+                    referenceColumn="attribute_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_56383AE374400B865AF7CD023686EE39"
+                    table="aw_helpdesk2_ticket_entity_int" column="entity_id"
+                    referenceTable="aw_helpdesk2_ticket_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTITY_INT_STORE_ID_STORE_STORE_ID"
+                    table="aw_helpdesk2_ticket_entity_int" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AW_HELPDESK2_TICKET_ENTITY_INT_ENTITY_ID_ATTRIBUTE_ID_STORE_ID">
+            <column name="entity_id"/>
+            <column name="attribute_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_INT_ATTRIBUTE_ID" indexType="btree">
+            <column name="attribute_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_INT_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_entity_text" resource="default" engine="innodb"
+           comment="Ticket Entity Text Attribute Backend Table">
+        <column xsi:type="int" name="value_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Value ID"/>
+        <column xsi:type="smallint" name="attribute_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Attribute ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Entity ID"/>
+        <column xsi:type="text" name="value" nullable="true" comment="Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="value_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTT_TEXT_ATTR_ID_EAV_ATTR_ATTR_ID"
+                    table="aw_helpdesk2_ticket_entity_text" column="attribute_id" referenceTable="eav_attribute"
+                    referenceColumn="attribute_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_F0FDEAB5035492D95C7D7662ADD08FC7"
+                    table="aw_helpdesk2_ticket_entity_text" column="entity_id"
+                    referenceTable="aw_helpdesk2_ticket_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_ENTITY_TEXT_STORE_ID_STORE_STORE_ID"
+                    table="aw_helpdesk2_ticket_entity_text" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AW_HELPDESK2_TICKET_ENTITY_TEXT_ENTITY_ID_ATTRIBUTE_ID_STORE_ID">
+            <column name="entity_id"/>
+            <column name="attribute_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_TEXT_ATTRIBUTE_ID" indexType="btree">
+            <column name="attribute_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_ENTITY_TEXT_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_eav_attribute" resource="default" engine="innodb"
+           comment="Ticket EAV Attribute Table">
+        <column xsi:type="smallint" name="attribute_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Attribute ID"/>
+        <column xsi:type="smallint" name="is_global" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Is Attribute Global"/>
+        <column xsi:type="smallint" name="is_visible_in_grid" padding="5" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Is Visible in Grid"/>
+        <column xsi:type="smallint" name="is_filterable_in_grid" padding="5" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Is Filterable in Grid"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="attribute_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_EAV_ATTR_ATTR_ID_EAV_ATTR_ATTR_ID"
+                    table="aw_helpdesk2_ticket_eav_attribute" column="attribute_id" referenceTable="eav_attribute"
+                    referenceColumn="attribute_id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_ticket_option" resource="default" engine="innodb" comment="Ticket Option Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Option ID"/>
+        <column xsi:type="int" name="ticket_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Ticket ID"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Option Label"/>
+        <column xsi:type="text" name="value" nullable="false" comment="Option Value"/>
+        <column xsi:type="boolean" name="is_encrypted" nullable="false" default="false" comment="Is Encrypted"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+            <column name="ticket_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_2ADC3252B4B3A61EC0EE451895CF7F84"
+                    table="aw_helpdesk2_ticket_option" column="ticket_id" referenceTable="aw_helpdesk2_ticket_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_TICKET_OPTION_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_message" resource="default" engine="innodb" comment="Ticket Message Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Message ID"/>
+        <column xsi:type="int" name="ticket_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Ticket ID"/>
+        <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Agent ID"/>
+        <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Status ID"/>
+        <column xsi:type="text" name="content" nullable="true" comment="Message content"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="50" comment="Message type"/>
+        <column xsi:type="varchar" name="author_name" nullable="false" length="255" comment="Author name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Date"/>
+        <column xsi:type="int" name="gateway_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Gateway Id"/>
+        <column xsi:type="boolean" name="is_encrypted" nullable="false" default="false" comment="Is Encrypted"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_DD1B6B8C6521A4E2BC9B69FB613F20D0"
+                    table="aw_helpdesk2_ticket_message" column="ticket_id" referenceTable="aw_helpdesk2_ticket_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_TICKET_ID_TYPE" indexType="btree">
+            <column name="ticket_id"/>
+            <column name="type"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_STATUS_ID" indexType="btree">
+            <column name="status_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_AGENT_ID" indexType="btree">
+            <column name="agent_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_TYPE" indexType="btree">
+            <column name="type"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_message_attachment" resource="default" engine="innodb"
+           comment="Ticket Message Attachment Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Attachment ID"/>
+        <column xsi:type="int" name="message_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Message ID"/>
+        <column xsi:type="varchar" name="file_name" nullable="true" length="255" comment="File name"/>
+        <column xsi:type="varchar" name="file_path" nullable="false" length="255" comment="File path"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_F53F7BA39044B49F7D66656B714F0D4F"
+                    table="aw_helpdesk2_ticket_message_attachment" column="message_id"
+                    referenceTable="aw_helpdesk2_ticket_message" referenceColumn="id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_TICKET_MESSAGE_ATTACHMENT_MESSAGE_ID" indexType="btree">
+            <column name="message_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_quick_response" resource="default" engine="innodb" comment="Quick Response Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Quick Response ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Quick Response Title"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Quick Response Active"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Date"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At Date"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_label" resource="default" engine="innodb" comment="Label Table">
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="entity_type" nullable="false" length="100" comment="Entity Type"/>
+        <column xsi:type="text" name="content" nullable="true" comment="Content"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_id"/>
+            <column name="entity_id"/>
+            <column name="entity_type"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_LABEL_STORE_ID_STORE_STORE_ID"
+                    table="aw_helpdesk2_label" column="store_id" referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_LABEL_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_grid" resource="default" engine="innodb" comment="Ticket Grid Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="uid" nullable="false" length="10" comment="Ticket Unique ID"/>
+        <column xsi:type="int" name="rating" padding="11" unsigned="false" nullable="false" identity="false" default="0"
+                comment="Rating"/>
+        <column xsi:type="timestamp" name="last_message_date" on_update="false" nullable="true"
+                default="CURRENT_TIMESTAMP" comment="Last Message Date"/>
+        <column xsi:type="varchar" name="last_message_by" nullable="false" length="255" comment="Last Message By"/>
+        <column xsi:type="varchar" name="last_message_type" nullable="false" length="16" comment="Last Message Type"/>
+        <column xsi:type="int" name="department_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Department ID"/>
+        <column xsi:type="int" name="agent_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Agent ID"/>
+        <column xsi:type="text" name="subject" nullable="false" comment="Subject"/>
+        <column xsi:type="text" name="first_message_content" nullable="false" comment="First Message Content"/>
+        <column xsi:type="text" name="last_message_content" nullable="false" comment="Last Message Content"/>
+        <column xsi:type="varchar" name="customer_name" nullable="true" length="255" comment="Customer name"/>
+        <column xsi:type="int" name="priority_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Priority ID"/>
+        <column xsi:type="int" name="customer_message_count" padding="11" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Customer Message Count"/>
+        <column xsi:type="int" name="agent_message_count" padding="11" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Agent Message Count"/>
+        <column xsi:type="int" name="message_count" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Message Count"/>
+        <column xsi:type="int" name="status_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Status ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At Date"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At Date"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
+        <column xsi:type="int" name="order_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Order Id"/>
+        <column xsi:type="text" name="order_increment_id" nullable="true" comment="Order Increment Id"/>
+        <column xsi:type="boolean" name="is_encrypted" nullable="false" default="false" comment="Is Encrypted"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_54632BAA6103AF67394188BB5533979C"
+                    table="aw_helpdesk2_ticket_grid" column="entity_id" referenceTable="aw_helpdesk2_ticket_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_TICKET_GRID_UID_SUBJECT_CUSTOMER_NAME" indexType="fulltext">
+            <column name="uid"/>
+            <column name="subject"/>
+            <column name="customer_name"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_automation" resource="default" engine="innodb" comment="Automation Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Automation ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Automation name"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" comment="Is Automation Active"/>
+        <column xsi:type="int" name="priority" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Priority"/>
+        <column xsi:type="boolean" name="is_required_to_break" nullable="false"
+                comment="Is Required to Break Chain of Automations"/>
+        <column xsi:type="varchar" name="event" nullable="false" length="255" comment="Event"/>
+        <column xsi:type="text" name="conditions" nullable="false" comment="Serialized Conditions"/>
+        <column xsi:type="text" name="actions" nullable="false" comment="Serialized Actions"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="aw_helpdesk2_automation_task" resource="default" engine="innodb" comment="Automation Task Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Task ID"/>
+        <column xsi:type="int" name="automation_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Automation ID"/>
+        <column xsi:type="int" name="ticket_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Ticket ID"/>
+        <column xsi:type="varchar" name="action_type" nullable="false" length="255" comment="Action Type"/>
+        <column xsi:type="text" name="action_data" nullable="false" comment="Action Data"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="12" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_3A2813D0D9687240A15486C6450FC736"
+                    table="aw_helpdesk2_automation_task" column="ticket_id" referenceTable="aw_helpdesk2_ticket_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_D059B925AA35F0147BC731ADF683E53B"
+                    table="aw_helpdesk2_automation_task" column="automation_id" referenceTable="aw_helpdesk2_automation"
+                    referenceColumn="id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_helpdesk2_tag" resource="default" engine="innodb" comment="Helpdesk2 Tag">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Tag Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="AW_HELPDESK2_TAG_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_ticket_tag" resource="default" engine="innodb" comment="Ticket To Tag Relation Table">
+        <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Tag Id"/>
+        <column xsi:type="int" name="ticket_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Ticket Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+            <column name="ticket_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_HELPDESK2_TICKET_TAG_TAG_ID_AW_HELPDESK2_TAG_ID"
+                    table="aw_helpdesk2_ticket_tag" column="tag_id" referenceTable="aw_helpdesk2_tag"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_7E4A27BAF9D09A2C4C5ABE187F254932" table="aw_helpdesk2_ticket_tag"
+                    column="ticket_id" referenceTable="aw_helpdesk2_ticket_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="AW_HELPDESK2_TICKET_TAG_TAG_ID" indexType="btree">
+            <column name="tag_id"/>
+        </index>
+        <index referenceId="AW_HELPDESK2_TICKET_TAG_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+    </table>
+    <table name="aw_helpdesk2_rejected_message" resource="default" engine="innodb" comment="Helpdesk2 Rejected Message">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="50" comment="Type"/>
+        <column xsi:type="varchar" name="from" nullable="false" length="255" comment="From"/>
+        <column xsi:type="text" name="subject" nullable="false" comment="Subject"/>
+        <column xsi:type="text" name="content" nullable="false" comment="Content"/>
+        <column xsi:type="int" name="reject_pattern_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Reject Pattern ID"/>
+        <column xsi:type="text" name="message_data" nullable="false" comment="Json Message Data"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

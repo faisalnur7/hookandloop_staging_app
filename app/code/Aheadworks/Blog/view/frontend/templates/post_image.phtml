@@ -1,0 +1,19 @@
+<?php
+/* @var $block \Aheadworks\Blog\Block\PostImage */
+/** @var  \Aheadworks\Blog\ViewModel\PostImage $viewModel */
+
+$viewModel = $block->getViewModel();
+$post = $block->getPost();
+$imgClass = $block->getImgClass();
+?>
+
+<picture>
+    <source srcset="<?= $block->escapeUrl($viewModel->getFeaturedImageMobileUrl($post)) ?>" media="(max-width: 768px)">
+    <img class="blog-post-lazyload-image <?= $block->escapeHtmlAttr($imgClass) ?>"
+         data-original = "<?= $block->escapeUrl($viewModel->getFeaturedImageUrl($post)) ?>"
+         src = ""
+         title = "<?= $block->escapeHtml($post->getFeaturedImageTitle()) ?>"
+         alt = "<?= $block->escapeHtml($viewModel->getFeaturedImageAlt($post)) ?>"
+         data-mage-init='{"awBlogLazyLoad":{}}'
+    >
+</picture>

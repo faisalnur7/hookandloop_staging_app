@@ -1,0 +1,52 @@
+<?php
+/* @var $viewModel \Aheadworks\Blog\ViewModel\Author\Badge */
+?>
+<?php
+    $viewModel = $block->getViewModel();
+    $author = $block->getAuthor();
+?>
+<?php if($author): ?>
+    <div class="author-badge-content">
+        <div class="author-badge-header">
+            <div class="author-badge-header-icon">
+                <img src="<?= $block->escapeHtml($viewModel->getAuthorImageUrl($author)) ?>" alt="">
+            </div>
+            <div class="author-badge-header-caption">
+                <div class="author-badge-header">
+                    <a class="author-link" href="<?= /* @noEscape */ $viewModel->getAuthorUrl($author) ?>">
+                        <?= $block->escapeHtml($viewModel->getAuthorFullname($author)) ?>
+                    </a>
+
+                    <a class="author-all-posts" href="<?= /* @noEscape */ $viewModel->getAuthorUrl($author) ?>">
+                        <?= $block->escapeHtml(__('View all posts by %1', $viewModel->getAuthorFullname($author))) ?>
+                    </a>
+                </div>
+                <div class="author-badge-header-info">
+                    <div class="author-badge-header-post"><?= $block->escapeHtml($author->getJobPosition()) ?></div>
+                    <div class="social-icons">
+                        <?php if (!empty($author->getTwitterId())): ?>
+                            <div class="author-social-handle">
+                                <a href="https://twitter.com/<?= $block->escapeHtml($author->getTwitterId()) ?>" target="_blank" class="stButton"><span class="chicklets twitter"></span></a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($author->getFacebookId())): ?>
+                            <div class="author-social-handle">
+                                <a href="https://www.facebook.com/<?= $block->escapeHtml($author->getFacebookId()) ?>" target="_blank" class="stButton"><span class="chicklets facebook"></span></a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($author->getLinkedinId())): ?>
+                            <div class="author-social-handle">
+                                <a href="https://www.linkedin.com/in/<?= $block->escapeHtml($author->getLinkedinId()) ?>" target="_blank" class="stButton"><span class="chicklets linkedin"></span></a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="author-badge-body">
+            <p class="author-badge-text">
+                <?= /* @noEscape */ $viewModel->getAuthorShortBio($author) ?>
+            </p>
+        </div>
+    </div>
+<?php endif; ?>

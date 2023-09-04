@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Aheadworks_BlogSearch::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="aw_blog_search.container.mobile"
+                       htmlTag="div"
+                       htmlClass="aw_blog_search-container aw_blog_search-container-mobile"
+                       before="aw_blog_author.list">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="aw_blog_search.search_field.mobile"
+                       template="Aheadworks_BlogSearch::search_field.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\BlogSearch\ViewModel\SearchField</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

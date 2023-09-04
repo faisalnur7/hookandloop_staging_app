@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\CategoriesComposite" type="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="storeIds" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Categories\StoreIds</item>
+                <item name="parentId" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Categories\ParentId</item>
+                <item name="status" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Categories\Status</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\Categories" type="Aheadworks\BlogGraphQl\Model\Resolver\EntityListResolver">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\Categories</argument>
+            <argument name="argumentProcessor" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\CategoriesComposite</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\PostsComposite" type="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="storeIds" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Posts\StoreIds</item>
+                <item name="status" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Posts\Status</item>
+                <item name="customerGroups" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Posts\CustomerGroups</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\Posts" type="Aheadworks\BlogGraphQl\Model\Resolver\EntityListResolver">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\Posts</argument>
+            <argument name="argumentProcessor" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\PostsComposite</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\TagsComposite" type="Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="postsStore" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Tags\PostsStore</item>
+                <item name="name" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Tags\Name</item>
+                <item name="postsStatus" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Tags\PostsStatus</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\Tags" type="Aheadworks\BlogGraphQl\Model\Resolver\EntityListResolver">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\Tags</argument>
+            <argument name="argumentProcessor" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\TagsComposite</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\Authors" type="Aheadworks\BlogGraphQl\Model\Resolver\EntityListResolver">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\Authors</argument>
+            <argument name="argumentProcessor" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Composite</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\TagsCloud" type="Aheadworks\BlogGraphQl\Model\Resolver\EntityListResolver">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\TagsCloud</argument>
+            <argument name="argumentProcessor" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\ArgumentProcessor\Composite</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\CategoryEntityAttributesForAst" type="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\EntityAttributesForAst">
+        <arguments>
+            <argument name="entityElementName" xsi:type="string">AwBlogCategory</argument>
+            <argument name="additionalAttributes" xsi:type="array">
+                <item name="0" xsi:type="string">store_ids</item>
+                <item name="1" xsi:type="string">status</item>
+                <item name="2" xsi:type="string">parent_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\PostEntityAttributesForAst" type="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\EntityAttributesForAst">
+        <arguments>
+            <argument name="entityElementName" xsi:type="string">AwBlogPost</argument>
+            <argument name="additionalAttributes" xsi:type="array">
+                <item name="0" xsi:type="string">tag_id</item>
+                <item name="1" xsi:type="string">product_id</item>
+                <item name="2" xsi:type="string">tag_name</item>
+                <item name="3" xsi:type="string">category_name</item>
+                <item name="4" xsi:type="string">category_url_key</item>
+                <item name="5" xsi:type="string">author_url_key</item>
+                <item name="6" xsi:type="string">status</item>
+                <item name="7" xsi:type="string">store_ids</item>
+                <item name="8" xsi:type="string">customer_groups</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\TagEntityAttributesForAst" type="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\EntityAttributesForAst">
+        <arguments>
+            <argument name="entityElementName" xsi:type="string">AwBlogTag</argument>
+            <argument name="additionalAttributes" xsi:type="array">
+                <item name="0" xsi:type="string">posts_store</item>
+                <item name="1" xsi:type="string">posts_status</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\AuthorsEntityAttributesForAst" type="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\EntityAttributesForAst">
+        <arguments>
+            <argument name="entityElementName" xsi:type="string">AwBlogAuthor</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\TagCloudEntityAttributesForAst" type="Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\EntityAttributesForAst">
+        <arguments>
+            <argument name="entityElementName" xsi:type="string">AwBlogTagCloud</argument>
+            <argument name="additionalAttributes" xsi:type="array">
+                <item name="0" xsi:type="string">tag_id</item>
+                <item name="1" xsi:type="string">category_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\GraphQl\Query\Resolver\Argument\FieldEntityAttributesPool">
+        <arguments>
+            <argument name="attributesInstances" xsi:type="array">
+                <item name="awBlogCategories" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\CategoryEntityAttributesForAst</item>
+                <item name="awBlogPosts" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\PostEntityAttributesForAst</item>
+                <item name="awBlogTags" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\TagEntityAttributesForAst</item>
+                <item name="awBlogAuthors" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\AuthorsEntityAttributesForAst</item>
+                <item name="awBlogTagsCloud" xsi:type="object">Aheadworks\BlogGraphQl\Model\Resolver\FilterArgument\TagCloudEntityAttributesForAst</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogGraphQl\Model\Resolver\CategoryTree">
+        <plugin name="awBlog" type="Aheadworks\BlogGraphQl\Plugin\Model\Resolver\CategoryTreePlugin" />
+    </type>
+    <type name="Magento\CatalogUrlRewriteGraphQl\Model\Resolver\CategoryUrlSuffix">
+        <plugin name="awBlog" type="Aheadworks\BlogGraphQl\Plugin\Model\Resolver\CategoryUrlSuffixPlugin" />
+    </type>
+    <type name="Aheadworks\BlogGraphQl\Model\TemplateFilter\Composite">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="widget" xsi:type="object">Aheadworks\BlogGraphQl\Model\TemplateFilter\Widget</item>
+                <item name="pageBuilder" xsi:type="object">Aheadworks\BlogGraphQl\Model\TemplateFilter\PageBuilder</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\BlogGraphQl\Model\Resolver\DataProvider\Posts">
+        <arguments>
+            <argument name="templateFilter" xsi:type="object">Aheadworks\BlogGraphQl\Model\TemplateFilter\Composite</argument>
+        </arguments>
+    </type>
+</config>

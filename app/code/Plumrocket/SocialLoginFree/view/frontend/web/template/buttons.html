@@ -1,0 +1,46 @@
+<if args="canShow()">
+    <div class="pslogin-block pslogin-login">
+        <if args="canShowSeparator()">
+            <ifnot args="customSeparatorHtml">
+                <div class="pslogin-spacer pslogin-clearfix">
+                    <table>
+                        <tr>
+                            <td><div class="pslogin-border"></div></td>
+                            <td class="pslogin-bordertext w25" data-bind="i18n: separatorText"></td>
+                            <td><div class="pslogin-border"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </ifnot>
+            <if args="customSeparatorHtml">
+                <div class="pslogin-spacer pslogin-clearfix" bindHtml="customSeparatorHtml"></div>
+            </if>
+        </if>
+        <div class="pslogin-buttons">
+            <ul data-bind="foreach: {data: buttons, as: 'button'}" class="pslogin-clearfix">
+                <li data-bind="
+                    class: $parent.getButtonClass(button),
+                    attr: {title: button.text}"
+                >
+                    <a class="pslogin-button-link pslogin-button-click"
+                       rel="nofollow"
+                       href="javascript:void(0);"
+                       data-bind="click: $parent.onClick.bind($parent),
+                       attr: {
+                            'data-href': button.url,
+                            'data-open-on-page': button.openOnPage,
+                            'data-width': button.modalWidth,
+                            'data-height': button.modalHeight,
+                            'data-use-custom-click-handler': $parent.useCustomClickHandler,
+                       }"
+                    >
+                        <span data-bind="class: $parent.getInnerContainerClass(button)">
+                            <span class="pslogin-button-icon"></span>
+                            <span class="pslogin-button-text" data-bind="text: button.text"></span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</if>

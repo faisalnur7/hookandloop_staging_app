@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Aheadworks_Blog::css/styles.css"/>
+        <css src="Aheadworks_Blog::css/slider.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="aw_blog_featured_posts.top" template="Aheadworks_Blog::post/featured.phtml" before="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post\FeaturedList</argument>
+                    <argument name="position" xsi:type="string">top</argument>
+                </arguments>
+                <block name="aw_blog_featured_posts.top.renderer" template="Aheadworks_Blog::post/featured_posts.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post\Featured\Renderer</argument>
+                    </arguments>
+                    <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_post.top.post_image">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                            <argument name="img_class" xsi:type="string">blog-post-featured-image</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="sidebar.main">
+            <block name="aw_blog_featured_posts.sidebar" template="Aheadworks_Blog::post/featured.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post\FeaturedList</argument>
+                    <argument name="position" xsi:type="string">sidebar</argument>
+                </arguments>
+                <block name="aw_blog_featured_posts.sidebar.renderer" template="Aheadworks_Blog::post/featured_posts.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post\Featured\Renderer</argument>
+                    </arguments>
+                    <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_post.sidebar.post_image">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                            <argument name="img_class" xsi:type="string">blog-post-featured-image</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

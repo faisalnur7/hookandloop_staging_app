@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="checkout" comment="Sales Quote">
+        <column xsi:type="text" name="magecomp_order_comment" nullable="true" comment="Magecomp Order Comment"/>
+    </table>
+    <table name="sales_order" resource="sales" comment="Sales Order">
+        <column xsi:type="text" name="magecomp_order_comment" nullable="true" comment="Magecomp Order Comment"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" comment="Sales Order Grid">
+        <column xsi:type="text" name="magecomp_order_comment" nullable="true" comment="Magecomp Order Comment"/>
+    </table>
+</schema>

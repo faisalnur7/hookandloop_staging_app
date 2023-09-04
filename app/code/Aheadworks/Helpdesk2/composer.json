@@ -1,0 +1,36 @@
+{
+    "name": "aheadworks/module-helpdesk",
+    "description": "Help Desk Ultimate 2 by Aheadworks",
+    "type": "magento2-module",
+    "version": "2.7.1",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "magento/framework": ">=103.0.4",
+        "magento/module-config": ">=101.2.4",
+        "magento/module-user": ">=101.2.4",
+        "magento/module-sales": ">=103.0.4",
+        "magento/module-backend": ">=102.0.4",
+        "magento/module-eav": ">=102.1.4",
+        "magento/module-store": ">=101.1.4",
+        "magento/module-ui": ">=101.2.4",
+        "magento/module-customer": ">=103.0.4",
+        "magento/module-catalog-import-export":">=101.1.4",
+        "aheadworks/module-bup": ">=1.0.2",
+        "php": ">=8.1"
+    },
+    "suggests": {
+        "aheadworks/module-helpdesk-graph-ql": "1.0.1",
+        "aheadworks/module-helpdesk-report": "1.0.1"
+    },
+    "homepage": "https://aheadworks.com/",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\Helpdesk2\\": ""
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- for add new tab in Magento2 system configuration section -->
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>eBridge</label>
+        </tab>
+        <!-- for create section -->
+        <section id="integration" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">          
+            <label>Integration</label>
+            <!-- Assign section to tab -->
+            <tab>webkul</tab>
+            <resource>Ebridge_Integration::configuration</resource>
+            <!-- create group for fields in section -->
+            <group id="parameters" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Accounting And ERP Integration</label>
+                <!-- create text type field -->
+                <field id="ebridgeAccountBtn" translate="label comment" sortOrder="7" type="button" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Ebridge\Integration\Block\System\Config\Button</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

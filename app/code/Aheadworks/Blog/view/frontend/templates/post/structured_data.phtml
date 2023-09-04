@@ -1,0 +1,13 @@
+<?php
+use Magento\Framework\View\Element\Template;
+use Aheadworks\Blog\ViewModel\Post\StructuredData;
+
+/**
+ * @var Template $block
+ * @var StructuredData $viewModel
+ */
+$viewModel = $block->getViewModel();
+?>
+<script type="application/ld+json">
+    <?= /* @noEscape */ $viewModel->getStructuredDataForCurrentPost() ?>
+</script>

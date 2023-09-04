@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Magento\Fedex\Model\Carrier" type="Exinent\DimweightFedex\Model\Carrier"/>
+    <preference for="Magento\Fedex\Model\Source\Generic" type="Exinent\DimweightFedex\Model\Source\Generic" />  
+    <preference for="Magento\Fedex\Model\Source\Method" type="Exinent\DimweightFedex\Model\Source\Method" />  
+    <preference for="Magento\Fedex\Model\Source\Packaging" type="Exinent\DimweightFedex\Model\Source\Packaging" />  
+    <preference for="Magento\Fedex\Model\Source\Dropoff" type="Exinent\DimweightFedex\Model\Source\Dropoff" />  
+    <preference for="Magento\Fedex\Model\Source\Unitofmeasure" type="Exinent\DimweightFedex\Model\Source\Unitofmeasure" /> 
+     <preference for="Magento\Fedex\Model\Source\Freemethod" type="Exinent\DimweightFedex\Model\Source\Freemethod" /> 
+   
+    <preference for="Magento\Quote\Model\Quote\Address\RateRequest" type="Exinent\DimweightFedex\Model\Rate\Request"/>
+</config>

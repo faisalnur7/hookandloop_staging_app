@@ -1,0 +1,583 @@
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+
+.pslogin-addedoverlay {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 2010;
+	background-color: black;
+	filter: alpha(opacity=60);
+	opacity: 0.6;
+	/*display: none;*/
+}
+
+.pslogin-pop-up-form {
+	left: 0;
+	top: 0;
+	position:fixed;
+	width: 100%;
+	z-index: 2020;
+	height:100%;
+	color:#666666;
+	text-align:left;
+	/*display:none;*/
+	overflow-y: auto;
+}
+
+#pslogin-pop-up-bg {
+	max-width: 450px;
+	font-size: 12px;
+	padding: 0 10px 0 10px;
+	margin: 10% auto 5% auto;
+	color: #444;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.pslogin-share {
+	background-color: white;
+	min-height: 210px;
+	padding: 18px 21px;
+	position: relative;
+}
+
+.pslogin-fake-email-message {
+	position: fixed;
+	top: 20px;
+	width: 100%;
+	padding: 0 5%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	z-index: 9999;
+}
+
+	.pslogin-fake-email-message .content {
+		padding: 5px 10px;
+		background: #fff;
+		max-width: 960px;
+		min-width: 250px;
+		margin: 0 auto;
+		box-shadow: 0 2px 15px 0px rgba(0, 0, 0, 0.42);
+		-webkit-box-shadow: 0 2px 15px 0px rgba(0, 0, 0, 0.42);
+		-moz-box-shadow: 0 2px 15px 0px rgba(0, 0, 0, 0.42);
+		font-size: 14px;
+		color: #636363;
+		z-index: 9999;
+	}
+
+	.pslogin-fake-email-message p {
+		margin: 10px auto;
+		text-align: left;
+	}
+
+	.pslogin-fake-email-message .close-message {
+		float: right;
+	}
+
+	.pslogin-fake-email-message .close-message:hover {
+		cursor: pointer;
+		color: #AEAEAE;
+	}
+
+
+/* general classes */
+.pslogin-share .ta-center {
+	text-align: center;
+}
+
+    .pslogin-share h2 {
+		padding: 0px 0px 7px 0px;
+		color: #3399cc;
+		font-weight: 400;
+		font-size: 15px;
+		text-transform: uppercase;
+		border-bottom: 1px solid #DDD;
+		margin-bottom: 10px;
+    }
+
+
+	.pslogin-share .prpop-close-btn {
+		position: absolute;
+		right: 9px;
+		left: auto;
+		margin-right: 10px;
+		top: 14px;
+		text-decoration: none;
+		color: #727272;
+		font-size: 16px;
+		background: none;
+	}
+
+	.pslogin-share .prpop-close-btn:hover {
+		color: #b6aba5;
+	}
+
+	.pslogin-share p {
+		margin-bottom: 7px;
+	}
+
+	.pslogin-share img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.pslogin-share .button-top {
+		height: 7px;
+	}
+
+	.pslogin-share a {
+		display: inline-block;
+		height: 30px;
+		color: white;
+		margin: 0 10px 10px 0;
+	}
+
+	.pslogin-share a:hover {
+		cursor: pointer;
+		opacity: 0.7;
+		filter: apha(filter=70);
+	}
+
+
+/*form*/
+.w25 { width: 25px!important; }
+.w100 { width: 100px; }
+
+.pslogin-block.account-login .content {
+	margin: 0;
+}
+
+.pslogin-form .registered-users .content {
+	margin: 0!important;
+}
+
+.pslogin-block.account-login .form-list label,
+#checkout-step-login .pslogin-block .form-list label {
+	width: auto;
+	float: none;
+}
+
+.pslogin-block.account-login .form-list .input-box,
+#checkout-step-login .pslogin-block .form-list .input-box {
+	float: none;
+}
+
+#checkout-step-login .col2-set {
+	box-sizing: border-box;
+}
+
+.pslogin-block.account-login .buttons-set {
+	min-height: 40px;
+}
+
+.pslogin-block.col2-set {
+	margin: 0;
+}
+
+.pslogin-block.col2-set .buttons-set {
+	padding: 0;
+}
+
+.pslogin-block.col2-set .fieldset {
+	margin: 15px 0;
+}
+
+	.pslogin-block button.button span,
+	.pslogin-block button.button span span {
+		height: auto;
+	}
+
+	.pslogin-share .soc-name {
+		height: 30px;
+		line-height: 30px;
+		padding: 0 7px;
+		display: block;
+		float: left;
+		box-sizing: border-box;
+	}
+
+		.pslogin-share .vkontakte {
+			background-position: -77px -78px;
+		}
+
+		.pslogin-share .facebook {
+			background-position: -5px -5px
+		}
+
+		.pslogin-share .twitter {
+			background-position: -41px -5px;
+		}
+
+		.pslogin-share .googleplus {
+			background-position: -113px -5px;
+		}
+
+/* welcome message */
+.pslogin-welcome-msg {
+	height: 22px;
+	line-height: 22px;
+	float: none;
+	display: inline-block;
+	margin: 0 0 5px 0;
+}
+
+.pslogin-welcome-msg:after {
+	clear: both;
+	content: "";
+}
+
+.pslogin-welcome-msg img {
+	height: 25px;
+	display: inline-block;
+	padding: 0 5px 0 0;
+	float: left;
+}
+
+/* Buttons */
+.popup-authentication .pslogin-block:before,
+.popup-authentication .pslogin-block:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.pslogin-block {
+	width: 100%;
+	margin: 0 0 20px 0;
+}
+
+.pslogin-block * {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.pslogin-block.pslogin-hidden-text .pslogin-button-text {
+	display: none!important;
+}
+
+.pslogin-block .pslogin-xs {
+	display: none!important;
+}
+
+.pslogin-block .pslogin-button-image {
+	display: block;
+	max-height: 32px;
+}
+
+.pslogin-block .pslogin-clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.pslogin-block .title {
+	text-align: center;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+.pslogin-spacer {
+	display: block;
+	margin: 10px auto;
+	position: relative;
+	text-align: center;
+	line-height: 16px!important;
+	top: auto;
+	left: auto;
+	height: auto;
+	width: auto;
+	line-height: normal;
+	overflow: visible;
+	font-size: 13px;
+}
+
+	.pslogin-spacer table {
+		width: 100%;
+	}
+
+	.pslogin-spacer table tr td:first-child { padding-left: 0; }
+	.pslogin-spacer table tr td:last-child { padding-right: 0; }
+
+	.pslogin-spacer table td {
+		vertical-align: middle;
+		padding: 10px 5px;
+	}
+
+	.pslogin-spacer .pslogin-border {
+		border-top: 1px solid #e5e2e2;
+		width: 100%;
+	}
+
+	.pslogin-spacer .pslogin-bordertext {
+		color: #b2b2b2;
+		text-align: center;
+		font-size: 11px;
+	}
+
+	.pslogin-spacer .circle {
+		width: 90%;
+		height: 25px;
+		line-height: 22px;
+		font-size: 11px;
+		border: 1px solid #b2b2b2;
+		border-radius: 0px 7px;
+		margin: 0 auto;
+		background-color: #eeeeee;
+	}
+
+	.pslogin-spacer .circle:hover {
+		cursor: pointer;
+		background-color: #FAFAFA;
+	}
+
+.pslogin-block.pslogin-login .pslogin-buttons {
+	display: block;
+}
+
+.modal-inner-wrap .pslogin-block .pslogin-buttons ul,
+.form-login .pslogin-block .pslogin-buttons ul {
+	padding-left: 0;
+}
+
+.pslogin-block .pslogin-buttons ul {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 0;
+}
+
+.customer-account-login .pslogin-buttons .ps-default{
+	max-width: 186px;
+}
+
+.pslogin-block .pslogin-buttons ul li {
+	display: block;
+	line-height: normal;
+	list-style: none !important;
+	padding: 0 !important;
+	background: none !important;
+	min-height: 48px;
+	margin: 7px;
+	position: relative;
+}
+
+.pslogin-block .pslogin-button:not(.ps-default){
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+}
+
+.pslogin-block .pslogin-buttons ul li a {
+	display: block;
+	height: 100%;
+	text-decoration: none;
+}
+
+.pslogin-block .pslogin-buttons ul li.show-button-image {
+	background: none!important;
+}
+
+.pslogin-block .pslogin-buttons ul li:hover {
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+}
+
+.pslogin-block .pslogin-buttons ul li span.pslogin-button-auto {
+	background-color: #3399cc;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding: 5px 4px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 0 3px 4px rgba(0, 0, 0, 0.18);
+}
+
+.pslogin-button:not(.ps-default) .pslogin-button-auto{
+	justify-content: center;
+}
+
+.pslogin-block .pslogin-buttons ul .ps-round span.pslogin-button-auto {
+	border-radius: 50%;
+}
+
+.pslogin-block .pslogin-buttons ul li .pslogin-button-icon {
+	background: url('../images/social.png');
+	display: block;
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.pslogin-block .pslogin-buttons ul li .pslogin-button-icon img {
+	width: 100%;
+}
+
+.pslogin-button.ps-default .pslogin-button-text {
+	display: flex;
+}
+
+.pslogin-buttons .pslogin-button-text {
+	box-sizing: border-box;
+	font: 600 13px/1 'Roboto', Arial, sans-serif;
+	text-align: left;
+	color: #fff;
+	min-width: 144px;
+	height: 100%;
+	display: none;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 4px;
+}
+
+.pslogin-block .pslogin-buttons.pslogin-buttons-showfull .pslogin-button-auto .pslogin-button-text {
+	display: inline-block;
+}
+
+.pslogin-block .pslogin-buttons.pslogin-buttons-showfull .pslogin-button-image {
+	display: inline-block;
+}
+
+.pslogin-block .pslogin-buttons .pslogin-button-icon-image {
+	display: inline-block;
+}
+
+.pslogin-block .pslogin-buttons.pslogin-buttons-showfull .pslogin-button-icon-image {
+	display: none;
+}
+
+.pslogin-block .pslogin-buttons .pslogin-button-auto .pslogin-button-icon-image {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+}
+
+.pslogin-block .pslogin-buttons ul li.facebook .pslogin-button-text {
+	background-color: transparent;
+}
+
+.pslogin-block .pslogin-buttons ul li.facebook span.pslogin-button-auto { background-color: #4267B2; }
+.pslogin-block .pslogin-buttons ul li.facebook .pslogin-button-icon { background-position: -1px 1px; }
+
+.pslogin-block .pslogin-buttons ul li.twitter span.pslogin-button-auto { background-color: #28a9e2; }
+.pslogin-block .pslogin-buttons ul li.twitter .pslogin-button-icon { background-position: -34px 0; }
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+
+	.pslogin-block .pslogin-buttons ul li .pslogin-button-icon {
+		background: url('../images/social_retina.png');
+		background-size: 236px 340px;
+		-webkit-background-size: 236px 340px;
+		-moz-background-size: 236px 340px;
+	}
+
+}
+
+@media screen and ( max-width: 767px ) {
+
+	.pslogin-block .pslogin-buttons {
+		width: 100%;
+	}
+
+	.pslogin-block .pslogin-buttons.show-button-text ul li .pslogin-button-text {
+		display: inline-block;
+	}
+
+	.pslogin-block .pslogin-xs {
+		display: inline-block!important;
+	}
+}
+
+
+@media screen and (max-width: 640px) {
+	.pslogin-block .pslogin-button.ps-default {
+		margin: 0 0 15px 0;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.pslogin-block .pslogin-buttons ul li span.pslogin-button-auto {
+		width: 100%;
+	}
+}
+
+
+/*=== animate ===*/
+#pslogin-pop-up-bg {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration:1s;
+		animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    -moz-transform: translate3d(0, -2000px, 0);
+            transform: translate3d(0, -2000px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+            transform: none;
+  }
+}
+
+@-moz-keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    -moz-transform: translate3d(0, -2000px, 0);
+            transform: translate3d(0, -2000px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    -moz-transform: translate3d(0, -2000px, 0);
+            transform: translate3d(0, -2000px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInDownBig {
+  -webkit-animation-name: fadeInDownBig;
+  -moz-animation-name: fadeInDownBig;
+          animation-name: fadeInDownBig;
+}

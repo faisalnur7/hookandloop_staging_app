@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.main">
+            <container name="aw_blog_sidebar.search"/>
+            <referenceBlock name="catalog.compare.sidebar" remove="true" />
+            <referenceBlock name="wishlist_sidebar" remove="true" />
+            <block class="Aheadworks\Blog\Block\Sidebar\Category" ifconfig="aw_blog/sidebar/category_listing_enabled" name="aw_blog_sidebar.category" as="category" template="sidebar/category.phtml" />
+
+            <block class="Aheadworks\Blog\Block\Sidebar\Recent" name="aw_blog_sidebar.recent" as="recent" template="sidebar/recent.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                </arguments>
+                <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_sidebar.recent_post_image">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                        <argument name="img_class" xsi:type="string">recent-post-featured-image</argument>
+                    </arguments>
+                </block>
+            </block>
+
+            <block class="Aheadworks\Blog\Block\Widget\TagCloud" name="aw_blog_sidebar.tags" as="tags" template="widget/tag_cloud/blog_sidebar.phtml" />
+            <block class="Aheadworks\Blog\Block\Sidebar\Cms" name="aw_blog_sidebar.cms" as="cms" template="sidebar/cms.phtml" />
+        </referenceContainer>
+    </body>
+</page>

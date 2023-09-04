@@ -1,0 +1,8 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<?php foreach ($block->getData('errors') as $error): ?>
+    <p>
+        <?= $block->escapeHtml(__($error)); ?>
+    </p>
+<?php endforeach; ?>

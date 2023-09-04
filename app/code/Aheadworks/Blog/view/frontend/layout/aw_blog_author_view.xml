@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Blog\Block\Author" name="aw_blog_author.view">
+                <arguments>
+                    <argument name="mode" xsi:type="string">view</argument>
+                </arguments>
+                <block class="Aheadworks\Blog\Block\Author\PostList" name="aw_blog_post.list" as="post_list" template="post/list.phtml">
+                    <block name="aw_blog_post.view_toggle" as="view_toggle"
+                           ifconfig="aw_blog/general/is_grid_view_enabled"
+                           template="Aheadworks_Blog::post/view_toggle.phtml">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostViewMode</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Aheadworks\Blog\Block\Post" name="aw_blog_post">
+                        <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_post.post_image">
+                            <arguments>
+                                <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                                <argument name="img_class" xsi:type="string">blog-post-featured-image</argument>
+                            </arguments>
+                        </block>
+                        <arguments>
+                            <argument name="mode" xsi:type="string">list_item</argument>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                            <argument name="social_icons_block" xsi:type="string">Aheadworks\Blog\Block\Sharethis</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Aheadworks\Blog\Block\Html\Pager" name="aw_blog_post.list.pager" as="pager" template="Aheadworks_Blog::pager.phtml">
+                        <arguments>
+                            <argument name="repository" xsi:type="string">Aheadworks\Blog\Api\PostRepositoryInterface</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

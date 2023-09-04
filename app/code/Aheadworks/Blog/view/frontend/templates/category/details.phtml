@@ -1,0 +1,25 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var \Aheadworks\Blog\ViewModel\Category\Details $viewModel */
+$viewModel = $block->getViewModel();
+// @codingStandardsIgnoreFile
+$currentCategory = $viewModel->getCurrentCategory();
+?>
+<?php if ($viewModel->isNeedToDisplayDetails($currentCategory)): ?>
+    <div class="blog-category category-details">
+        <?php if ($viewModel->isNeedToDisplayImage($currentCategory)): ?>
+            <div class="category-image-wrapper">
+                <img class="category-image"
+                     src="<?= $block->escapeUrl($viewModel->getImageUrl($currentCategory)) ?>"
+                     title="<?= $block->escapeHtml($currentCategory->getImageTitle()) ?>"
+                     alt="<?= $block->escapeHtml($currentCategory->getImageAlt()) ?>"
+                />
+            </div>
+        <?php endif; ?>
+        <?php if ($viewModel->isNeedToDisplayDescription($currentCategory)): ?>
+            <div class="description">
+                <?= /* @noEscape */ $viewModel->getDescription($currentCategory) ?>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

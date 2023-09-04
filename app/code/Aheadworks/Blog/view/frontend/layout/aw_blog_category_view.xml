@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="aw_blog_sidebar"/>
+    <update handle="aw_blog_post_list"/>
+    <update handle="aw_blog_featured_posts"/>
+    <body>
+        <referenceContainer name="columns.top">
+            <container name="category.view.container" htmlTag="div" htmlClass="category-view" after="-">
+                <block class="Magento\Framework\View\Element\Template" name="category.cms" template="Aheadworks_Blog::category/cms.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Category\Cms</argument>
+                    </arguments>
+                    <block class="Magento\Cms\Block\Block" name="category.cms.renderer" />
+                </block>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="aw_blog_category.details"
+                   template="Aheadworks_Blog::category/details.phtml"
+                   before="aw_blog_post.list">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Category\Details</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

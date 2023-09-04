@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Aheadworks\Blog\Block\Adminhtml\Widget\Instance\Edit\Tab\Main\WidgetInstanceScript $block */
+/** @var \Aheadworks\Blog\ViewModel\Admin\Widget\Instance\Edit\Tab\Main\WidgetInstance $viewModel */
+
+$viewModel = $block->getViewModel();
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "widgetInstance": <?php /* @noEscape */ echo $viewModel->getScriptOptions(); ?>
+        }
+    }
+</script>
+

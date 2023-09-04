@@ -1,0 +1,186 @@
+<?php
+$maxTime = $block->getBackorder();
+if (!empty($maxTime)):
+    ?>
+    <div id="backorder-background" class="overlay-backorder">
+        <div id="confirmBox">
+            <a href="#" class="close-btn">x</a>
+            <div class="message">Would you like a <span class="txt01" >partial shipment
+                    <span class="txt02">One or more of the items on your order are back ordered or only partial stock is available. The balance of the order will ship out ASAP at our expense. We apologize for any inconvenience this may cause.</span></span>?</div>
+            <button class="yes" id="yes">Yes, Please send me a partial shipment right away.</button>
+            <button class="no" id="no"></button>
+        </div>
+    </div>        
+    <div style='display:none;' id="backorder-msg"><?php echo $maxTime; ?></div>
+    <div style='display:none;' id="backorder-choice">
+        <input type="hidden" name="partialshipment-choice" value="">
+    </div>    
+<?php endif; ?>
+<style>
+	#backorder-background {
+		background-color: rgba(0,0,0,0.7);
+		width: 100%;
+		height: 100%;
+		display: none;
+		position: fixed;
+		z-index: 99999;
+		top: 0;
+		left: 0;
+	}
+	#confirmBox{
+		display: none;
+		background-color: #fff;
+		border: 6px solid rgba(0,0,0,0.6);
+		position: fixed;
+		left: 50%;
+		right: 0;
+		top: 25%;
+		max-width: 600px;
+		padding: 20px 8px 28px;
+		text-align: center;
+		transform: translate(-50%,-50%);
+		border-radius: 5px;
+		box-sizing: border-box;
+		z-index: 9999;
+	}
+	#confirmBox .close-btn{
+		background-color: #f00;
+		color: #fff;
+		font-size: 16px;
+		height: 28px;
+		line-height: 26px;
+		opacity: 1;
+		position: absolute;
+		cursor: pointer;
+		right: 2px;
+		text-align: center;
+		top: 2px;
+		width: 28px;
+	}
+	#confirmBox .message{
+		font-weight: 600;
+		text-align: center;
+		margin-bottom: 8px;
+		padding: 0px 0 5px;
+		font-size: 18px;
+		color: #222;
+	}
+	#confirmBox .message span.txt01{
+		display: inline-block;
+		color: #ed2328;
+		position: relative;
+		text-decoration: underline;
+	}
+	#confirmBox .message span.txt02{
+		display: none;
+	}
+	#confirmBox button{
+		display: inline-block;
+		font-size: 16px;
+		border-radius: 3px;
+		border: none;
+		padding: 10px;
+		text-align: center;
+		width: 45%;
+		cursor: pointer;
+		vertical-align: top;
+		color: #fff;
+	}
+	#confirmBox button.yes{
+		background-color: #ed2328;
+	}
+	#confirmBox button.no{
+		background-color: #444;
+	}
+	/*.action.primary.checkout{
+		display: none;
+	}*/
+	.action.primary.checkout.partial-shipment{
+		display: block;
+	}
+</style>
+<script>
+	requirejs(['jquery', 'mage/url'], function ($, url) {
+		$(document).ready(function () {
+
+			var backorderMsg = document.getElementById('backorder-msg');
+
+			$("#checkout").on('click', '.partial-shipment', function () {
+				var backorder = 0;
+				$('.item-msg.notice p').each(function () {
+					if ($(this).text() != '') {
+						backorder = 1;
+					}
+				});
+				if (backorder) {
+					var backorderOption = $('#backorder-choice').find('input[name="partialshipment-choice"]').val();
+					if (backorderOption == '') {
+						document.getElementById('backorder-background').style.display = 'block';
+						document.getElementById('no').innerHTML = 'No, Please ship this order complete in ' + backorderMsg.innerHTML;
+
+						var confirmBox = $("#confirmBox");
+						confirmBox.find(".message").text();
+
+						confirmBox.find(".yes").click(function () {
+							$msg = document.getElementById('yes').innerHTML;
+							$('#backorder-choice').find('input[name="partialshipment-choice"]').val($msg);
+							document.getElementById('backorder-background').style.display = 'none';
+							$("html, body").animate({scrollTop: 400}, 600);
+							var apirequest = url.build('partialshipping/index/index');
+							var requestdata = $('#backorder-choice').find('input[name="partialshipment-choice"]').val();
+							$.ajax({
+								type: 'POST',
+								url: apirequest,
+								data: {choice: requestdata},
+								success: function (data) {
+									console.log(data.result);
+								}
+							});
+							$('#onestepcheckout_place_order_button .btn-checkout').trigger('click');
+							return false;
+						});
+
+						confirmBox.find(".no").click(function () {
+							$msg = document.getElementById('no').innerHTML;
+							$('#backorder-choice').find('input[name="partialshipment-choice"]').val($msg);
+							document.getElementById('backorder-background').style.display = 'none';
+							$("html, body").animate({scrollTop: 400}, 600);
+							var apirequest = url.build('partialshipping/index/index');
+							var requestdata = $('#backorder-choice').find('input[name="partialshipment-choice"]').val();
+							$.ajax({
+								type: 'POST',
+								url: apirequest,
+								data: {choice: requestdata},
+								success: function (data) {
+									console.log(data.result);
+								}
+							});
+							$('#onestepcheckout_place_order_button .btn-checkout').trigger('click');
+							return false;
+						});
+
+						confirmBox.show();
+
+						$('#backorder-background').click(function () {
+							if ($('#backorder-background').css('display') == 'block') {
+								$('#backorder-background').hide();
+								confirmBox.hide();
+								return false;
+							}
+						});
+						$('#confirmBox .close-btn').click(function () {
+							if ($('#backorder-background').css('display') == 'block') {
+								$('#backorder-background').hide();
+								confirmBox.hide();
+								return false;
+							}
+						});
+					}
+					$('#onestepcheckout_place_order_button .btn-checkout').trigger('click');
+				} else {
+					$('#onestepcheckout_place_order_button .btn-checkout').trigger('click');
+				}
+			});
+		});
+	});
+</script>

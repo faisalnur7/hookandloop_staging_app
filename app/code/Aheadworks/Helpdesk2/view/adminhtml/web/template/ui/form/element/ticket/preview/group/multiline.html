@@ -1,0 +1,41 @@
+<div class="admin__field" data-bind="css: $data.additionalClasses, attr: {'data-index': index}, visible: visible">
+    <if args="$data.label">
+        <legend class="admin__field-label" if="showLabel">
+            <span translate="label" attr="'data-config-scope': $data.scopeLabel"></span>
+        </legend>
+    </if>
+    <div class="admin__field-control admin__control-fields">
+
+        <div class="admin__field-complex-element-preview" data-bind="attr: {'data-multiline-preview-index': index}">
+            <span class="preview" text="$data.getPreview()" data-bind="attr: $data.getBindAttributeMap()"></span>
+            <span class="control" if="$data.isEditModeAllowed">
+                <button class="action-edit" data-bind="click: $data.enableEditMode.bind($data)"><span>edit</span></button>
+            </span>
+        </div>
+
+        <div class="admin-multiline-fields" data-bind="attr: {'data-multiline-fields-index': index}">
+
+            <each args="elems">
+                <if args="visible()" if="!$data.additionalForGroup">
+                    <render args="$parent.fieldTemplate" if="element.input_type != 'checkbox' || element.input_type != 'radio'"></render>
+                    <render args="elementTmpl" if="element.input_type == 'checkbox' || element.input_type == 'radio'"></render>
+                </if>
+            </each>
+
+            <each args="getRegion('insideGroup')" render=""></each>
+
+            <each args="elems" if="validateWholeGroup">
+                <if args="!$data.additionalForGroup">
+                    <label class="admin__field-error" if="error() && visible()" attr="for: uid" text="error"></label>
+                </if>
+            </each>
+
+            <button type="button"
+                    css="$data.service.buttonClasses"
+                    data-bind="click: $data.onSaveButtonClick.bind($data)">
+                <span text="$data.service.label"></span>
+            </button>
+        </div>
+
+    </div>
+</div>

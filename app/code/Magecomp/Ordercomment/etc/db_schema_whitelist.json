@@ -1,0 +1,17 @@
+{
+    "quote": {
+        "column": {
+            "magecomp_order_comment": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "magecomp_order_comment": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "magecomp_order_comment": true
+        }
+    }
+}

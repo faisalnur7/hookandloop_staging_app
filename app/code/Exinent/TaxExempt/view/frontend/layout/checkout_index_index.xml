@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Exinent_TaxExempt::js/checkout_taxexempt.js"/>
+        <!-- <script src="Exinent_TaxExempt::js/customscript.js"/> -->
+    </head>
+    <body>
+        <referenceBlock name="before.body.end">
+            <block class="Exinent\TaxExempt\Block\Sessiondata" name="cart-tax-form" before="-" template="Exinent_TaxExempt::checkout/taxrelief.phtml" />
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,6 @@
+<button type="button"
+        if="isButtonDisplayed($row())"
+        data-bind="attr: {'data-index': index}, click: function(){ deleteMessage($row()) }, css: additionalClasses"
+        data-index="delete_action">
+    <span data-bind="text: title"></span>
+</button>

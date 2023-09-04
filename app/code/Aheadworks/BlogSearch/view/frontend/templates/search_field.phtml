@@ -1,0 +1,24 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var \Aheadworks\BlogSearch\ViewModel\SearchField $viewModel */
+$viewModel = $block->getViewModel();
+$searchQueryMinLength = $viewModel->getSearchQueryMinLength();
+$searchQueryMaxLength = $viewModel->getSearchQueryMaxLength();
+?>
+
+<div class="block-search aw_blog_search-container">
+    <form action="<?= $block->escapeUrl($viewModel->getBlogSearchUrl()) ?>" method="get" role="search">
+        <input type="text"
+               class="input-text aw_blog_search-input"
+               placeholder="<?= $block->escapeHtml(__("Search Blog..."))?>"
+               name="<?= /* @noEscape */ $viewModel->getSearchQueryParamName() ?>"
+               role="combobox"
+               aria-required="true"
+               required
+               value="<?php echo $block->escapeHtml($viewModel->getSearchQueryValue()) ?>"
+               <?=  /* @noEscape */ $searchQueryMinLength ? ('minlength=' . $searchQueryMinLength) : '' ?>
+               <?=  /* @noEscape */ $searchQueryMaxLength ? ('maxlength=' . $searchQueryMaxLength) : '' ?>
+        />
+        <button type="submit" value="" class="action search aw_blog_search-button">
+    </form>
+</div>

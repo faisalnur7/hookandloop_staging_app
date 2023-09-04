@@ -1,0 +1,29 @@
+<?php
+/* @var $block \Aheadworks\Blog\Block\PostList */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+    $posts = $block->getPosts(); 
+?>
+<?php if (count($posts)): ?>
+    <p class="post-list-description"><?php __('A place to learn about Everything in Hook and Loop!™')?></p>
+    <div class="post-list-wrapper">
+        <ol class="post-list grid">
+            <?php foreach ($posts as $post): ?>
+                <li class="item <?php echo $post->getPostFormat() ?>">
+                    <?php /* @noEscape */ //echo $block->getItemHtml($post) ?>
+                    <?php echo $this->getLayout()->createBlock("Ravedigital\Blog\Block\PostList")->setData('post', $post)->setTemplate("Ravedigital_Blog::post/list/renderer/default.phtml")->toHtml();
+?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+        <?php echo $block->getChildHtml('pager'); ?>
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <div><?php echo $block->escapeHtml(__('No posts.')) ?></div>
+    </div>
+<?php endif; ?>
+

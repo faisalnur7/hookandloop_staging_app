@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Ess\M2ePro\Model\Magento\Quote\Item" type="Ravedigital\M2ePro\Model\Magento\Quote\Item" />
+	<preference for="Ess\M2ePro\Model\Magento\Quote\Builder" type="Ravedigital\M2ePro\Model\Magento\Quote\Builder" />
+</config>

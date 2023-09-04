@@ -1,0 +1,40 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var $block \Aheadworks\Blog\Block\Adminhtml\System\Config\Field\EntityImport  */
+
+$element = $block->getElement();
+$viewModel = $block->getViewModel();
+?>
+<div class="entity-import-type">
+    <label class="addafter" for="entity">
+        <span id="sample-file-span">
+            <a id="sample-file-link" href=""><?php echo $block->escapeHtml(__('Download Sample File'))?></a>
+        </span>
+    </label>
+
+    <div class="admin__field-control">
+        <input
+                id="entity_import_file"
+                class="input-file"
+                type="file"
+                name="import_file"
+        />
+        <p class="note">
+            <span><?php echo $block->escapeHtml(__('Make sure your file isn\'t more than 256M')) ?></span>
+        </p>
+        <button type="button"
+                class="action-default"
+                data-role="import-button">
+            <span><?php echo $block->escapeHtml(__('Import'))?></span>
+        </button>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".entity-import-type": {
+            "entityImport": <?php /* @noEscape */ echo $viewModel->getScriptOptions(); ?>
+        }
+    }
+</script>

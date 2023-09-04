@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aw_bup_user_profile" resource="default" engine="innodb" comment="aw_bup_user_profile">
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="User ID"/>
+        <column xsi:type="boolean" name="status" nullable="true" comment="Status"/>
+        <column xsi:type="text" name="display_name" nullable="true" comment="Display name"/>
+        <column xsi:type="text" name="email" nullable="true" comment="Email"/>
+        <column xsi:type="text" name="phone_number" nullable="true" comment="Phone number"/>
+        <column xsi:type="text" name="image" nullable="true" comment="Image"/>
+        <column xsi:type="text" name="additional_information" nullable="true" comment="Additional information"/>
+        <column xsi:type="int" name="sort_order" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="user_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_BUP_USER_PROFILE_USER_ID_ADMIN_USER_USER_ID"
+                    table="aw_bup_user_profile" column="user_id" referenceTable="admin_user" referenceColumn="user_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

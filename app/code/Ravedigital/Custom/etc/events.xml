@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_update_items_after">
+        <observer name="checkout_cart_product_add_after_update_cart" instance="Ravedigital\Custom\Observer\UpdataCart" />
+    </event>
+    <event name="sales_quote_remove_item">
+        <observer name="checkout_cart_item_remove" instance="Ravedigital\Custom\Observer\UpdataCart" />
+    </event>
+    <event name="wishlist_product_add_after">
+        <observer name="wishlist_item_add_after" instance="Ravedigital\Custom\Observer\UpdataCart" />
+    </event>    
+    <event name="sales_order_place_after">
+        <observer name="add_tax_to_sales_after_sales_order" instance="Ravedigital\Custom\Observer\OrderPlaceAfter"/>
+    </event>
+</config>

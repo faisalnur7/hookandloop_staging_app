@@ -1,0 +1,83 @@
+<div class="modal-body merge-ticket-form">
+    <div class="merge-block">
+        <div class="title"><%= _.i18n('Merge Ticket') %></div>
+        <div id="merge-warning-note" class="message message-warning warning">
+            <div data-ui-id="messages-message-warning"><%- warningNote %></div>
+        </div>
+        <div class="message message-notice notice">
+            <div data-ui-id="messages-message-notice"><%= notice %></div>
+        </div>
+        <div class="confirm-ticket">
+            <div class="ticket-info">
+                <button class="button-uid-disable" type="button" disabled><%- mainTicket.uid %></button>
+                <div class="ticket-desc">
+                    <%- mainTicket.created_at %> <%- mainTicket.customer_name %>
+                    <div class="ticket-subject">
+                        <%- mainTicket.subject %>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-content">
+                <div class="admin__form-field">
+                    <label class="admin__field-label">
+                            <%= _.i18n('This ticket will be updated with the following comment:') %>
+                    </label>
+                    <div class="admin__form-field-control">
+                        <textarea class="admin__control-text merge-tickets-input" rows="3" cols="5"
+                                  id="ticket_comment-<%- mainTicket.entity_id %>"
+                                  data-validate="{required:true}" type="text" name="ticket_comment-<%- mainTicket.entity_id %>"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field admin__field-option">
+                <input type="checkbox" class="admin__control-checkbox" id="is_requested_see_comment-<%- mainTicket.entity_id %>" name="is_requested_see_comment-<%- mainTicket.entity_id %>" value="1">
+                <label class="admin__field-label" for="is_requested_see_comment-<%- mainTicket.entity_id %>"><%= _.i18n('Requester can see this comment') %></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container block-arrow">
+        <span class="arrow-up" style="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 20 32">
+                <path id="Path_79" data-name="Path 79" d="M31.416,34.4l-9.99-8.462a1.6,1.6,0,0,0-2.581,1.319v2.83a1.556,1.556,0,0,1-1.42,1.7H1.549A1.54,1.54,0,0,0,0,33.386v4.451a1.624,1.624,0,0,0,1.549,1.648H17.424a1.481,1.481,0,0,1,1.42,1.621v2.83A1.577,1.577,0,0,0,21.4,45.228l9.964-8.242A1.672,1.672,0,0,0,31.416,34.4Z" transform="translate(45.585) rotate(90)" fill="#303030"></path>
+            </svg>
+        </span>
+    </div>
+
+    <% _.each(selectedTickets, function(ticket) { %>
+    <div class="confirm-ticket">
+        <div class="ticket-info">
+            <button class="button-uid-disable add-to-merge-list-button" type="button" disabled><%- ticket.uid %></button>
+            <div class="ticket-desc">
+                <%- ticket.created_at %> <%- ticket.customer_name %>
+                <div class="ticket-subject">
+                    <%- ticket.subject %>
+                </div>
+            </div>
+        </div>
+        <div class="ticket-content">
+            <div class="admin__form-field">
+                <label class="admin__field-label">
+                    <%= _.i18n('This ticket will be closed with the following comment:') %>
+                </label>
+                <div class="admin__form-field-control">
+                        <textarea class="admin__control-text merge-tickets-input" rows="3" cols="5"
+                                  id="ticket_comment-<%- ticket.entity_id %>"
+                                  type="text" name="ticket_comment-<%- ticket.entity_id %>"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="admin__field admin__field-option">
+            <input type="checkbox" class="admin__control-checkbox" id="is_requested_see_comment-<%- ticket.entity_id %>" name="is_requested_see_comment-<%- ticket.entity_id %>" value="1">
+            <label class="admin__field-label" for="is_requested_see_comment-<%- ticket.entity_id %>"><%= _.i18n('Requester can see this comment') %></label>
+        </div>
+    </div>
+    <% }); %>
+
+    <div class="block-confirm-merge-button">
+        <button type="button" data-button-tm-confirm-id="<%- mainTicket.entity_id %>" class="action-default scalable action-save action-secondary">
+            <span><%= _.i18n('Confirm and Merge') %></span>
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!--<link src="Exinent_TaxExempt::js/taxexempt.js"/>-->
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Sales\Block\Adminhtml\Order\Create\Billing\Method" template="Magento_Sales::order/create/abstract.phtml" name="billing_method">
+                <block class="Magento\Sales\Block\Adminhtml\Order\Create\Billing\Method\Form" template="Magento_Sales::order/create/billing/method/form.phtml" name="order.create.billing.method.form" as="form"/>
+                <block class="Magento\Backend\Block\Template" template="Exinent_TaxExempt::taxrelief.phtml" name="tax_exempt"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

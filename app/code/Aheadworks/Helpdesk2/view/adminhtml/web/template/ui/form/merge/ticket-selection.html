@@ -1,0 +1,77 @@
+<div class="modal-body merge-ticket-form">
+    <div class="merge-block">
+        <div class="title"><%= _.i18n('Merge Ticket') %></div>
+        <div class="ticket">
+            <button class="button-uid-disable" type="button" disabled><%- ticketInfo.main_ticket.uid %></button>
+            <div class="ticket-desc">
+                <%- ticketInfo.main_ticket.created_at %> <%- ticketInfo.main_ticket.customer_name %>
+                <div class="ticket-subject">
+                    <%- ticketInfo.main_ticket.subject %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container block-arrow">
+        <span class="arrow-up" style="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 20 32">
+                <path id="Path_79" data-name="Path 79" d="M31.416,34.4l-9.99-8.462a1.6,1.6,0,0,0-2.581,1.319v2.83a1.556,1.556,0,0,1-1.42,1.7H1.549A1.54,1.54,0,0,0,0,33.386v4.451a1.624,1.624,0,0,0,1.549,1.648H17.424a1.481,1.481,0,0,1,1.42,1.621v2.83A1.577,1.577,0,0,0,21.4,45.228l9.964-8.242A1.672,1.672,0,0,0,31.416,34.4Z" transform="translate(45.585) rotate(90)" fill="#303030"></path>
+            </svg>
+        </span>
+    </div>
+
+    <div class="block-tickets-input">
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span>
+                    <%= _.i18n('Enter ID of tickets to merge (Example: ASD-12,ASD-13)') %>
+                </span>
+            </label>
+            <div class="admin__form-field-control">
+                <input class="admin__control-text merge-tickets-input" data-input-tm-id="<%- entityId %>"
+                       data-validate="{required:true}" type="text" name="merge_tickets-<%- entityId %>"
+                       maxlength="255">
+            </div>
+        </div>
+        <button type="button" data-button-tm-id="<%- entityId %>" class="action- scalable action-secondary">
+            <span><%= _.i18n('Merge') %></span>
+        </button>
+    </div>
+
+    <div class="or">
+        <div class="line"></div>
+        <span class="line-title">OR</span>
+        <div class="line"></div>
+    </div>
+
+    <div class="title"><%= _.i18n('Select tickets') %></div>
+
+    <% _.each(ticketInfo.customer_tickets, function(ticket) { %>
+    <div class="ticket">
+        <button class="button-uid-enable button add-to-merge-list-button" type="button"><%- ticket.uid %></button>
+        <div class="ticket-desc">
+            <%- ticket.created_at %> <%- ticket.customer_name %>
+            <div class="ticket-subject blue-subject">
+                <%- ticket.subject %>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+
+    <div class="title"><%= _.i18n('Your recently viewed tickets') %></div>
+
+    <% _.each(ticketInfo.history_tickets, function(ticket) { %>
+    <div class="ticket">
+        <button class="button-uid-enable button add-to-merge-list-button" type="button"><%- ticket.uid %></button>
+        <div class="ticket-desc">
+            <%- ticket.created_at %> <%- ticket.customer_name %>
+            <div class="ticket-subject blue-subject">
+                <%- ticket.subject %>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+
+</div>
+<div class="modal-footer"></div>
+

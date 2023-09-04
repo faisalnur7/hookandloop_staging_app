@@ -1,0 +1,18 @@
+{
+    "aw_bup_user_profile": {
+        "column": {
+            "user_id": true,
+            "status": true,
+            "display_name": true,
+            "email": true,
+            "phone_number": true,
+            "image": true,
+            "additional_information": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_BUP_USER_PROFILE_USER_ID_ADMIN_USER_USER_ID": true
+        }
+    }
+}

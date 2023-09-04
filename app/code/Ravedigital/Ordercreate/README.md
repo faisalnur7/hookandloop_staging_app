@@ -1,0 +1,42 @@
+//Flow after clicking on place order button as a guest customer with CC payment method
+	- Checkout Magento\Checkout\Model\GuestShippingInformationManagement: Quote Id - 364575
+	- Checkout MW\Onestepcheckout\Controller\Session: START
+	- Checkout MW\Onestepcheckout\Controller\Session: END
+	- Checkout Magento\Checkout\Model\GuestShippingInformationManagement: Quote Id - 364575
+	- Checkout Magenest\SagepayUS\Controller\Checkout\Request: START.
+	- Checkout Magenest\SagepayUS\Controller\Checkout\Request: Reserve OrderId - 100032911
+	- Checkout Magenest\SagepayUS\Controller\Checkout\Request: END
+	- Checkout Magento\Checkout\Model\GuestPaymentInformationManagement: START
+	- Checkout Magento\Quote\Model\GuestCart\GuestCartManagement: QuoteId 364575
+	- Checkout Magento\Quote\Model\GuestCart\GuestCartManagement: paymentMethod
+	- Checkout Magento\Quote\Model\QuoteManagement: Cart ID after paymentMethod 364575
+	- Checkout Magento\Quote\Model\QuoteManagement: START submit quote364575
+	- Checkout Magento\Quote\Model\QuoteManagement: END submit quote364575
+	- Checkout Magento\Quote\Model\QuoteManagement: START submitQuote Quote ID 364575
+	- Checkout Magento\Quote\Model\QuoteManagement: submitQuote try
+	- Checkout Magento\Sales\Model\Service\OrderService: START place
+	- Checkout Magento\Sales\Model\OrderRepository: START save
+	- Checkout Magento\Sales\Model\OrderRepository: START END Order ID 34434
+	- Checkout Magento\Quote\Model\QuoteManagement: END submitQuote Order ID 34434
+	- Checkout Magento\Quote\Model\QuoteManagement: After Order submitted
+	- Checkout Magento\Quote\Model\QuoteManagement: order has been placed with ID 100032911
+	- Checkout Magento\Checkout\Model\GuestPaymentInformationManagement: END
+
+//Flow after clicking on place order button as a guest customer with Paypal Express payment method
+	- Checkout Magento\Quote\Model\GuestCart\GuestShippingMethodManagement: Quote ID - 364580
+	- Checkout Magento\Checkout\Model\GuestShippingInformationManagement: Quote Id - 364580
+	- Checkout MW\Onestepcheckout\Controller\Session: START
+	- Checkout MW\Onestepcheckout\Controller\Session: END
+	- Checkout Magento\Checkout\Model\GuestShippingInformationManagement: Quote Id - 364580
+	- Checkout Magento\Paypal\Controller\Express\AbstractExpress\PlaceOrder: START
+	- Checkout Magento\Paypal\Controller\Express\AbstractExpress\PlaceOrder: shipping_options_account_number 41111
+	- Checkout Magento\Quote\Model\QuoteManagement: START submit quote364580
+	- Checkout Magento\Quote\Model\QuoteManagement: END submit quote364580
+	- Checkout Magento\Quote\Model\QuoteManagement: START submitQuote Quote ID 364580
+	- Checkout Magento\Quote\Model\QuoteManagement: submitQuote try
+	- Checkout Magento\Sales\Model\Service\OrderService: START place
+	- Checkout Magento\Sales\Model\OrderRepository: START save
+	- Checkout Magento\Sales\Model\OrderRepository: START END Order ID 34435
+	- Checkout Magento\Quote\Model\QuoteManagement: END submitQuote Order ID 34435
+	- Checkout Magento\Paypal\Controller\Express\AbstractExpress\PlaceOrder: Order shipping_options_account_number 41111
+	- Checkout Magento\Paypal\Controller\Express\AbstractExpress\PlaceOrder END Order Id: 34435

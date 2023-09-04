@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="dimweightfedex" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Exinent - FedEx</label>
+            <tab>exinent</tab>
+            <resource>Exinent_DimweightFedex::system_configuration</resource>
+            <group id="general_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="length_attribute" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Length Attribute</label>
+                    <comment>Name of the EAV length attribute.</comment>
+                </field>
+                <field id="width_attribute" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Width Attribute</label>
+                    <comment>Name of the EAV width attribute.</comment>
+                </field>
+                <field id="height_attribute" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Height Attribute</label>
+                    <comment>Name of the EAV height attribute.</comment>
+                </field>
+                <field id="units" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unit of Measurement</label>
+                    <source_model>Exinent\DimweightFedex\Model\Config\Source\Unit</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

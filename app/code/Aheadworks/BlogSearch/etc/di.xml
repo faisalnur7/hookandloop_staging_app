@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Aheadworks\BlogSearch\Model\Indexer\Post\PostIndexerHandlerVirtual" type="Aheadworks\BlogSearch\Model\Indexer\IndexerHandler">
+        <arguments>
+            <argument name="indexerId" xsi:type="const">Aheadworks\BlogSearch\Model\Indexer\Post\Fulltext::INDEXER_ID</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\BlogSearch\Model\Indexer\Post\Fulltext">
+        <arguments>
+            <argument name="indexerHandler" xsi:type="object">Aheadworks\BlogSearch\Model\Indexer\Post\PostIndexerHandlerVirtual</argument>
+        </arguments>
+    </type>
+
+    <!--    Used to map field types while index creating-->
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\FieldMapperResolver">
+        <arguments>
+            <argument name="fieldMappers" xsi:type="array">
+                <item name="aheadworks_blogsearch_post_fulltext" xsi:type="string">
+                    Aheadworks\BlogSearch\Model\Adapter\FieldMapper\PostFieldMapper
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\SearchAdapter\Aggregation\Builder">
+        <arguments>
+            <argument name="dataProviderContainer" xsi:type="array">
+                <item name="aheadworks_blogsearch_post_fulltext" xsi:type="object">Magento\Elasticsearch\SearchAdapter\Dynamic\DataProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--    Posts search query modifier-->
+    <!--    This (es5) mapper is using for es6 and es7-->
+    <type name="Magento\Elasticsearch\Elasticsearch5\SearchAdapter\Mapper">
+        <plugin name="awBlogSearchSearchAdapterMapperPlugin" type="Aheadworks\BlogSearch\Plugin\Elasticsearch\Elasticsearch5\SearchAdapter\MapperPlugin" />
+    </type>
+    <virtualType name="Aheadworks\BlogSearch\Model\Modifier\Query\Search\Post\CompositeVirtual" type="Aheadworks\BlogSearch\Model\Modifier\Query\Search\Composite">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="sort" xsi:type="object">Aheadworks\BlogSearch\Model\Modifier\Query\Search\Post\Sort</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\BlogSearch\Plugin\Elasticsearch\Elasticsearch5\SearchAdapter\MapperPlugin">
+        <arguments>
+            <argument name="searchQueryModifier" xsi:type="object">Aheadworks\BlogSearch\Model\Modifier\Query\Search\Post\CompositeVirtual</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Elasticsearch\SearchAdapter\Filter\Builder\Wildcard">
+        <plugin name="awBlogSearchWildcardFilterBuilderPlugin" type="Aheadworks\BlogSearch\Plugin\Elasticsearch\SearchAdapter\Filter\Builder\WildcardPlugin" />
+    </type>
+    <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Match">
+        <plugin name="awBlogSearchMatchQueryBuilderPlugin" type="Aheadworks\BlogSearch\Plugin\Elasticsearch\SearchAdapter\Query\Builder\MatchPlugin" />
+    </type>
+    <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\MatchQuery">
+        <plugin name="awBlogSearchMatchQueryBuilderPlugin" type="Aheadworks\BlogSearch\Plugin\Elasticsearch\SearchAdapter\Query\Builder\MatchPlugin" />
+    </type>
+
+    <!--    Query name to boost mapping -->
+    <type name="Aheadworks\BlogSearch\Model\SearchAdapter\BoostResolver">
+        <arguments>
+            <argument name="titleBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_title_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_title_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_title_search_match_query_partial</item>
+            </argument>
+
+            <argument name="contentBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_content_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_content_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_content_search_match_query_partial</item>
+            </argument>
+
+            <argument name="tagsBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_tags_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_tag_names_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_tag_names_search_match_query_partial</item>
+            </argument>
+
+            <argument name="authorBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_author_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_author_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_author_search_match_query_partial</item>
+            </argument>
+
+            <argument name="metaTitleBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_meta_title_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_meta_title_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_meta_title_search_match_query_martial</item>
+            </argument>
+
+            <argument name="metaKeywordsBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_meta_keywords_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_meta_keywords_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_meta_keywords_search_match_query_partial</item>
+            </argument>
+
+            <argument name="metaDescriptionBoostQueryNames" xsi:type="array">
+                <item name="0" xsi:type="string">aw_blog_search_post_meta_description_filter</item>
+                <item name="1" xsi:type="string">aw_blog_search_post_meta_description_search_match_query</item>
+                <item name="2" xsi:type="string">aw_blog_search_post_meta_description_search_match_query_partial</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+</config>

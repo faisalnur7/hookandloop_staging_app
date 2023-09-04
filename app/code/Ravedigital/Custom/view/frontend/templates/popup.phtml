@@ -1,0 +1,51 @@
+  <div id="popup-modal" style="display:none;">
+    <a class="popup-a" re=" " />
+        <img class="popup-image" src=" " alt=" "/>
+    </div>
+
+   
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ], function($, modal) {
+        $(document).ready(function() {
+            
+            $(".col-four li").on('click', function() {
+                console.log($(this).find('img').attr('src'));
+                console.log($(this).find('img').attr('alt'));
+                $(".popup-image").attr('src',$(this).find('img').attr('src'));
+                var title = $(this).find('img').attr('alt');
+                var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: title
+            };
+
+
+            var popup = modal(options, $('#popup-modal'));
+                $("#popup-modal").modal("openModal");
+                $('.modal-footer').hide();
+            });
+            
+        });
+
+             $(".newpopup").on('click', function() {
+                console.log($(this).find('img').attr('src'));
+                console.log($(this).find('img').attr('alt'));
+                $(".popup-image").attr('src',$(this).find('img').attr('src'));
+                console.log($(".popup-image").attr('src',$(this).find('img').attr('src')));
+                // var title = $(this).find('img').attr('alt');
+                var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+            };
+            var popup = modal(options, $('#popup-modal'));
+                $("#popup-modal").modal("openModal");
+                $('.modal-footer').hide();
+            });
+   
+    });
+    </script>

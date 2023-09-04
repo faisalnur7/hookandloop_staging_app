@@ -1,0 +1,22 @@
+{
+    "name": "aheadworks/module-blog-graph-ql",
+    "description": "Blog GraphQl module by Aheadworks",
+    "type": "magento2-module",
+    "version": "1.2.1",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "magento/framework": ">100.0",
+        "aheadworks/module-blog": ">=2.14.0",
+        "magento/module-widget": ">100.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\BlogGraphQl\\": ""
+        }
+    }
+}

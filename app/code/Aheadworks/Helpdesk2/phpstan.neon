@@ -1,0 +1,7 @@
+parameters:
+    excludePaths:
+        - 'Controller/Adminhtml/ThirdParty/Aheadworks/CouponGenerator/Generate.php'
+        - 'Model/Gateway/Email/Connection/AuthType/Google/Adapter.php'
+        - 'Model/Source/ThirdPartyModule/Aheadworks/CouponCodeGenerator/RuleList.php'
+        - 'Model/Gateway/Email/Connection/AuthType/Microsoft/Adapter.php'
+        - 'Plugin/ThirdParty/CustomerCustomAttributes/Helper/CustomerPlugin.php'

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Model\Product\Attribute\Backend\Price" type="Exinent\Catalog\Model\Product\Attribute\Backend\Price" />
+    <preference for="Magento\Checkout\Model\Cart" type="Exinent\Catalog\Model\Cart" />
+    <!-- <type name="Magento\Catalog\Model\Product">
+        <plugin name="AfterGetPrice" type="Exinent\Catalog\Plugin\AfterGetPrice" sortOrder="10" disabled="false"/>
+    </type> -->
+<!--    <type name="Magento\Catalog\Model\Product\Type\Price">
+        <plugin name="AftergetFinalPrice" type="Exinent\Catalog\Plugin\AfterGetFinalPrice" sortOrder="10" disabled="false"/>
+    </type>-->
+    <!--    <type name="Magento\Catalog\Pricing\Price\FinalPrice">
+        <plugin name="exinent_catalog_catalog_pricing_price_finalprice" type="Exinent\Catalog\Plugin\FinalPrice" />
+    </type>-->
+</config>

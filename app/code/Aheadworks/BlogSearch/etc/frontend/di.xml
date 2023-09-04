@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--    Post list data provider result items modifier-->
+    <virtualType name="Aheadworks\BlogSearch\Ui\DataProvider\Frontend\ItemModifier\Post\VirtualComposite"
+                 type="Aheadworks\BlogSearch\Ui\DataProvider\ItemModifier\Composite">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="author" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\ItemModifier\Post\Author</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!--    Post list data provider filters-->
+    <virtualType name="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualCustomerGroupId"
+                 type="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\CustomerGroupId">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::CUSTOMER_GROUPS</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualStoreId"
+                 type="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\StoreId">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::STORE_IDS</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualStatus"
+                 type="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\FieldValue">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::STATUS</argument>
+            <argument name="fieldValue" xsi:type="const">Aheadworks\Blog\Model\Source\Post\Status::PUBLICATION</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Post\VirtualApplier"
+                 type="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Applier">
+        <arguments>
+            <argument name="filterBuilderList" xsi:type="array">
+                <item name="customer_group_id" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualCustomerGroupId</item>
+                <item name="store_id" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualStoreId</item>
+                <item name="status" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\Post\VirtualStatus</item>
+                <item name="search_query" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\SearchQuery</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\BlogSearch\Ui\DataProvider\Filter\Builder\Frontend\SearchQuery">
+        <arguments>
+            <argument name="validator" xsi:type="object">Aheadworks\BlogSearch\Model\Validator\SearchQueryLength</argument>
+        </arguments>
+    </type>
+
+    <!--    Post list data provider-->
+    <type name="Aheadworks\BlogSearch\Ui\DataProvider\Frontend\PostDataProvider" shared="true">
+        <arguments>
+            <argument name="name" xsi:type="string">aw_blogsearch_post_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::ID</argument>
+            <argument name="requestFieldName" xsi:type="const">Aheadworks\Blog\Api\Data\PostInterface::ID</argument>
+            <argument name="itemModifier" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Frontend\ItemModifier\Post\VirtualComposite</argument>
+            <argument name="filterApplier" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Post\VirtualApplier</argument>
+            <argument name="addFilterStrategyList" xsi:type="array">
+                <item name="store_ids" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Strategy\Post\StoreIds</item>
+                <item name="search_query" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Strategy\Post\SearchQuery</item>
+                <item name="customer_groups" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Filter\Strategy\Post\CustomerGroups</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--    Post list pager-->
+    <virtualType name="Aheadworks\BlogSearch\Block\PostList\VirtualPager"
+                 type="Aheadworks\BlogSearch\Block\Pager\Wrapper">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\BlogSearch\Ui\DataProvider\Frontend\PostDataProvider</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\BlogSearch\ViewModel\PostList">
+        <arguments>
+            <argument name="searchQueryValidator" xsi:type="object">Aheadworks\BlogSearch\Model\Validator\SearchQueryLength</argument>
+        </arguments>
+    </type>
+
+</config>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+?>
+<?php /** @var \Plumrocket\SocialLoginFree\Block\Buttons $block */ ?>
+<?php if ($block->getButtons()): ?>
+    <div class="pslogin-block pslogin-register" data-mage-init='{"pslogin":{}}'>
+        <div class="pslogin-buttons">
+            <?php if ($block->getButtonDesign() !== \Plumrocket\SocialLoginFree\Model\OptionSource\ButtonDesign::TYPE_DEFAULT) : ?>
+                <div class="pslogin-spacer"><?= $block->escapeHtml(__('Register with your social account')) ?></div>
+                <br>
+            <?php endif; ?>
+
+            <ul>
+            <?php foreach ($block->getButtons() as $button): ?>
+                <li class="pslogin-button <?= $block->escapeHtmlAttr($button->getNetworkCode()) ?> ps-<?= /* @noEscape */ $block->getButtonDesign() ?>"
+                    title="<?= $block->escapeHtmlAttr($button->getRegisterText()) ?>">
+                    <a class="pslogin-button-link pslogin-button-click"
+                       rel="nofollow"
+                       href="javascript:void(0);"
+                       data-href="<?= $block->escapeHtmlAttr($button->getRegisterUrl()) ?>"
+                       data-open-on-page="<?= /* @noEscape */ $button->shouldOpenOnPage() ?>"
+                       data-width="<?= $block->escapeHtmlAttr($button->getModalWidth()) ?>"
+                       data-height="<?= $block->escapeHtmlAttr($button->getModalHeight()) ?>" >
+                        <span class="pslogin-button-auto">
+                            <span class="pslogin-button-icon"></span>
+                            <span class="pslogin-button-text"><?= $block->escapeHtml($button->getRegisterText()) ?></span>
+                        </span>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+<?php endif; ?>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Aheadworks_BlogSearch::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="aw_blog_search.container.mobile" htmlTag="div" htmlClass="aw_blog_search-container aw_blog_search-container-mobile">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="aw_blog_search.search_field.mobile"
+                       template="Aheadworks_BlogSearch::search_field.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\BlogSearch\ViewModel\SearchField</argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <block class="Aheadworks\BlogSearch\Block\PostList"
+                   name="aw_blog_search.post_list"
+                   template="Aheadworks_BlogSearch::post_list.phtml"
+                   cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Aheadworks\BlogSearch\ViewModel\PostList</argument>
+                </arguments>
+
+                <block class="Aheadworks\Blog\Block\Post" name="aw_blog_post">
+                    <block class="Aheadworks\Blog\Block\PostImage" name="aw_blog_post.post_image">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\PostImage</argument>
+                            <argument name="img_class" xsi:type="string">blog-post-featured-image</argument>
+                        </arguments>
+                    </block>
+                    <arguments>
+                        <argument name="social_icons_block" xsi:type="string">Aheadworks\Blog\Block\Sharethis</argument>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Blog\ViewModel\Post</argument>
+                    </arguments>
+                </block>
+            </block>
+
+            <container name="aw_blog_search.post_list.pager.container"
+                       htmlTag="div"
+                       htmlClass="toolbar bottom aw_blog_search-bottom-toolbar-container">
+                <block class="Aheadworks\BlogSearch\Block\PostList\VirtualPager"
+                       name="aw_blog_search.post_list.pager"
+                       template="Aheadworks_BlogSearch::pager/wrapper.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="pager"/>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

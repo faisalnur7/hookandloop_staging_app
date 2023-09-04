@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <shippingoptions>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Exinent\ShippingOptions\Model\Carrier\Shipping</model>
+                <name>Use My Customer Shipping Account. Order may be delayed if account # is invalid.</name>
+                <price>0.00</price>
+                <title>Or You Can Enter Your FedEx/UPS Account Number</title>
+                <type>O</type>
+                <specific_error_msg>Please enter your address to view the shipping rates.</specific_error_msg>
+            </shippingoptions>
+        </carriers>
+    </default>
+</config>

@@ -1,0 +1,92 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+?>
+<?php
+/* @var $block \Magento\Sales\Block\Adminhtml\Items\Column\Name */
+
+?>
+<?php if ($_item = $block->getItem()) :
+        $options = $_item->getProductOptions();?>
+    
+    <?php
+        $product_sku = $block->getSku();
+        $helper = $this->helper('Ravedigital\Custom\Helper\Customhelper');
+        $product = $helper->getLoadProductBySku($product_sku);
+        $product_name =  $product->getName();
+    if (isset($options['attributes_info']) && isset($options['simple_sku']) && isset($options['simple_name'])) {
+        ?>
+        <div id="order_item_<?= /* @escapeNotVerified */ $_item->getId() ?>_title"
+           class="product-title">
+           <?php echo $options['simple_name'];?>
+       </div>
+       <div class="product-sku-block">
+        <span><?= /* @escapeNotVerified */ __('SKU') ?>:</span><?php echo $options['simple_sku'];?>
+    </div>
+<?php } else { ?>
+    <div id="order_item_<?= /* @escapeNotVerified */ $_item->getId() ?>_title"
+       class="product-title">
+        <?= $block->escapeHtml($product_name) ?>
+   </div>
+   <div class="product-sku-block">
+    <span><?= /* @escapeNotVerified */ __('SKU') ?>:</span> <?= implode('<br />', $this->helper('Magento\Catalog\Helper\Data')->splitSku($block->escapeHtml($block->getSku()))) ?>
+</div>
+        <?php
+}?>
+    <?php
+    $arrayKeys = ['options', 'additional_options', 'attributes_info'];
+    ?>
+
+    <?php foreach ($arrayKeys as $key) : ?>
+        <?php if (isset($options[$key])) : ?>
+            <?php foreach ($options[$key] as $option) :
+
+                if (strpos($option['value'], 'No') !== false) :
+                    continue;
+            else :
+                ?>
+                <br/>
+                <?php echo "<b>".$block->escapeHtml($option['label'])."</b><br/>" ?> :   <?php if (strpos($option['value'], ' x ') !== false) { ?>
+                    <?= /* @escapeNotVerified */ substr($option['value'], strpos($option['value'], "x") + 2); ?>
+                <?php } else {
+                    ?>
+                    <?= /* @escapeNotVerified */ $option['value'] ?>
+                <?php }
+            endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
+
+    <?php if ($block->getOrderOptions()) : ?>
+    <dl class="item-options">
+            <?php foreach ($block->getOrderOptions() as $_option) : ?>
+            <dt><?= $block->escapeHtml($_option['label']) ?>:</dt>
+            <dd>
+                <?php if (isset($_option['custom_view']) && $_option['custom_view']) : ?>
+                    <?= /* @noEscape */ $block->getCustomizedOptionValue($_option) ?>
+                <?php else : ?>
+                    <?php $_option = $block->getFormattedOption($_option['value']); ?>
+                    <?php $dots = 'dots' . uniqid(); ?>
+                    <?php $id = 'id' . uniqid(); ?>
+                    <?= $block->escapeHtml($_option['value'], ['a', 'br']) ?><?php if (isset($_option['remainder']) && $_option['remainder']) : ?><span id="<?= /* @noEscape */ $dots; ?>"> ...</span><span id="<?= /* @noEscape */ $id; ?>"><?= $block->escapeHtml($_option['remainder'], ['a']) ?></span>
+                    <script>
+                        require(['prototype'], function() {
+                            $('<?= /* @noEscape */ $id; ?>').hide();
+                            $('<?= /* @noEscape */ $id; ?>').up().observe('mouseover', function(){$('<?= /* @noEscape */ $id; ?>').show();});
+                            $('<?= /* @noEscape */ $id; ?>').up().observe('mouseover', function(){$('<?= /* @noEscape */ $dots; ?>').hide();});
+                            $('<?= /* @noEscape */ $id; ?>').up().observe('mouseout',  function(){$('<?= /* @noEscape */ $id; ?>').hide();});
+                            $('<?= /* @noEscape */ $id; ?>').up().observe('mouseout',  function(){$('<?= /* @noEscape */ $dots; ?>').show();});
+                        });
+                    </script>
+                <?php endif; ?>
+            <?php endif; ?>
+        </dd>
+    <?php endforeach; ?>
+</dl>
+    <?php endif; ?>
+    <?= $block->escapeHtml($_item->getDescription()) ?>
+<?php endif; ?>

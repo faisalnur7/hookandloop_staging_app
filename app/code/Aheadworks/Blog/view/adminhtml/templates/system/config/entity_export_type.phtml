@@ -1,0 +1,21 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var $block \Aheadworks\Blog\Block\Adminhtml\System\Config\Field\EntityExport */
+
+$element = $block->getElement();
+$viewModel = $block->getViewModel();
+?>
+<div id="export-content" style="position: relative">
+    <?= /* @noEscape */ $block->getElementHtml() ?>
+</div>
+
+<?= /* @noEscape */ $block->getFilesBlock()->toHtml() ?>
+
+<script type="text/x-magento-init">
+    {
+        "#aw_blog_entity_export_entity": {
+            "entityExport": <?php /* @noEscape */ echo $viewModel->getScriptOptions(); ?>
+        }
+    }
+</script>

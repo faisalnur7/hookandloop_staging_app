@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <topic name="aw_blog_import_export.export" request="Magento\ImportExport\Api\Data\ExtendedExportInfoInterface">
+        <handler name="awBlogExportProcessor" type="Aheadworks\Blog\Model\Export\Consumer" method="process" />
+    </topic>
+</config>

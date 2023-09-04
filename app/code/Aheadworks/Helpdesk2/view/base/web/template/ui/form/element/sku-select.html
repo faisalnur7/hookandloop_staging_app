@@ -1,0 +1,24 @@
+<input class="admin__control-text input-product-listing" type="text"
+       data-bind="
+        event: {change: changeSku},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            maxlength: 255
+    }"/>
+
+<a href="javascript:void(0)" class="rule-chooser-trigger" data-bind="event: {click: openProductListing}">
+    <img data-bind="attr: { src: require.toUrl('images/rule_chooser_trigger.gif') }" alt="" class="v-middle rule-chooser-trigger" title="Open Chooser" />
+</a>
+<a href="javascript:void(0)" class="rule-param-apply" data-bind="event: {click: applySelectProducts}">
+    <img data-bind="attr: { src: require.toUrl('images/rule_component_apply.gif') }" alt="" class="v-middle rule-chooser-trigger" title="Open Chooser" />
+</a>
+<a href="javascript:void(0)" class="rule-param-remove" title="Remove" data-bind="event: {click: clearProductListing}">
+    <img data-bind="attr: { src: require.toUrl('images/rule_component_remove.gif') }" alt="" class="v-middle rule-chooser-trigger" title="Open Chooser" />
+</a>

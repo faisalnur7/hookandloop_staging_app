@@ -1,0 +1,54 @@
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0; font-size:14px;">
+                <!-- [ header starts here] -->
+                <tr>
+                    <td valign="top">
+                        <td valign="top"><a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                    </td>
+                </tr>
+                <!-- [ middle starts here] -->
+                <tr>
+                    <td valign="top">
+                        <h1 style="font-size:20px; font-weight:normal; line-height:22px; margin:0 0 8px 0;">Hello,</h1>
+                        <p>Here is below product attribute updated:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <table cellpadding="5" cellspacing="0" border="0" width="100%" style="font-size:14px;">
+                            <tr>
+                                <th style="background-color:#e5e5e5; text-align:left;">Store Name</th> 
+                                <th style="background-color:#e5e5e5; text-align:left;">Product SKU</th>
+                                <th style="background-color:#e5e5e5; text-align:left;">Measurement sold <br>in size Old</th>
+                                <th style="background-color:#e5e5e5; text-align:left;">Measurement sold <br>in size New</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">{{var store_name}}</td>
+                                <td style="text-align:left;">{{var product_sku}}</td>
+                                <td style="text-align:left;">{{var product_old}}</td>
+                                <td style="text-align:left;">{{var product_new}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background:#fff; text-align:center;">
+                        <p style="height:10px;">&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;">
+                        <center><p style="font-size:12px; margin:0;">Thank you, <strong>{{var store.getFrontendName()}}</strong></p></center>
+                    </td>
+                </tr>
+                
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

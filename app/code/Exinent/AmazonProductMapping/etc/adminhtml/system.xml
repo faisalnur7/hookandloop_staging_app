@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <system>
+
+        <!-- main tab -->
+
+        <tab id="exinent" translate="label" sortOrder="450">
+            <label>Exinent</label>
+        </tab>
+
+        <!-- AmazonProductMapping tab -->
+
+        <section id="exinent_amazonproductmapping" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>AmazonProductMapping</label>
+            <tab>exinent</tab>
+            <resource>Ess_M2ePro::system_configuration</resource>
+            <group id="ebay_mode" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <fieldset_css>m2epro-system-config-fieldset</fieldset_css>
+                <label>AmazonProductMapping Setting</label>
+                <field id="amazon_order_alert_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Amazon Order Alert</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable mail sending when Magento Order is not created for Amazon order.</comment>    
+                </field>
+                <field id="amazon_order_alert_emails" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Recipient List</label>
+                    <comment>Enable mail sending when Magento Order is not created for Amazon order.</comment>    
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

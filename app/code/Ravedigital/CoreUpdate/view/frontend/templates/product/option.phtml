@@ -1,0 +1,81 @@
+<?php
+/**
+ * @copyright Copyright (c) 2017 www.tigren.com
+ */
+$productid = $block->getProductId();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->create('Magento\Catalog\Model\Product')->load($productid);
+if ($product->getTypeId() == 'configurable') {
+    $product_sku = implode(', ', $block->getBothOptionConfigsku());
+    
+    print_r($product_sku);
+    ?>
+<div class="swatch-opt"> 
+    <span id="popuppartnmber">Part #: <?php echo $product_sku;?></span>
+    <span><?php $attributes = $block->getSuperAttributes() ?></span><br>
+    <?php
+    foreach ($attributes as $key => $attribute) {
+        $attrcode = $product->getResource()->getAttribute($key)->getAttributeCode();
+        $attr = $product->getResource()->getAttribute($attrcode);
+        if ($attr->usesSource()) { ?>
+                <span class="swatch-attribute size">
+                    <span><?php echo $attr->getFrontendLabel().": ";?> </span>
+                    <span><?php
+                    if ($attribute == '180-181') {
+                        echo $color_label = __('Both');
+                    } else {
+                        echo $color_label = $attr->getSource()->getOptionText($attribute); 
+                         }?></span>
+                        <br>
+                </span>
+            <?php
+        }
+    }
+    $optionVal = $block->getCustomOptions();
+    if ($optionVal) {
+        $optionVal = $block->getCustomOptionValue($productid);
+        ?>  <span class="cusoption"> <?php echo $optionVal;?></span>
+        <?php //echo $optionVal= '';
+    } else {
+        echo $optionVal= '';
+    }
+} else {
+    ?>
+    <span>Part Number#: <?php echo $product->getSku();?></span><br>
+    <?php if (!empty($product->getColor())) { ?>
+    <span>Color: <?php echo $product->getResource()->getAttribute('color')->getFrontend()->getValue($product);?></span><br>
+    <?php } ?>
+    <?php if (!empty($product->getConfiguratbleWidth())) { ?>
+    <span>Width: <?php echo $product->getResource()->getAttribute('configuratble_width')->getFrontend()->getValue($product);?></span><br>
+    <?php } ?>
+    <?php if (!empty($product->getManufacturer())) { ?>
+    <span>Manufacturer: <?php echo $product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($product);?></span><br>
+    <?php } ?>
+    <?php if (!empty($product->getMeasurementSoldInSize())) { ?>
+    <span>Measurement Sold In Size: <?php echo $product->getResource()->getAttribute('measurement_sold_in_size')->getFrontend()->getValue($product);?></span><br>
+    <?php } ?>
+    <?php if (!empty($product->getHookLoop())) { ?>
+    <span>Hook or Loop?: <?php echo $product->getResource()->getAttribute('hook_loop')->getFrontend()->getValue($product);?></span><br>
+    <?php }
+        $optionVal = $block->getCustomOptions();
+    if ($optionVal) {
+        $optionVal = $block->getCustomOptionValue($productid);
+        ?>  <span class="cusoption"> <?php echo $optionVal;?></span>
+            <?php //echo $optionVal= '';
+    } else {
+        echo $optionVal= '';
+    }
+} ?>
+   
+</div>
+<script type="text/javascript">
+     requirejs(['jquery'], function ($) {
+        $("input[type='radio']").change(function () {
+            var radioButtonId=$(this).attr('id');
+            var idSplit=radioButtonId.split('_');
+            if(idSplit[2] == '2'){
+                $('.swatch-opt .cusoption').css('display','none');
+            }
+        });
+    });
+</script>

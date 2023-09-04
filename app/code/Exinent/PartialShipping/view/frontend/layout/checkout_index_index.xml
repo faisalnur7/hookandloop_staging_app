@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+<!--        <script src="Exinent_PartialShipping::js/backorder_popup.js" async="async" defer="defer" />
+        <css src="Exinent_PartialShipping::css/backorder_popup.css" async="async" defer="defer" />-->
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Exinent\PartialShipping\Block\Partial" name="backorder.popup" template="Exinent_PartialShipping::backorder_popup.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

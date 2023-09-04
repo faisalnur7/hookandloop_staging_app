@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2023 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license   End-user License Agreement
+ */
+-->
+<cookies xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="urn:magento:module:Plumrocket_CookieConsent:etc/pr-cookies.xsd">
+    <cookie name="pslogin_referer" category="necessary">
+        <duration xsi:type="number">0</duration>
+        <description>Stores the last visited page to keep users on the same page after social login.</description>
+    </cookie>
+    <cookie name="pslogin_show_popup" category="necessary">
+        <duration xsi:type="number">0</duration>
+        <description>Keep state of Social Login share popup.</description>
+    </cookie>
+</cookies>

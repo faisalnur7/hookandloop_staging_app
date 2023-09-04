@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+<!-- <preference for="Magento\Checkout\Model\PaymentInformationManagement" type="Ravedigital\CoreUpdate\Model\Checkout\PaymentInformationManagement" /> -->
+    
+   <preference for="Magento\Sales\Block\Adminhtml\Order\Invoice\Create\Items" type="Ravedigital\CoreUpdate\Block\Sales\Adminhtml\Order\Invoice\Create\Items" />
+   <preference for="Magento\Sales\Model\Order\Item" type="Ravedigital\CoreUpdate\Model\Sales\Order\Item" />
+ 
+   <preference for="Magento\Catalog\Model\CategoryRepository" type="Ravedigital\CoreUpdate\Model\Catalog\CategoryRepository" />
+   <preference for="Magento\CatalogInventory\Model\Stock\StockItemRepository" type="Ravedigital\CoreUpdate\Model\CatalogInventory\Stock\StockItemRepository" />
+ 
+  <preference for="Magento\Framework\Serialize\Serializer\Json" type="Ravedigital\CoreUpdate\Serialize\Serializer\Json" />
+  <preference for="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort" type="Ravedigital\CoreUpdate\SearchAdapter\Query\Builder\Sort" />
+
+  <preference for="Magento\ConfigurableProduct\ResourceModel\Model\Indexer\Stock\Configurable" type="Ravedigital\CoreUpdate\Model\ConfigurableProduct\ResourceModel\Indexer\Stock\Configurable" />
+  <preference for="Magento\Quote\Model\Quote\Address\RateResult\Method" type="Ravedigital\CoreUpdate\Model\Quote\Quote\Address\RateResult\Method" />
+  <preference for="Magento\Wishlist\Model\Wishlist" type="Ravedigital\CoreUpdate\Model\Wishlist\Wishlist" />
+  <preference for="Magento\Usps\Model\Carrier" type="Ravedigital\CoreUpdate\Model\Usps\Carrier" />
+  <preference for="Magento\Wishlist\Pricing\ConfiguredPrice\ConfigurableProduct" type="Ravedigital\CoreUpdate\Pricing\Wishlist\ConfiguredPrice\ConfigurableProduct" /> 
+  <preference for="Tigren\Ajaxcart\Block\Product\ConfigurableOption" type="Ravedigital\CoreUpdate\Block\Product\ConfigurableOption" />
+  <preference for="Magento\Ups\Model\Carrier" type="Ravedigital\CoreUpdate\Model\Ups\Carrier" />
+  <preference for="Vsourz\HtmlSitemap\Block\CategoryList" type="Ravedigital\CoreUpdate\Block\CategoryList" />
+  <preference for="Fooman\PdfCustomiser\Block\Pdf\Order" type="Ravedigital\CoreUpdate\Block\Pdf\Order" />
+
+  <preference for="Magento\Quote\Model\QuoteRepository" type="Ravedigital\CoreUpdate\Model\QuoteRepository" />
+
+<!--   <type name="Magento\Sales\Controller\Adminhtml\Shipment\AbstractShipment\View">
+      <plugin name="SalesAdminShipmentView" type="Ravedigital\CoreUpdate\Plugin\ViewPlugin" sortOrder="10"/>
+  </type> 
+ -->
+  <type name="Magento\Catalog\Block\Product\View\Options\Type\Select">
+      <plugin name="Sigma_CategoryCustomAttribute_select" sortOrder="10"
+      type="Ravedigital\CoreUpdate\Block\Magento\Catalog\Product\View\Options\Type\Select"/>
+  </type>
+</config>

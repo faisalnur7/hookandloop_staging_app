@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- <event name="checkout_onepage_controller_success_action">
+        <observer 
+            name="ravedigital_ordercreate_controller_success_action"
+            instance="Ravedigital\Ordercreate\Observer\OrderSuccessAfter" />
+    </event> -->
+    <event name="paypal_express_place_order_success">
+        <observer 
+            name="ravedigital_ordercreate_paypal_express_place_order_success"
+            instance="Ravedigital\Ordercreate\Observer\PaypalExpressOrderSuccess" />
+    </event>
+</config>
