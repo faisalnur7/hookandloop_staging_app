@@ -1,37 +1,36 @@
 <?php $result = $block->getConfigdata(); ?>
-<?php if($result) : 
-$currencySymbol = "$";
+<?php if($result) :  $currencySymbol = "$";
 $priceprop = str_replace($currencySymbol, '', $result['price']);
-?>
-<div class='configurable-pricerange'>
-    <span class="price" id="dynamic-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-        <?= $result['price']; ?>
-            <span  id="product-price-<?= $block->getProductId();?>" data-price-amount="<?= $priceprop; ?>" data-price-type="finalPrice" 
-            class="price-wrapper">
-            </span>
-        <!-- <meta itemprop="price" content="<?php // $result['itemprop-price'] ?>" /> -->
-        <meta itemprop="price" content="<?= $priceprop ?>" />
-        
-            <meta itemprop="priceCurrency" content="USD" />
-    </span>
-    <span class="old-price">
-    </span>
-</div>
-<script>
-
+$priceRange = explode('-',$priceprop);?>
+    <div class='configurable-pricerange'>
+        <span class="price" id="dynamic-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <?= $result['price']; ?>
+                <span  id="product-price-<?= $block->getProductId();?>" data-price-amount="<?= $priceprop; ?>" data-price-type="finalPrice" 
+                class="price-wrapper">
+               </span>
+               <?php if(sizeof($priceRange) > 1) { ?>
+                <meta itemprop="lowPrice" content="<?= $priceRange[0]?>" />
+                <meta itemprop="highPrice" content="<?= $priceRange[1]?>" />
+                <?php } else {?>
+                    <meta itemprop="price" content="<?= $priceprop ?>" />
+                <?php }?>    
+               <meta itemprop="priceCurrency" content="USD" />
+               <meta itemprop="availability" content="InStock" />
+        </span>
+        <span class="old-price">
+        </span>
+    </div>
+    <script>
         requirejs(['jquery'], function (jQuery) {
             var configdataorg = <?php echo $result['json']; ?>;
             jQuery(document).on('click', '.page-product-configurable .swatch-option', function () {
-
-                //jQuery(document).trigger('update_price_range');
-                // calculateRemainingQuantity();
 
                 var configdata = JSON.parse(JSON.stringify(configdataorg));
                 selected = [];
                 var selectedoptions = jQuery(this).parents('.product-add-form').find('.selected');
                 var attr = jQuery(this).parents('.product-add-form').find('.swatch-attribute');
                 var flag = 0;
-                
+                var product_id = jQuery('#product_id').val();
                  // Check if all swatch options are selected
                 var allSelected = true;
 
@@ -80,13 +79,18 @@ $priceprop = str_replace($currencySymbol, '', $result['price']);
                     var maxValueInArray = Math.max.apply(Math, pricearray);
                     if (minValueInArray === maxValueInArray)
                     {
-                       var pricerange = '$' + (minValueInArray * jQuery('#qty').val()).toFixed(2);
+                        var pricerange = '$' + (minValueInArray * jQuery('#qty').val()).toFixed(2);
+                        item_prop_price = (minValueInArray * jQuery('#qty').val()).toFixed(2);    
+                        pricerange +='<span id="product-price-'+product_id+'" data-price-amount="'+item_prop_price+'" data-price-type="finalPrice" class="price-wrapper"></span><meta itemprop="price" content="'+item_prop_price+'"><meta itemprop="priceCurrency" content="USD"><meta itemprop="availability" content="InStock"></span>';
+                
                          
                     } else
                        {                    
-                           var pricerange = '$' + minValueInArray.toFixed(2) + '-$' + maxValueInArray.toFixed(2);
+                        var pricerange = '$' + minValueInArray.toFixed(2) + '-$' + maxValueInArray.toFixed(2);
+                        item_prop_price = minValueInArray.toFixed(2) + '-$' + maxValueInArray.toFixed(2);   
+                        pricerange +='<span id="product-price-'+product_id+'" data-price-amount="'+item_prop_price+'" data-price-type="finalPrice" class="price-wrapper"></span><meta itemprop="lowPrice" content="'+minValueInArray.toFixed(2)+'"/><meta itemprop="highPrice" content="'+maxValueInArray.toFixed(2)+'" /><meta itemprop="priceCurrency" content="USD"><meta itemprop="availability" content="InStock"></span>';
                     }
-                    jQuery('.page-product-configurable .configurable-pricerange .price').text(pricerange);
+                    jQuery('.page-product-configurable .configurable-pricerange .price').html(pricerange);
                 }else{
 
                     var configdata_both = JSON.parse(JSON.stringify(configdataorg));
@@ -137,17 +141,21 @@ $priceprop = str_replace($currencySymbol, '', $result['price']);
                     });
                     priceranges = '$' + (pricearray_both * jQuery('#qty').val()).toFixed(2);  
                     if(flag == 0){
-                        if($check_both_exist == 1){   
+                        var item_prop_price = 0;
+                    item_prop_price = (pricearray_both * jQuery('#qty').val()).toFixed(2);  
+                    var pricerange_meta ='<span id="product-price-'+product_id+'" data-price-amount="'+item_prop_price+'" data-price-type="finalPrice" class="price-wrapper"></span><meta itemprop="price" content="'+item_prop_price+'"><meta itemprop="priceCurrency" content="USD"><meta itemprop="availability" content="InStock"></span>';
+                  
+                        if($check_both_exist == 1){ 
+                           console.log('both');  
                            jQuery('.page-product-configurable .configurable-pricerange .price').text(priceranges);
-                           jQuery('.price-final_price .price-wrapper').attr('finalprice',pricearray_both);
+                           jQuery('.price-final_price .price-wrapper').attr('finalprice',priceranges);
                         }else{
                            jQuery('.page-product-configurable .configurable-pricerange .price').text(pricerange);
                         }
+                        jQuery('.page-product-configurable .configurable-pricerange .price').append(pricerange_meta);
                     }
                 }
             });
         });
     </script>
 <?php endif;?>
-
-

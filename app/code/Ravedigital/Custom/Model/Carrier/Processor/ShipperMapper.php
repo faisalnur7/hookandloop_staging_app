@@ -370,15 +370,13 @@ class ShipperMapper extends OriginalShipperMapper
             }
             $qty = $magentoItem->getQty() ? floatval($magentoItem->getQty()) : 0;
             $measurement_sold_in_size = $magentoItem->getProduct()->getMeasurementSoldInSize();
-
-            // $logger->info($measurement_sold_in_size);
-            // var_dump($measurement_sold_in_size);
-
+             $logger->info('$measurement_sold_in_size'.$measurement_sold_in_size);
             if($measurement_sold_in_size){
                 $qty = $qty / $measurement_sold_in_size;
-                // var_dump($qty);
-                // $logger->info($qty);
+                 $logger->info($qty);
             }
+                    $logger->info($magentoItem->getBasePrice()*$measurement_sold_in_size);
+
             if ($qty < 1 && $qty > 0) {
                 $qty = 1; //SHQ18-438
                 $weight = ($weight !== null && $weight != 0) ? $weight * $magentoItem->getQty() : $weight;
@@ -1003,16 +1001,6 @@ class ShipperMapper extends OriginalShipperMapper
 
             return null;
         }
-         // Rave customization to update weight
-        // $measurement_sold_in_size = $magentoItem->getProduct()->getMeasurementSoldInSize();
-        //  $logger->info('-------------- Rave log ------------');
-        //  $logger->info('current weight - '.$weight);
-        // //$logger->info($measurement_sold_in_size);
-        // if($measurement_sold_in_size){
-        //      $logger->info('condition true');
-        //     $weight = $weight * $measurement_sold_in_size;
-        //  }
-        // $logger->info('final weight - '.$weight);
         return $weight;
     }
    

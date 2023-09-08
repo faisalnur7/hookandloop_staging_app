@@ -89,7 +89,7 @@ class Listing
      * @param Pager $pager
      * @return void
      */
-    public function applyPagination(\Ravedigital\Blog\Block\Html\Pager $pager)
+    public function applyPagination(Pager $pager)
     {
         
         $this->prepareSearchCriteriaBuilder();

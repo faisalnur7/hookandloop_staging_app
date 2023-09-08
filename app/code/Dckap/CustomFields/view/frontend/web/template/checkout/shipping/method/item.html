@@ -21,8 +21,11 @@
        <each args="element.getRegion('price')" render="" ></each>
    </td>
        <!-- ko if: method.extension_attributes -->
-            <td class="col col-eta_delivery_time">
-                <!-- ko text: $data.extension_attributes.eta_delivery_time --><!-- /ko -->
+            <td class="col col-shipping-title">
+                    <!-- ko text: $data.extension_attributes.shipping_title --><!-- /ko -->
+            </td>
+             <td class="col col-eta_delivery_date">
+                <!-- ko text: $data.extension_attributes.eta_delivery_date --><!-- /ko -->
             </td>
         <!-- /ko -->
         <!-- ko ifnot: method.extension_attributes -->

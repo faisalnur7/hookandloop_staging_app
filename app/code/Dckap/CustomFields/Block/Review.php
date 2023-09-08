@@ -143,7 +143,8 @@ class Review extends \Magento\Paypal\Block\Express\Review{
      */
     public function canEditShippingMethod()
     {
-        return $this->getData('can_edit_shipping_method') || !$this->getCurrentShippingRate();
+       // return $this->getData('can_edit_shipping_method') || !$this->getCurrentShippingRate();
+        return true;
     }
 
     /**

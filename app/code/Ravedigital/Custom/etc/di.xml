@@ -2,4 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="ShipperHQ\Shipper\Model\Carrier\Processor\ShipperMapper" type="Ravedigital\Custom\Model\Carrier\Processor\ShipperMapper" />
     <preference for="ShipperHQ\Shipper\Helper\CarrierGroup" type="Ravedigital\Custom\Helper\CarrierGroup" />
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="add_delivery_date_to_carrier" type="Ravedigital\Custom\Plugin\Carrier\DeliveryDate" disabled="false" sortOrder="30"/>
+    </type> 
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="add_description_to_method_rate" type="Ravedigital\Custom\Plugin\Quote\Address\Rate" disabled="false" sortOrder="3"/>
+    </type> 
+    <preference for="ShipperHQ\Shipper\Model\Carrier\Shipper" type="Ravedigital\Custom\Model\Carrier\Shipper" />
 </config>

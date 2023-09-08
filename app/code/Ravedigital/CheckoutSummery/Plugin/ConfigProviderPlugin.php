@@ -19,14 +19,13 @@ class ConfigProviderPlugin extends \Magento\Framework\Model\AbstractModel
              $items[$i]['childsku'] = $simpleProductSku;
              $product = $objectManager->create('\Magento\Catalog\Model\ProductRepository')->get($simpleProductSku);
              $simpleProductName = $product->getName();
+             $measurement_sold_in_size = $product->getMeasurementSoldInSize();
              $items[$i]['name'] = $simpleProductName;
              $result['quoteItemData'][$i]['name'] = $simpleProductName;
-
              $result['quoteItemData'][$i]['childsku'] = $simpleProductSku;
-        }
-          
+             $result['quoteItemData'][$i]['measurement_sold_in_size'] = $measurement_sold_in_size;
+        } 
         $result['totalsData']['items'] = $items;
-        
         return $result;
     }
 }
